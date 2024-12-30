@@ -1,5 +1,5 @@
 # PROJET-FIL-ROUGE
-##Fonctionnalités Clés Élargies
+# Fonctionnalités Clés Élargies
 - Gestion des Utilisateurs :
 
 Description : Création de différentes catégories d'utilisateurs (entraîneurs, arbitres, administrateurs) avec des rôles et des permissions appropriés.
