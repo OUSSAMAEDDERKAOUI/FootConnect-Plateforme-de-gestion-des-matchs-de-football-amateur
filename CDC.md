@@ -5,22 +5,22 @@ Le projet FootConnect est une plateforme web dédiée à la gestion des matchs d
 
 ## 2. Objectifs du Projet
 ### Centralisation des informations : 
- Une plateforme unique pour gérer les matchs, les joueurs, les sanctions et les blessures.
+ - Une plateforme unique pour gérer les matchs, les joueurs, les sanctions et les blessures.
 ### Suivi des performances : 
-Permettre aux entraîneurs et arbitres de suivre les statistiques des joueurs et des équipes.
+- Permettre aux entraîneurs et arbitres de suivre les statistiques des joueurs et des équipes.
 ### Gestion des blessures et sanctions : 
-Automatiser la gestion des suspensions et sanctions.
+- Automatiser la gestion des suspensions et sanctions.
 ### Amélioration de la communication : 
-Notifications en temps réel pour la disponibilité des arbitres, gestion des blessures et informations partagées.
+- Notifications en temps réel pour la disponibilité des arbitres, gestion des blessures et informations partagées.
 ## 3. Acteurs du Projet
 ### Administrateurs des équipes : 
-Gestion des joueurs et des matchs, suivi des blessures.
+- Gestion des joueurs et des matchs, suivi des blessures.
 ### Arbitres : 
-Confirmer la disponibilité pour les matchs, saisir les événements et les blessures après chaque match.
+- Confirmer la disponibilité pour les matchs, saisir les événements et les blessures après chaque match.
 ### Administrateurs de la fédération : 
-Valider les listes de joueurs, gérer les matchs et suivre les statistiques.
+- Valider les listes de joueurs, gérer les matchs et suivre les statistiques.
 ### Entraîneurs : 
-Suivre les performances des joueurs, gérer les entraînements et sélectionner les joueurs pour les matchs.
+- Suivre les performances des joueurs, gérer les entraînements et sélectionner les joueurs pour les matchs.
 ## 4. Use Cases Détailés
 #### **4.1. Administrateurs des Équipes**
 ##### 1.1. Gérer la Liste des Joueurs
