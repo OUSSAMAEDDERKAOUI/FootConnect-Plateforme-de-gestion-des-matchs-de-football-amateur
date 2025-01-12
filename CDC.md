@@ -24,41 +24,41 @@ Suivre les performances des joueurs, gérer les entraînements et sélectionner 
 ## 4. Use Cases Détailés
 #### **4.1. Administrateurs des Équipes**
 ##### 1.1. Gérer la Liste des Joueurs
-Objectif : Enregistrer et mettre à jour les joueurs de l’équipe.
-Actions : L’administrateur saisit les informations des joueurs (personnelles, rôle, état de santé, etc.) et soumet la liste à la fédération pour validation.
+- Objectif : Enregistrer et mettre à jour les joueurs de l’équipe.
+- Actions : L’administrateur saisit les informations des joueurs (personnelles, rôle, état de santé, etc.) et soumet la liste à la fédération pour validation.
 ##### 1.2. Valider la Liste des Joueurs
-Objectif : Soumettre la liste des joueurs à la fédération pour validation.
-Actions : L’administrateur soumet la liste, la fédération valide ou rejette la liste, et l’administrateur reçoit une notification.
+- Objectif : Soumettre la liste des joueurs à la fédération pour validation.
+- Actions : L’administrateur soumet la liste, la fédération valide ou rejette la liste, et l’administrateur reçoit une notification.
 ##### 1.3. Suivre les Blessures des Joueurs
-Objectif : Suivre les blessures et ajuster les matchs en conséquence.
-Actions : L’administrateur reçoit les informations sur les blessures après chaque match et met à jour les données.
+- Objectif : Suivre les blessures et ajuster les matchs en conséquence.
+- Actions : L’administrateur reçoit les informations sur les blessures après chaque match et met à jour les données.
 #### **4.2. Arbitres**
 ##### 2.1. Confirmer la Disponibilité pour un Match
-Objectif : Confirmer la disponibilité avant chaque match.
-Actions : L’arbitre reçoit une notification 7 jours avant, confirme sa disponibilité, et la fédération est informée.
+- Objectif : Confirmer la disponibilité avant chaque match.
+- Actions : L’arbitre reçoit une notification 7 jours avant, confirme sa disponibilité, et la fédération est informée.
 ##### 2.2. Saisir les Sanctions et Événements du Match
-Objectif : Enregistrer les événements du match (buts, cartons, etc.).
-Actions : L’arbitre saisit les événements après le match et les soumet pour validation.
+- Objectif : Enregistrer les événements du match (buts, cartons, etc.).
+- Actions : L’arbitre saisit les événements après le match et les soumet pour validation.
 ##### 2.3. Saisir les Blessures des Joueurs
-Objectif : Enregistrer les blessures des joueurs après chaque match.
-Actions : L’arbitre saisit les blessures, y compris la gravité, et une notification est envoyée aux administrateurs des équipes concernées.
+- Objectif : Enregistrer les blessures des joueurs après chaque match.
+- Actions : L’arbitre saisit les blessures, y compris la gravité, et une notification est envoyée aux administrateurs des équipes concernées.
 #### **4.3. Administrateurs de la Fédération**
 ##### 3.1. Valider les Listes des Joueurs
-Objectif : Valider ou rejeter les listes des joueurs soumises par les administrateurs des équipes.
-Actions : La fédération vérifie et valide ou rejette chaque liste.
+-Objectif : Valider ou rejeter les listes des joueurs soumises par les administrateurs des équipes.
+- Actions : La fédération vérifie et valide ou rejette chaque liste.
 ##### 3.2. Suivi des Blessures et Sanctions
-Objectif : Suivre les sanctions et les blessures des joueurs.
-Actions : Accéder à un tableau de bord des blessures et sanctions pour un suivi global.
+- Objectif : Suivre les sanctions et les blessures des joueurs.
+- Actions : Accéder à un tableau de bord des blessures et sanctions pour un suivi global.
 ##### 3.3. Gérer les Matchs et Statistiques
-Objectif : Planifier et valider les matchs, générer des statistiques.
-Actions : Planifier les matchs, valider les résultats, et générer des rapports sur les performances.
+- Objectif : Planifier et valider les matchs, générer des statistiques.
+- Actions : Planifier les matchs, valider les résultats, et générer des rapports sur les performances.
 #### **4.4. Entraîneurs**
 ##### 4.1. Suivi des Performances des Joueurs
-Objectif : Suivre les performances des joueurs.
-Actions : Consulter les statistiques des joueurs et ajuster les choix tactiques.
+- Objectif : Suivre les performances des joueurs.
+- Actions : Consulter les statistiques des joueurs et ajuster les choix tactiques.
 ##### 4.2. Gérer les Entraînements et Sélection des Joueurs
-Objectif : Planifier les entraînements et sélectionner les joueurs pour les matchs.
-Actions : Planifier les entraînements et sélectionner les joueurs en fonction de leurs performances et état physique.
+- Objectif : Planifier les entraînements et sélectionner les joueurs pour les matchs.
+- Actions : Planifier les entraînements et sélectionner les joueurs en fonction de leurs performances et état physique.
 ## 5. Fonctionnalités Clés
 ##### Gestion des utilisateurs :
  Création et gestion des rôles pour chaque acteur.
