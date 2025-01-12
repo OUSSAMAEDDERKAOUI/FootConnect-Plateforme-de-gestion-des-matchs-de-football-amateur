@@ -44,7 +44,7 @@ Suivre les performances des joueurs, gérer les entraînements et sélectionner 
 - Actions : L’arbitre saisit les blessures, y compris la gravité, et une notification est envoyée aux administrateurs des équipes concernées.
 #### **4.3. Administrateurs de la Fédération**
 ##### 3.1. Valider les Listes des Joueurs
--Objectif : Valider ou rejeter les listes des joueurs soumises par les administrateurs des équipes.
+- Objectif : Valider ou rejeter les listes des joueurs soumises par les administrateurs des équipes.
 - Actions : La fédération vérifie et valide ou rejette chaque liste.
 ##### 3.2. Suivi des Blessures et Sanctions
 - Objectif : Suivre les sanctions et les blessures des joueurs.
@@ -61,52 +61,52 @@ Suivre les performances des joueurs, gérer les entraînements et sélectionner 
 - Actions : Planifier les entraînements et sélectionner les joueurs en fonction de leurs performances et état physique.
 ## 5. Fonctionnalités Clés
 ##### Gestion des utilisateurs :
- Création et gestion des rôles pour chaque acteur.
+ - Création et gestion des rôles pour chaque acteur.
 ##### Planification des matchs :
- Interface calendrier pour organiser et valider les matchs.
+ - Interface calendrier pour organiser et valider les matchs.
 ##### Saisie des événements du match :
- Les arbitres enregistrent les événements comme les buts et sanctions.
+ - Les arbitres enregistrent les événements comme les buts et sanctions.
 ##### Suivi des blessures : 
-Les arbitres saisissent les blessures et des notifications sont envoyées aux administrateurs des équipes.
+- Les arbitres saisissent les blessures et des notifications sont envoyées aux administrateurs des équipes.
 ##### Statistiques des joueurs et équipes : 
-Outils d’analyse pour suivre les performances.
+- Outils d’analyse pour suivre les performances.
 ##### Gestion des suspensions automatiques : 
-Suspension automatique des joueurs ayant 4 cartes jaunes ou une carte rouge.
+- Suspension automatique des joueurs ayant 4 cartes jaunes ou une carte rouge.
 ## 6. Architecture et Technologies
 ### Technologies Web :
 ##### Frontend : 
-HTML5, CSS3, JavaScript native ou  (Frameworks possibles : React).
+- HTML5, CSS3, JavaScript native ou  (Frameworks possibles : React).
 ##### Backend : 
-Node.js, PHP(laravel).
+- Node.js, PHP(laravel).
 ##### Base de données : 
-MySQL, PostgreSQL, ou MongoDB.
+- MySQL, PostgreSQL, ou MongoDB.
 ##### API RESTful :
-pour l’échange de données entre le frontend et le backend.
+- pour l’échange de données entre le frontend et le backend.
 ##### Hébergement :
 ##### Solution cloud :
- (AWS, Google Cloud, Azure) ou serveur dédié selon les besoins.
+-  (AWS, Google Cloud, Azure) ou serveur dédié selon les besoins.
 ##### Sécurité :
-Authentification via JWT ou OAuth.
-Cryptage des données sensibles.
+- Authentification via JWT ou OAuth.
+- Cryptage des données sensibles.
 ## 7. Méthodologie
 ### Méthodologie Agile :
-Utilisation de sprints de 2 à 4 semaines avec des révisions régulières.
-Revue continue des besoins et des fonctionnalités avec les utilisateurs (entraîneurs, arbitres, administrateurs).
+- Utilisation de sprints de 2 à 4 semaines avec des révisions régulières.
+- Revue continue des besoins et des fonctionnalités avec les utilisateurs (entraîneurs, arbitres, administrateurs).
 ### Développement itératif :
-Prototypes fonctionnels livrés à chaque fin de sprint pour recueillir des retours utilisateurs.
+- Prototypes fonctionnels livrés à chaque fin de sprint pour recueillir des retours utilisateurs.
 ### Tests utilisateurs :
-Tests effectués avec chaque groupe d’utilisateurs (entraîneurs, arbitres, administrateurs) tout au long du développement.
+- Tests effectués avec chaque groupe d’utilisateurs (entraîneurs, arbitres, administrateurs) tout au long du développement.
 ## 8. Planification du Projet
 ### Phase 1 - Analyse et spécifications : 2 semaines
-Collecte des besoins, définition des fonctionnalités et rédaction des spécifications techniques.
+- Collecte des besoins, définition des fonctionnalités et rédaction des spécifications techniques.
 ### Phase 2 - Conception et prototypage : 3 semaines
-Conception de l’architecture du système, maquettes de l’interface utilisateur.
+- Conception de l’architecture du système, maquettes de l’interface utilisateur.
 ### Phase 3 - Développement et implémentation : 6-8 semaines
-Développement des fonctionnalités principales : gestion des utilisateurs, gestion des équipes, planification des matchs.
+- Développement des fonctionnalités principales : gestion des utilisateurs, gestion des équipes, planification des matchs.
 ### Phase 4 - Tests et déploiement : 2-3 semaines
-Tests utilisateurs, correction des bugs, déploiement sur un environnement de production.
+- Tests utilisateurs, correction des bugs, déploiement sur un environnement de production.
 ### Phase 5 - Finalisation et documentation : 2 semaines
-Rédaction de la documentation utilisateur et technique.
+- Rédaction de la documentation utilisateur et technique.
 ## 9. Livrables
 - Application web fonctionnelle avec toutes les fonctionnalités essentielles.
 - Documentation utilisateur détaillant l’utilisation de la plateforme pour chaque acteur (entraîneurs, arbitres, administrateurs).
@@ -118,10 +118,10 @@ Rédaction de la documentation utilisateur et technique.
 - Questionnaire de satisfaction pour recueillir les retours des utilisateurs afin d'améliorer la plateforme.
 ## 11. Risques et Contraintes
 ### Risques techniques :
- Difficultés d’intégration de certaines fonctionnalités ou de gestion de grandes quantités de données.
+ - Difficultés d’intégration de certaines fonctionnalités ou de gestion de grandes quantités de données.
 ### Risques de retard :
- Retards dans le développement en raison de l’ajout de fonctionnalités imprévues ou de problèmes techniques.
+ - Retards dans le développement en raison de l’ajout de fonctionnalités imprévues ou de problèmes techniques.
 ### Contraintes de temps :
- Respect des délais pour la présentation et la remise des livrables.
+ - Respect des délais pour la présentation et la remise des livrables.
 ## 12. Conclusion
 Le projet FootConnect fournit une solution complète pour la gestion des matchs de football amateur. Il permet de suivre les performances des joueurs, de gérer les blessures et les sanctions, et de faciliter la communication entre tous les acteurs du système (arbitres, entraîneurs, administrateurs d’équipes, et fédération). Ce projet répond à des besoins spécifiques et offre une interface intuitive pour améliorer l’organisation et l’efficacité des compétitions de football amateur.
