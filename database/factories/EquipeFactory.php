@@ -2,22 +2,24 @@
 
 namespace Database\Factories;
 
+use App\Models\Equipe;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Equipe>
- */
 class EquipeFactory extends Factory
 {
+    // Le modèle associé à la factory
+    protected $model = Equipe::class;
+
     /**
-     * Define the model's default state.
+     * Définir l'état de la factory.
      *
-     * @return array<string, mixed>
+     * @return array
      */
-    public function definition(): array
+    public function definition()
     {
         return [
-            //
+            'nom' => $this->faker->company, 
+            'categorie' => $this->faker->word, 
         ];
     }
 }
