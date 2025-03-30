@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ligues', function (Blueprint $table) {
+        Schema::create('admins_ligues', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_ligue');
-            $table->string('region');
+            $table->unsignedBigInteger('ligue_id');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->timestamps();
+
+            $table->foreign('ligue_id')->references('id')->on('ligues')->onDelete('cascade');
         });
     }
 
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ligues');
+        Schema::dropIfExists('admin_ligues');
     }
 };

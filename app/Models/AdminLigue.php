@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ligue extends Model
+class AdminLigue extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nom_ligue',
-        'region',
+        'ligue_id',
+        'email',
+        'password',
     ];
 }

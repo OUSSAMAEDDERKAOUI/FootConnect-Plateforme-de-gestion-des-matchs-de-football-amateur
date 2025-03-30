@@ -2,14 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\AdminLigue;
 use App\Models\Ligue;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class LigueFactory extends Factory
+class AdminLigueFactory extends Factory
 {
     // Le modèle associé à la factory
-    protected $model = Ligue::class;
+    protected $model = AdminLigue::class;
 
     /**
      * Définir l'état de la factory.
@@ -19,9 +19,9 @@ class LigueFactory extends Factory
     public function definition()
     {
         return [
-            'nom_ligue' => $this->faker->company, 
-            'region' => $this->faker->word, 
-            
+            'ligue_id' => Ligue::inRandomOrder()->first()->id, 
+            'email' => $this->faker->unique()->safeEmail, 
+            'password' => bcrypt('password123'), 
         ];
     }
 }
