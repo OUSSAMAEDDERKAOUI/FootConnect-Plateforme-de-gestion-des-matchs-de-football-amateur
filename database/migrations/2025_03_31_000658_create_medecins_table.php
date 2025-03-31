@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('medecins', function (Blueprint $table) {
         $table->id();
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         $table->string('licence');
         $table->enum('specialite', ['Traumatologie', 'Physiothérapie', 'Médecine générale']);
         $table->enum('statut', ['actif', 'suspendu']);          

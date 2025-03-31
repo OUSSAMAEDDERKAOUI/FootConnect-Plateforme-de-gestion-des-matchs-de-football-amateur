@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('entraineurs', function (Blueprint $table) {
-            $table->id();
+            $table->id();   
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('experience');
             $table->string('licence');
             $table->enum('role_entraineur', ['principal', 'adjoint', 'préparateur physique']);

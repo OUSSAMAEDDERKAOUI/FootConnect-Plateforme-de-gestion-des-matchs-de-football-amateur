@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('prenom');
             $table->string('nom');
-            $table->string('nationalite');
+            $table->string('nationalite')->default('marocaine');
             $table->date('date_naissance');
             $table->string('telephone');
             $table->string('photo');

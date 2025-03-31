@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+use App\Models\User;
 
 use App\Models\Arbitre;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -18,6 +19,7 @@ class ArbitreFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => User::factory(), 
             'numero_accreditation' => $this->faker->unique()->numerify('ACR-####'), 
             'niveau' => $this->faker->randomElement(['régional', 'national', 'international']), 
             'poste' => $this->faker->randomElement(['arbitre central', 'assistant', 'vidéo']), 

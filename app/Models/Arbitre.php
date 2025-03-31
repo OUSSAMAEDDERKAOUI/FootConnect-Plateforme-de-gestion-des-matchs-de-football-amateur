@@ -9,6 +9,7 @@ class Arbitre extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'numero_accreditation',
         'niveau',
         'poste',

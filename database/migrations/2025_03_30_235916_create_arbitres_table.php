@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('arbitres', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_accreditation');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->enum('niveau', [ 'régional', 'national', 'international']);
             $table->enum('poste', ['arbitre central', 'assistant', 'vidéo']);
             $table->string('experience');
