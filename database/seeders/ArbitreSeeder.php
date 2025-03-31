@@ -13,6 +13,6 @@ class ArbitreSeeder extends Seeder
     public function run(): void
     {
         Arbitre::factory(10)->create();
-    
+
     }
 }
