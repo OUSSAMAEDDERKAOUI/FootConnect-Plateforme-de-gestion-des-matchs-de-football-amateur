@@ -20,7 +20,6 @@ class MedecinFactory extends Factory
     {
         return [
             'user_id' => User::factory(), 
-
             'licence' => $this->faker->unique()->bothify('???-####-???'), 
             'specialite' => $this->faker->randomElement(['Traumatologie', 'Physiothérapie', 'Médecine générale']), 
             'statut' => $this->faker->randomElement(['actif', 'suspendu']), 

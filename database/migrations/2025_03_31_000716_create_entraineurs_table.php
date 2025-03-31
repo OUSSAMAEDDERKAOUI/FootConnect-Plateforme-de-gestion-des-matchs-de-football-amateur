@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('entraineurs', function (Blueprint $table) {
             $table->id();   
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('experience');
             $table->string('licence');
             $table->enum('role_entraineur', ['principal', 'adjoint', 'préparateur physique']);

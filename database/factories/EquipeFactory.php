@@ -19,7 +19,7 @@ class EquipeFactory extends Factory
     {
         return [
             'nom' => $this->faker->company, 
-            'categorie' => $this->faker->word, 
+            'categorie' => $this->faker->randomElement(['Senior']), 
         ];
     }
 }

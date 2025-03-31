@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('joueurs', function (Blueprint $table) {
             $table->id();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->unsignedBigInteger('equipe_id');
             $table->integer('numeroMaillot');
             $table->enum('position', ['gardien', 'defenseur', 'milieu', 'attaquant']);

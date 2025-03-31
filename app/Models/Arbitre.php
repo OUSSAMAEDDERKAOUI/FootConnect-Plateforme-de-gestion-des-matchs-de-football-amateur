@@ -15,5 +15,7 @@ class Arbitre extends Model
         'poste',
         'experience',
     ];
-
+    public function user(){
+        return $this->belongsTo(User::class,"user_id");
+    }
 }

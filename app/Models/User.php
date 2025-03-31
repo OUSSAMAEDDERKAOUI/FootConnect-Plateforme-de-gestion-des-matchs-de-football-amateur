@@ -30,6 +30,14 @@ class User extends Authenticatable
         'role',
     ];
 
+public function joueur(){
+    return $this->hasOne(Joueur::class,'user_id');
+}
+
+public function arbitre(){
+    return $this->hasOne(Arbitre::class,'user_id');
+}
+
     /**
      * The attributes that should be hidden for serialization.
      *
