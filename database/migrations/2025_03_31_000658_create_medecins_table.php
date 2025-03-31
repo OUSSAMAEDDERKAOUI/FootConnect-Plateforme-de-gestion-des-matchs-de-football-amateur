@@ -15,7 +15,7 @@ return new class extends Migration
         $table->id();
         $table->string('licence');
         $table->enum('specialite', ['Traumatologie', 'Physiothérapie', 'Médecine générale']);
-        $table->string('statut');
+        $table->enum('statut', ['actif', 'suspendu']);          
         $table->timestamps();
     });
 

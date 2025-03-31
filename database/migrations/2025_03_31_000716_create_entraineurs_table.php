@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('entraineurs', function (Blueprint $table) {
             $table->id();
+            $table->string('experience');
+            $table->string('licence');
+            $table->enum('role_entraineur', ['principal', 'adjoint', 'préparateur physique']);
+            $table->enum('statut', ['actif', 'suspendu']);          
             $table->timestamps();
         });
     }
