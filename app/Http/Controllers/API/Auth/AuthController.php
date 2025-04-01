@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\API\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\Auth\RegisterUserRequest;
 use App\Http\Requests\Auth\LoginUserRequest;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
@@ -43,30 +44,52 @@ class AuthController extends Controller
     }
 
 
-    public function login(LoginUserRequest $request)
-    {
-        $request->validated();
+//     
 
-        $credentials = $request->only('email', 'password');
 
-        $result = $this->userService->authenticate($credentials);
+public function login(Request $request)
+{
+    $request->validate([
+        'email' => 'required|string|email',
+        'password' => 'required|string',
+    ]);
 
-        if (!$result) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized',
-            ], 401);
-        }
+    // Vérifier si l'utilisateur existe
+    $user = \App\Models\User::where('email', $request->email)->first();
 
+    if (!$user) {
         return response()->json([
-            'status' => 'success',
-            'user' => $result['user'],
-            'authorisation' => [
-                'token' => $result['token'],
-                'type' => 'bearer',
-            ]
-        ]);
+            'status' => 'error',
+            'message' => 'User not found',
+        ], 404);
     }
+
+    $credentials = $request->only('email', 'password');
+    // dump($credentials);
+
+    $token = Auth::guard('api')->attempt($credentials);
+    dump($token);
+
+    if (!$token) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Unauthorized',
+        ], 401);
+    }
+
+    $user = Auth::guard('api')->user();
+    return response()->json([
+        'status' => 'success',
+        'user' => $user,
+        'authorisation' => [
+            'token' => $token,
+            'type' => 'bearer',
+        ]
+    ]);
+}
+
+
+
 
     public function logout()
     {

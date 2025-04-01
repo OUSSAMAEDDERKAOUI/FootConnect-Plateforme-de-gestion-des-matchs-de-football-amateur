@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'date_naissance'   => $this->faker->date(),
             'telephone'       => $this->faker->phoneNumber(),
             'photo'         => $this->faker->imageUrl(640, 480, 'people'), 
-            'status'      => $this->faker->randomElement(['actif', 'inactif']),
+            'isBanned' => false,
             'email'           => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(), 
             'password'          => bcrypt('password'), 

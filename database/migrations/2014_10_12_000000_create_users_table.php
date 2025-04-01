@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('date_naissance');
             $table->string('telephone');
             $table->string('photo');
-            $table->enum('status',['actif','inactif']);
+            $table->boolean('isBanned')->default(false);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
