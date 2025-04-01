@@ -10,6 +10,7 @@ class Equipe extends Model
     use HasFactory;
     protected $fillable = [
         'nom', 
+        'telephone',
         'categorie',
     ];
 }

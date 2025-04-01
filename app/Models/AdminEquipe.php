@@ -10,7 +10,9 @@ class AdminEquipe extends Model
     use HasFactory;
     protected $fillable = [
         'equipe_id', 
+        'telephone',
         'email', 
         'password',
+        'isBanned',
     ];
 }

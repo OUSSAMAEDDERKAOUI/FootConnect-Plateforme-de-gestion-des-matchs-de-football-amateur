@@ -50,7 +50,7 @@ class RegisterUserRequest extends FormRequest
                 $rules += [
                     'experience' => 'required|string|max:500',
                     'licence' => 'required|string|max:255',
-                    'roleEntraineur' => 'required|string|in:principal,adjoint,préparateur physique',
+                    'role_entraineur' => 'required|string|in:principal,adjoint,préparateur physique',
                     'statut' => 'required|string|max:255',
                 ];
                 break;

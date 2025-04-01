@@ -69,7 +69,7 @@ class UserRepository
                 Entraineur::create([
                     'experience' => $userData['experience'],
                     'licence' => $userData['licence'],
-                    'roleEntraineur' => $userData['roleEntraineur'],
+                    'role_entraineur' => $userData['role_entraineur'],
                     'statut' => $userData['statut'],
                     'user_id' => $user->id,
                 ]);

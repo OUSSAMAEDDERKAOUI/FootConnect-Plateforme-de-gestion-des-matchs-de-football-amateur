@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('AdminEquipes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('equipe_id');
+            $table->string('telephone');
             $table->string('email')->unique();
             $table->string('password');
+            $table->boolean('isBanned')->default(false);
             $table->timestamps();
             $table->foreign('equipe_id')->references('id')->on('equipes')->onDelete('cascade');
         });

@@ -3,7 +3,7 @@ namespace App\Http\Controllers\API\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterUserRequest;
+use App\Http\Requests\Auth\RegisterAdminEquipeRequest;
 use App\Http\Requests\Auth\LoginUserRequest;
 use App\Services\UserService;
 use App\Models\User;
@@ -19,11 +19,11 @@ class AuthController extends Controller
         $this->userService = $userService;
     }
 
-    public function register(RegisterUserRequest $request)
+    public function register(RegisterAdminEquipeRequest $request)
     {
         $validatedData = $request->validated();
         // Dump($validatedData);
-        $user = $this->userService->registerUser($validatedData);
+        $user = $this->AdminEquipeService->RegisterAdminEquipe($validatedData);
 
         if ($user) {
             $token = Auth::guard('api')->login($user);

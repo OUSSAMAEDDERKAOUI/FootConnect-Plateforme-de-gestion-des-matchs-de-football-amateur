@@ -20,8 +20,11 @@ class AdminEquipeFactory extends Factory
     {
         return [
             'equipe_id' => Equipe::inRandomOrder()->first()->id, 
+            'telephone'    => $this->faker->phoneNumber(),
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('password123'), 
+            'isBanned' => false,
+
         ];
     }
 }
