@@ -20,7 +20,10 @@ class EquipeFactory extends Factory
         return [
             'nom' => $this->faker->company, 
             'telephone'       => $this->faker->phoneNumber(),
+            'logo' => $this->faker->imageUrl(640, 480, 'team_logo'),
+
             'categorie' => $this->faker->randomElement(['Senior']), 
+
         ];
     }
 }

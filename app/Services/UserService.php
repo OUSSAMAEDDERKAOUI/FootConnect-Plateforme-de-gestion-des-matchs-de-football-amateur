@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class UserService
 {
@@ -35,11 +37,35 @@ class UserService
     public function authenticate(array $credentials)
     {
 
-        if (Auth::guard('api')->attempt($credentials)) {
 
-            $user = Auth::guard('api')->user();
 
-            $token = Auth::guard('api')->login($user);
+
+        $user = $this->userRepository->findByCredentials($credentials);
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User not found',
+            ], 404);
+        }
+        
+        if (!Hash::check($credentials["password"], $user->password)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Unauthorized Password',
+            ], 401);
+        }
+        
+        
+            $token = JWTAuth::fromUser($user);
+        
+
+
+
+
+
+
+        if ($token) {
 
             return ['user' => $user, 'token' => $token];
         }

@@ -15,7 +15,7 @@ class AdminEquipeService
         $this->AdminEquipeRepository = $AdminEquipeRepository;
     }
 
-    public function registerUser(array $userData)
+    public function RegisterAdminEquipe(array $userData)
     {
         if ($this->AdminEquipeRepository->isEmailUnique($userData['email'])) {
             

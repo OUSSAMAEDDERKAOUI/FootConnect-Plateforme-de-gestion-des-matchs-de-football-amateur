@@ -1,13 +1,21 @@
 <?php
 
 namespace App\Models;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject; 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AdminEquipe extends Model
+
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
+class AdminEquipe extends Authenticatable implements JWTSubject 
 {
-    use HasFactory;
+    use HasApiTokens,  HasFactory, Notifiable;
+    protected $table = 'admin_equipes';
+
     protected $fillable = [
         'equipe_id', 
         'telephone',
@@ -15,4 +23,21 @@ class AdminEquipe extends Model
         'password',
         'isBanned',
     ];
+
+
+
+
+
+    public function getJWTIdentifier()
+    {
+      return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+      return [
+        'email'=>$this->email,
+        'name'=>$this->name
+      ];
+    }
 }

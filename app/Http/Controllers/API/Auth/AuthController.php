@@ -1,13 +1,15 @@
 <?php
 namespace App\Http\Controllers\API\Auth;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\RegisterUserRequest;
-use App\Http\Requests\Auth\LoginUserRequest;
-use App\Services\UserService;
 use App\Models\User;
+use Illuminate\Http\Request;
+use App\Services\UserService;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Auth\LoginUserRequest;
+use App\Http\Requests\Auth\RegisterUserRequest;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class AuthController extends Controller
@@ -48,44 +50,30 @@ class AuthController extends Controller
 //     
 
 
-public function login(Request $request)
+public function login(LoginUserRequest $request)
 {
-    $request->validate([
-        'email' => 'required|string|email',
-        'password' => 'required|string',
-    ]);
 
-    $user = User::where('email', $request->email)->first();
+$request->validated();
 
-    if (!$user) {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'User not found',
-        ], 404);
-    }
+$credentials = $request->only('email', 'password');
 
-    $credentials = $request->only('email', 'password');
-    // dump($credentials);
+$result = $this->userService->authenticate($credentials);
 
-    $token = Auth::guard('api')->attempt($credentials);
-    // dump($token);
-
-    if (!$token) {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Unauthorized',
-        ], 401);
-    }
-
-    $user = Auth::guard('api')->user();
+if (!$result) {
     return response()->json([
-        'status' => 'success',
-        'user' => $user,
-        'authorisation' => [
-            'token' => $token,
-            'type' => 'bearer',
-        ]
-    ]);
+        'status' => 'error',
+        'message' => 'Unauthorized Token',
+    ], 401);
+}
+
+return response()->json([
+    'status' => 'success',
+    'user' => $result["user"],
+    'authorisation' => [
+        'token' => $result["token"],
+        'type' => 'bearer',
+    ]
+]);
 }
 
 

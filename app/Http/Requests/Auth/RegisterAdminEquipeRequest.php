@@ -11,7 +11,7 @@ class RegisterAdminEquipeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,8 +26,11 @@ class RegisterAdminEquipeRequest extends FormRequest
       
         return [
             'equipe_id' => 'required|exists:equipes,id',
+            'telephone' => 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
+            'isBanned' => 'nullable|boolean',
+
         ];
     }
 }

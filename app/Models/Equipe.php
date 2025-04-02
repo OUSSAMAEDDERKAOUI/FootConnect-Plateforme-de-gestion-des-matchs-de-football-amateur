@@ -11,6 +11,7 @@ class Equipe extends Model
     protected $fillable = [
         'nom', 
         'telephone',
+        'logo',
         'categorie',
     ];
 }

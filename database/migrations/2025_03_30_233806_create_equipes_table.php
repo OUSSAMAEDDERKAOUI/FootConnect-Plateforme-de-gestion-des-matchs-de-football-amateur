@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('telephone');
+            $table->string('logo');
             $table->enum('categorie', [ 'U13', 'U15', 'U17', 'U19','U23','Senior'])->default('Senior');
             $table->timestamps();
         });
