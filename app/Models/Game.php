@@ -12,8 +12,10 @@ class Game extends Model
     use HasFactory;
 
     protected $fillable = [
+        'nombre_journée',
         'equipe_domicile_id',
         'equipe_exterieur_id',
+        'ligue_id',
         'date_heure',
         'lieu',
         'score_domicile',
