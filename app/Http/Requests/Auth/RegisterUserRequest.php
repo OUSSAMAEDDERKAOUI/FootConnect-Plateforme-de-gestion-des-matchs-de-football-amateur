@@ -21,7 +21,7 @@ class RegisterUserRequest extends FormRequest
             'telephone' => 'required|string|max:20',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'role' => 'required|string|in:joueur,arbitre,entraineur,medecin',
+            'role' => 'required|string|in:joueur,arbitre,delegue,entraineur,medecin',
             'photo' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'isBanned' => 'nullable|boolean',
 
@@ -45,6 +45,14 @@ class RegisterUserRequest extends FormRequest
                     'experience' => 'required|string|max:500',
                 ];
                 break;
+                case 'delegue':
+                    $rules += [
+                        'numero_accreditation' => 'required|string|max:255',
+                        'niveau' => 'required|string|in:régional,national,international',
+                        'experience' => 'required|string|max:500',
+                        
+                    ];
+                    break;
 
             case 'entraineur':
                 $rules += [

@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('arbitres', function (Blueprint $table) {
+        Schema::create('delegues', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('numero_accreditation');
             $table->enum('niveau', [ 'régional', 'national', 'international']);
-            $table->enum('poste', ['arbitre central', 'assistant', 'vidéo']);
             $table->string('experience');
             $table->enum('statut',['actif','inactif','suspendu'])->default('actif');
             $table->timestamps();
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('arbitres');
+        Schema::dropIfExists('delegues');
     }
 };

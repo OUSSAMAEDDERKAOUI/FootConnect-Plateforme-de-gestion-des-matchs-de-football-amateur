@@ -34,7 +34,7 @@ class UserFactory extends Factory
             'email'           => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(), 
             'password'          => bcrypt('password'), 
-            'role'              => $this->faker->randomElement(['joueur', 'arbitre', 'entraineur', 'medecin']),
+            'role'              => $this->faker->randomElement(['joueur', 'arbitre','delegue', 'entraineur', 'medecin']),
         ];
     }
 

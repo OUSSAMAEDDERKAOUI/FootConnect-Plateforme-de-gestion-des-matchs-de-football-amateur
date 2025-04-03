@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Arbitre extends Model
+class Delegue extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'user_id',
         'numero_accreditation',
         'niveau',
-        'poste',
         'experience',
         'statut',
     ];

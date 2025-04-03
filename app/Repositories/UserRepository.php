@@ -7,7 +7,7 @@ use App\Models\Joueur;
 use App\Models\Medecin;
 use App\Models\Entraineur;
 use App\Models\Arbitre;
-
+use App\Models\Delegue;
 
 class UserRepository
 {
@@ -64,6 +64,14 @@ class UserRepository
                     'user_id' => $user->id,
                 ]);
                 break;
+                case 'delegue':
+                    Delegue::create([
+                        'numero_accreditation' => $userData['numero_accreditation'],
+                        'niveau' => $userData['niveau'],
+                        'experience' => $userData['experience'],
+                        'user_id' => $user->id,
+                    ]);
+                    break;
     
             case 'entraineur':
                 Entraineur::create([
@@ -83,6 +91,7 @@ class UserRepository
                     'user_id' => $user->id,
                 ]);
                 break;
+
         }
     
         return $user;

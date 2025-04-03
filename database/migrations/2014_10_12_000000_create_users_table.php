@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['joueur', 'arbitre', 'entraineur', 'medecin']);
+            $table->enum('role', ['joueur', 'arbitre','delegue', 'entraineur', 'medecin']);
             $table->rememberToken();
             $table->timestamps();
         });
