@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Auth\AdminEquipeController;
 use App\Http\Controllers\API\Auth\AdminLigueController;
+use App\Http\Controllers\API\GameController as APIGameController;
+use App\Http\Controllers\API\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,8 @@ Route::post('register',[AuthController::class,'register']);
 Route::post('login', [AuthController::class,'login']);
 Route::post('refresh', [AuthController::class,'refresh']);
 Route::post('logout', [AuthController::class,'logout']);
+
+
+
+
+Route::apiResource('match',GameController::class);

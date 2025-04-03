@@ -21,7 +21,7 @@ return new class extends Migration
             $table->dateTime('date_heure')->nullable();
             $table->string('lieu')->nullable();
             $table->integer('score_domicile')->nullable();
-            $table->integer('score_exterieur')->nullable()->nullable();
+            $table->integer('score_exterieur')->nullable();
             $table->unsignedBigInteger('arbitre_central_id')->nullable();
             $table->unsignedBigInteger('assistant_1_id')->nullable();
             $table->unsignedBigInteger('assistant_2_id')->nullable();
