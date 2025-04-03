@@ -28,10 +28,10 @@ class GameService
 
     }
 
-    public function ProgrammerGame(array $gameData , $id){
+    public function UpdateGame(array $gameData , $id){
         
         
-        $game=$this->GameRepository->ProgrammerGame($gameData,$id);
+        $game=$this->GameRepository->UpdateGame($gameData,$id);
 
 
         return $game;

@@ -38,3 +38,6 @@ Route::post('logout', [AuthController::class,'logout']);
 
 
 Route::apiResource('match',GameController::class);
+
+
+Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);

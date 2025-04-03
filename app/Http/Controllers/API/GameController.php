@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Validated;
 use App\Services\GameService\GameService;
 use App\Http\Requests\Games\StoreGameRequest;
+use App\Http\Requests\Games\UpdateGameRequest;
 use App\Http\Requests\Games\ProgrammerGameRequest;
 
 class GameController extends Controller
@@ -56,9 +57,18 @@ public function __construct(GameService $GameService)
     /**
      * Update the specified resource in storage.
      */
-    // public function update(Request $request, string $id)
-    // {
-        
+    public function update(UpdateGameRequest $request, $id)
+    {
+        $validatedData = $request->validated();
+    
+      $game=$this->GameService->UpdateGame($validatedData,$id);
+    
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Match updated successfully',
+            'data' => $game
+        ]);
+    }
 
 
 
@@ -75,11 +85,12 @@ public function __construct(GameService $GameService)
 
 
 
-    public function update(ProgrammerGameRequest $request, $id)
+    
+    public function ProgrammerGame(ProgrammerGameRequest $request, $id)
     {
         $validatedData = $request->validated();
     
-      $game=$this->GameService->ProgrammerGame($validatedData,$id);
+      $game=$this->GameService->UpdateGame($validatedData,$id);
     
         return response()->json([
             'status' => 'success',

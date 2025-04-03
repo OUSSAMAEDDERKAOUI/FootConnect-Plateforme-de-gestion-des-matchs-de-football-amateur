@@ -4,7 +4,7 @@ namespace App\Http\Requests\Games;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProgrammerGameRequest extends FormRequest
+class UpdateGameRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,14 +26,14 @@ class ProgrammerGameRequest extends FormRequest
         'equipe_domicile_id' => 'required|exists:equipes,id',
         'equipe_exterieur_id' => 'required|exists:equipes,id',
         'ligue_id' => 'required|exists:ligues,id',
-        'date_heure' => 'required|date',
-        'lieu' => 'required|string|max:255',
+        'date_heure' => 'nullable|date',
+        'lieu' => 'nullable|string|max:255',
         'score_domicile' => 'nullable|integer',
         'score_exterieur' => 'nullable|integer',
-        'arbitre_central_id' => 'required|exists:arbitres,id',
-        'assistant_1_id' => 'required|exists:arbitres,id',
-        'assistant_2_id' => 'required|exists:arbitres,id',
-        'delegue_id' => 'required|exists:users,id',
+        'arbitre_central_id' => 'nullable|exists:arbitres,id',
+        'assistant_1_id' => 'nullable|exists:arbitres,id',
+        'assistant_2_id' => 'nullable|exists:arbitres,id',
+        'delegue_id' => 'nullable|exists:users,id',
         ];
     }
 }
