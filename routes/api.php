@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Auth\AdminEquipeController;
+use App\Http\Controllers\API\Auth\AdminLigueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('register/AdminEquipe',[AdminEquipeController::class,'registerAdminEquipe']);
 Route::post('login/AdminEquipe',[AdminEquipeController::class,'loginAdminEquipe']);
+Route::post('login/AdminLigue',[AdminLigueController::class,'loginAdminLigue']);
 
 Route::post('register',[AuthController::class,'register']);
 

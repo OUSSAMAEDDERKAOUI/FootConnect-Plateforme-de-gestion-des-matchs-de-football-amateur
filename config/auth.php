@@ -44,9 +44,13 @@ return [
         'driver' => 'jwt',
         'provider' => 'users',
       ],
-      'api_admin' => [
+      'api_admin_equipe' => [
         'driver' => 'jwt',
-        'provider' => 'admin_equipes',
+        'provider' => 'admin_equipe',
+    ],
+    'api_admin_ligue' => [
+        'driver' => 'jwt',
+        'provider' => 'admin_ligue',
     ],
     ],
 
@@ -73,11 +77,14 @@ return [
             'model' => App\Models\User::class,
         ],
       
-    'admin_equipes' => [
+    'admin_equipe' => [
         'driver' => 'eloquent',
         'model' => App\Models\AdminEquipe::class,
     ],
-
+'admin_ligue' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\AdminLigue::class,
+    ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

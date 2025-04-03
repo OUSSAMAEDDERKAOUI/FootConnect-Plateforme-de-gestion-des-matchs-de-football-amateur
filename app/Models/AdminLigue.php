@@ -4,8 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject; 
 
-class AdminLigue extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class AdminLigue extends Authenticatable implements JWTSubject 
+
 {
     use HasFactory;
     protected $table='admin_ligues';
@@ -14,4 +18,16 @@ class AdminLigue extends Model
         'email',
         'password',
     ];
+    public function getJWTIdentifier()
+    {
+      return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+      return [
+        'email'=>$this->email,
+        'name'=>$this->name
+      ];
+    }
 }

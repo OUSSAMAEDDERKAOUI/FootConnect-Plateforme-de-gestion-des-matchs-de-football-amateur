@@ -1,52 +1,59 @@
 <?php
 namespace App\Http\Controllers\API\Auth;
-use App\Models\AdminLigue;
 
-use App\Models\AdminEquipe;
+use App\Models\AdminLigue;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\AdminEquipeService\AdminEquipeService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\LoginUserRequest;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
-use App\Http\Requests\Auth\RegisterAdminEquipeRequest;
+use App\Http\Requests\Auth\RegisterAdminLigueRequest;
+use App\Services\AdminLigueService\AdminLigueService;
 use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
-class AdminEquipeController extends Controller
+class AdminLigueController extends Controller
 {
-    protected $AdminEquipeService;
+    protected $AdminLigueService;
 
-    public function __construct(AdminEquipeService $AdminEquipeService)
+    public function __construct(AdminLigueService $AdminLigueService)
     {
-        $this->AdminEquipeService = $AdminEquipeService;
+        $this->AdminLigueService = $AdminLigueService;
     }
 
-    public function registerAdminEquipe(RegisterAdminEquipeRequest $request)
-    {
-        $validatedData = $request->validated();
-        
-        $AdminEquipe = $this->AdminEquipeService->RegisterAdminEquipe($validatedData);
-    
-        if ($AdminEquipe) {
-            return response()->json([
-                'status' => 'success',
-                'message' => 'User created successfully',
-                'user' => $AdminEquipe
-            ]);
-        }
-    
-        return response()->json([
-            'error' => 'The email address is already registered. Please choose a different email.',
-        ], 422);
-    }
-    
+    // public function registerAdminLigue(RegisterAdminLigueRequest $request)
+    // {
+    //     $validatedData = $request->validated();
+    //     // dump($validatedData);
+
+    //     $AdminLigue = $this->AdminLigueService->RegisterAdminLigue($validatedData);
+    //     // dump($AdminLigue);
+
+    //     if ($AdminLigue) {
+    //         $token = Auth::guard('api')->login($AdminLigue);
+
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'User created successfully',
+    //             'user' => $AdminLigue,
+    //             'authorisation' => [
+    //                 'token' => $token,
+    //                 'type' => 'bearer',
+    //             ]
+    //         ]);
+    //     }
+
+    //     return response()->json([
+    //         'error' => 'The email address is already registered. Please choose a different email.',
+    //     ], 422);
+    // }
+
 
 //     
 
 
 
-public function loginAdminEquipe(LoginUserRequest $request)
+public function loginAdminLigue(LoginUserRequest $request)
 {
     
     
@@ -54,7 +61,7 @@ public function loginAdminEquipe(LoginUserRequest $request)
     
     $credentials = $request->only('email', 'password');
     
-    $result = $this->AdminEquipeService->authenticate($credentials);
+    $result = $this->AdminLigueService->authenticate($credentials);
     
     if (!$result) {
         return response()->json([
@@ -78,7 +85,7 @@ public function loginAdminEquipe(LoginUserRequest $request)
 
 //     public function logout()
 //     {
-//         $this->AdminEquipeService->logout();
+//         $this->AdminLigueService->logout();
 
 //         // Retourner une réponse de succès après la déconnexion
 //         return response()->json([

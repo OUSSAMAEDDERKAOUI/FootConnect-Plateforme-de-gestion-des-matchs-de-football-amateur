@@ -1,6 +1,6 @@
 <?php 
 // 
-namespace App\Repositories;
+namespace App\Repositories\AdminEquipeRepository;
 
 use App\Models\AdminEquipe;
 use App\Models\Joueur;

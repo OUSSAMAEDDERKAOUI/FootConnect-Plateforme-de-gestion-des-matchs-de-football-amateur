@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\AdminEquipeService;
 
-use App\Repositories\AdminEquipeRepository;
+use App\Repositories\AdminEquipeRepository\AdminEquipeRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -35,11 +35,11 @@ class AdminEquipeService
     public function authenticate(array $credentials)
     {
 
-        if (Auth::guard('api_admin')->attempt($credentials)) {
+        if (Auth::guard('api_admin_equipe')->attempt($credentials)) {
 
-            $user = Auth::guard('api_admin')->user();
+            $user = Auth::guard('api_admin_equipe')->user();
 
-            $token = Auth::guard('api_admin')->login($user);
+            $token = Auth::guard('api_admin_equipe')->login($user);
 
             return ['user' => $user, 'token' => $token];
         }
