@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('isBanned')->default(false);
+            $table->string('role')->default("admin_equipe");
             $table->timestamps();
             $table->foreign('equipe_id')->references('id')->on('equipes')->onDelete('cascade');
         });

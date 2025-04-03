@@ -67,7 +67,7 @@ public function loginAdminEquipe(LoginUserRequest $request)
     if (!$result) {
         return response()->json([
             'status' => 'error',
-            'message' => 'Unauthorized Token',
+            'message' => 'Unauthorized Password or Email',
         ], 401);
     }
     

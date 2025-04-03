@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admins_ligues', function (Blueprint $table) {
+        Schema::create('admin_ligues', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('ligue_id');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('role')->default("admin_ligue");
+
             $table->timestamps();
 
             $table->foreign('ligue_id')->references('id')->on('ligues')->onDelete('cascade');

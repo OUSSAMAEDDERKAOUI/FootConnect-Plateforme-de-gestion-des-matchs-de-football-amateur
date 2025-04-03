@@ -35,11 +35,11 @@ class AdminEquipeService
     public function authenticate(array $credentials)
     {
 
-        if (Auth::guard('api')->attempt($credentials)) {
+        if (Auth::guard('api_admin')->attempt($credentials)) {
 
-            $user = Auth::guard('api')->user();
+            $user = Auth::guard('api_admin')->user();
 
-            $token = Auth::guard('api')->login($user);
+            $token = Auth::guard('api_admin')->login($user);
 
             return ['user' => $user, 'token' => $token];
         }
