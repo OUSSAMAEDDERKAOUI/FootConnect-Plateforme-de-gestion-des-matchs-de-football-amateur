@@ -3,12 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\API\Auth\AuthController;
-use App\Http\Controllers\API\Auth\AdminEquipeController;
-use App\Http\Controllers\API\Auth\AdminLigueController;
-use App\Http\Controllers\API\GameController as APIGameController;
+use App\Http\Controllers\API\ButeurController;
 use App\Http\Controllers\API\GameController;
-use App\Http\Controllers\SanctionController;
+use App\Http\Controllers\API\SanctionController;
+use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\Auth\AdminLigueController;
+use App\Http\Controllers\API\Auth\AdminEquipeController;
+use App\Http\Controllers\API\GameController as APIGameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,15 @@ Route::apiResource('sanction',SanctionController::class);
 
 
 Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);
+
+
+
+
+
+Route::prefix('buteurs')->group(function () {
+    Route::get('/', [ButeurController::class, 'index']);
+    Route::get('/{id}', [ButeurController::class, 'show']);
+    Route::post('/', [ButeurController::class, 'store']);
+    Route::put('/{id}', [ButeurController::class, 'update']);
+    Route::delete('/{id}', [ButeurController::class, 'destroy']);
+});

@@ -18,4 +18,7 @@ class Joueur extends Model
     public function user(){
         return $this->belongsTo(User::class,"user_id");
     }
+    public function buts(){
+        return $this->hasMany(Buteur::class,'game_id');
+    }
 }

@@ -63,4 +63,8 @@ class Game extends Model
     public function sanctions(){
         return $this->hasMany(Sanction::class,'game_id');
     }
+
+    public function buts(){
+        return $this->hasMany(Buteur::class,'game_id');
+    }
 }
