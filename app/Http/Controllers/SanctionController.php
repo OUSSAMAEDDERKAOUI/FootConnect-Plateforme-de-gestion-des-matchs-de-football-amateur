@@ -18,45 +18,4 @@ public function __construct(SanctionService $SanctionService){
 }
 
 
-public function store(StoreSanctionRequest $request){
-
-    $validatedData=$request->validated();
-    $sanction =$this->SanctionService->ajouterSanction($validatedData);
-    return response()->json([
-        "status"=>"success",
-        "message"=>'Sanction created successfully',
-        "sanction"=>$sanction,
-    ]);
-}
-
-
-
-public function update(Request $request , $SanctionId){
-
-    $validatedData=$request->validate([
-        'duree'=>'required|string', 
-    ]);
-
-    $sanction =$this->SanctionService->ajouterDureeSanction($validatedData , $SanctionId);
-
-    return response()->json([
-        "status"=>"success",
-        "message"=>'Sanction updated successfully',
-        "sanction"=>$sanction,
-    ]);
-
-}
-
-
-public function destroy($SanctionId){
-    $sanction =$this->SanctionService->deleteSanction($SanctionId);
-
-    return response()->json([
-        "status"=>"success",
-        "message"=>'Sanction deleted successfully',
-        "sanction"=>$sanction,
-    ]);
-}
-
-
 }
