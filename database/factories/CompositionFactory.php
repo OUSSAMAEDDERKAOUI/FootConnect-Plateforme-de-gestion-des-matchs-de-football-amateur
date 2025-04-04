@@ -2,22 +2,21 @@
 
 namespace Database\Factories;
 
+use App\Models\Composition;
+use App\Models\Game;
+use App\Models\Joueur;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Composition>
- */
 class CompositionFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Composition::class;
+
+    public function definition()
     {
         return [
-            //
+            'game_id' => Game::factory(),
+            'joueur_id' => Joueur::factory(),
+            'statut' => $this->faker->randomElement(['titulaire', 'remplaçant']),
         ];
     }
 }
