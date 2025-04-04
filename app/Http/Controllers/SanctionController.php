@@ -48,7 +48,15 @@ public function update(Request $request , $SanctionId){
 }
 
 
+public function destroy($SanctionId){
+    $sanction =$this->SanctionService->deleteSanction($SanctionId);
 
+    return response()->json([
+        "status"=>"success",
+        "message"=>'Sanction deleted successfully',
+        "sanction"=>$sanction,
+    ]);
+}
 
 
 }
