@@ -18,4 +18,20 @@ public function __construct(SanctionService $SanctionService){
 }
 
 
+public function store(StoreSanctionRequest $request){
+
+    $validatedData=$request->validated();
+    $sanction =$this->SanctionService->ajouterSanction($validatedData);
+    return response()->json([
+        "status"=>"success",
+        "message"=>'Sanction created successfully',
+        "sanction"=>$sanction,
+    ]);
+}
+
+
+
+
+
+
 }
