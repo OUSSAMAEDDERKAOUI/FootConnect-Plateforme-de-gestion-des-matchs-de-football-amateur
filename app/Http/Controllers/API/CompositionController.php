@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOrUpdateCompositionRequest;
 use App\Services\CompositionService\CompositionService;
 
 class CompositionController extends Controller

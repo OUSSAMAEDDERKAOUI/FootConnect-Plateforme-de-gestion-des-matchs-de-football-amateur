@@ -3,10 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\API\ButeurController;
 use App\Http\Controllers\API\GameController;
+use App\Http\Controllers\API\ButeurController;
 use App\Http\Controllers\API\SanctionController;
 use App\Http\Controllers\API\Auth\AuthController;
+use App\Http\Controllers\API\CompositionController;
 use App\Http\Controllers\API\Auth\AdminLigueController;
 use App\Http\Controllers\API\Auth\AdminEquipeController;
 use App\Http\Controllers\API\GameController as APIGameController;
@@ -56,3 +57,9 @@ Route::prefix('buteurs')->group(function () {
     Route::put('/{id}', [ButeurController::class, 'update']);
     Route::delete('/{id}', [ButeurController::class, 'destroy']);
 });
+
+
+
+
+
+Route::apiResource('compositions', CompositionController::class);
