@@ -31,6 +31,23 @@ public function store(StoreSanctionRequest $request){
 
 
 
+public function update(Request $request , $SanctionId){
+
+    $validatedData=$request->validate([
+        'duree'=>'required|string', 
+    ]);
+
+    $sanction =$this->SanctionService->ajouterDureeSanction($validatedData , $SanctionId);
+
+    return response()->json([
+        "status"=>"success",
+        "message"=>'Sanction updated successfully',
+        "sanction"=>$sanction,
+    ]);
+
+}
+
+
 
 
 
