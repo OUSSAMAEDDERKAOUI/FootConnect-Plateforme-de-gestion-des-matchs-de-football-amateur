@@ -8,6 +8,7 @@ use App\Http\Controllers\API\Auth\AdminEquipeController;
 use App\Http\Controllers\API\Auth\AdminLigueController;
 use App\Http\Controllers\API\GameController as APIGameController;
 use App\Http\Controllers\API\GameController;
+use App\Http\Controllers\SanctionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::post('logout', [AuthController::class,'logout']);
 
 
 Route::apiResource('match',GameController::class);
+Route::apiResource('sanction',SanctionController::class);
 
 
 Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);

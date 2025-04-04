@@ -58,4 +58,9 @@ class Game extends Model
     {
         return $this->belongsTo(User::class, 'delegue_id');
     }
+
+
+    public function sanctions(){
+        return $this->hasMany(Sanction::class,'game_id');
+    }
 }
