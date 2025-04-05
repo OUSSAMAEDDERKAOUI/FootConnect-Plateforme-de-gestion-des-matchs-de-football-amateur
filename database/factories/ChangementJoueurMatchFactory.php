@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Equipe;
+use App\Models\Game;
+use App\Models\Joueur;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +20,10 @@ class ChangementJoueurMatchFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'game_id'=>Game::factory(),
+            'joueur_sortie_id'=>Joueur::factory(),
+            'joueur_entreée_id'=>Joueur::factory(),
+            'equipe_id'=>Equipe::factory(),
         ];
     }
 }

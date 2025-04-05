@@ -9,12 +9,10 @@ use Illuminate\Http\Request;
 
 class ChangementJoueurMatchController extends Controller
 {
-    /**
-     * Enregistrer un changement de joueur dans un match
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    protected $ChangementJoueurMatchService;
+    public function __construct(ChangementJoueurMatchService $ChangementJoueurMatchService){
+        $this->ChangementJoueurMatchService=$ChangementJoueurMatchService;
+    }
     public function store(Request $request)
     {
         $validatedData = $request->validated();
