@@ -39,6 +39,11 @@ class RapportController extends Controller
         return response()->json($this->rapportService->update($id, $data));
     }
 
- 
-    
+    public function destroy($id)
+    {
+        
+        $this->rapportService->destroy($id);
+
+        return response()->json(['message' => 'Rapport supprimé avec succès']);
+    }
 }
