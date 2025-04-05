@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('arbitres', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('numero_accreditation');
+            $table->string('numero_accreditation')->unique();
             $table->enum('niveau', [ 'régional', 'national', 'international']);
             $table->enum('poste', ['arbitre central', 'assistant', 'vidéo']);
             $table->string('experience');
