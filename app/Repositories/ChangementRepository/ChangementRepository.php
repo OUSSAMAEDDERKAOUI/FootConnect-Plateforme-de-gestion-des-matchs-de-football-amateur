@@ -33,6 +33,10 @@ class ChangementRepository implements ChangementRepositoryInterface{
     }
 
     public function create(array $data){
+
+        $model= $this->model->create($data);
+        
+        return $model;
         
     }
 

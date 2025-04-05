@@ -18,6 +18,9 @@ protected $Changement;
     return $this->Changement->all();
  }
 
+ public function create($data){
+    return $this->Changement->create($data);
+ }
 
 
 }
