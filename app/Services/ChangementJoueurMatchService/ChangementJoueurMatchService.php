@@ -7,13 +7,16 @@ use App\Repositories\ChangementRepository\ChangementRepositoryInterface;
 
 class ChangementJoueurMatchService{
 
-protected $ChangementRepositoryInterface;
+protected $Changement;
 
- public function __construct(ChangementRepositoryInterface $ChangementRepositoryInterface)
+ public function __construct(ChangementRepositoryInterface $Changement)
  {
-    $this->ChangementRepositoryInterface=$ChangementRepositoryInterface;
+    $this->Changement=$Changement;
  }
-
+    
+ public function all(){
+    return $this->Changement->all();
+ }
 
 
 

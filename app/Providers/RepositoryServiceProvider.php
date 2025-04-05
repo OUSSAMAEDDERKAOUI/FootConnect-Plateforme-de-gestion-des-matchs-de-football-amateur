@@ -7,10 +7,12 @@ use Illuminate\Support\ServiceProvider;
 use App\Repositories\ButeurRepository\ButeurRepository;
 use App\Repositories\RapportRepository\RapportRepository;
 use App\Repositories\BlessureRepository\BlessureRepository;
+use App\Repositories\ChangementRepository\ChangementRepository;
 use App\Repositories\ButeurRepository\ButeurRepositoryInterface;
 use App\Repositories\CompositionRepository\CompositionRepository;
 use App\Repositories\RapportRepository\RapportRepositoryInterface;
 use App\Repositories\BlessureRepository\BlessureRepositoryInterface;
+use App\Repositories\ChangementRepository\ChangementRepositoryInterface;
 use App\Repositories\CompositionRepository\CompositionRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -24,6 +26,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CompositionRepositoryInterface::class, CompositionRepository::class);
         $this->app->bind(RapportRepositoryInterface::class, RapportRepository::class);
         $this->app->bind(BlessureRepositoryInterface::class, BlessureRepository::class);
+        $this->app->bind(ChangementRepositoryInterface::class, ChangementRepository::class);
 
     }
 

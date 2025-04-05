@@ -12,6 +12,7 @@ use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\CompositionController;
 use App\Http\Controllers\API\Auth\AdminLigueController;
 use App\Http\Controllers\API\Auth\AdminEquipeController;
+use App\Http\Controllers\API\ChangementJoueurMatchController;
 use App\Http\Controllers\API\GameController as APIGameController;
 
 /*
@@ -79,3 +80,5 @@ Route::delete('blessures/{id}', [BlessureController::class, 'destroy']);
 
 
 Route::apiResource('compositions', CompositionController::class);
+
+Route::apiResource('changements', ChangementJoueurMatchController::class);

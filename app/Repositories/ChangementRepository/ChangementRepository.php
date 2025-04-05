@@ -16,6 +16,8 @@ class ChangementRepository implements ChangementRepositoryInterface{
 
         
 
+        return $this->model->all();
+
     }
 
     public function find($id){
