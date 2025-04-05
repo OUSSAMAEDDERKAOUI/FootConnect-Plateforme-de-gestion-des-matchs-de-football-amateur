@@ -20,6 +20,12 @@ class RapportController extends Controller
         return response()->json($this->rapportService->getAll());
     }
 
-    
-    
+    public function store(StoreRapportRequest $request)
+    {
+        $data = $request->validated();
+
+        return response()->json($this->rapportService->store($data), 201);
+    }
+
+   
 }
