@@ -46,7 +46,7 @@ class BlessureController extends Controller
     public function destroy($id)
     {
         $this->blessureService->deleteBlessure($id);
-        return response()->json(['message' => 'Blessure deleted successfully'], 204);
+        return response()->json(['message' => 'Blessure deleted successfully']);
     }
 }
 

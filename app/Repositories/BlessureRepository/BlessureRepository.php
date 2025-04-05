@@ -32,7 +32,10 @@ class BlessureRepository implements BlessureRepositoryInterface
     public function update($id, array $data)
     {
         $blessure = $this->model->find($id);
-        return $blessure->update($data);
+        
+        $blessure->update($data);
+
+        return $blessure;
     }
 
     public function delete($id)
