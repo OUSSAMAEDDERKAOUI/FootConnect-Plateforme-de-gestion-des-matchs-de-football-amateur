@@ -24,6 +24,7 @@ class ChangementJoueurMatchFactory extends Factory
             'joueur_sortie_id'=>Joueur::factory(),
             'joueur_entreée_id'=>Joueur::factory(),
             'equipe_id'=>Equipe::factory(),
+            'minute'=>$this->faker->time(),
         ];
     }
 }

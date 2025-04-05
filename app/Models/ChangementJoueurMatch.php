@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ChangementJoueurMatch extends Model
 {
     use HasFactory;
-    protected $table='ChangementJoueurMatch' ;
+    protected $table='changement_joueur_matchs' ;
     protected $fillable = [
         'game_id',
         'joueur_entreée_id',
-        'joueur_sortie_id',
+        'joueur_sortie_id', 
         'equipe_id',
         'minute',
     ];
