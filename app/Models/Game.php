@@ -67,4 +67,7 @@ class Game extends Model
     public function buts(){
         return $this->hasMany(Buteur::class,'game_id');
     }
+    public function rapport(){
+        return $this->hasOne(Rapport::class,'game_id');
+    }
 }

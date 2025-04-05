@@ -11,6 +11,7 @@ use App\Http\Controllers\API\CompositionController;
 use App\Http\Controllers\API\Auth\AdminLigueController;
 use App\Http\Controllers\API\Auth\AdminEquipeController;
 use App\Http\Controllers\API\GameController as APIGameController;
+use App\Http\Controllers\API\RapportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +59,13 @@ Route::prefix('buteurs')->group(function () {
     Route::delete('/{id}', [ButeurController::class, 'destroy']);
 });
 
-
+Route::prefix('rapports')->group(function () {
+    Route::get('/', [RapportController::class, 'index']);
+    Route::get('/{id}', [RapportController::class, 'show']);
+    Route::post('/', [RapportController::class, 'store']);
+    Route::put('/{id}', [RapportController::class, 'update']);
+    Route::delete('/{id}', [RapportController::class, 'destroy']);
+});
 
 
 
