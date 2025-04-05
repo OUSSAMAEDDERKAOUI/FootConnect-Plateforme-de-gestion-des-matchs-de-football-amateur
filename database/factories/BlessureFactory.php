@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Game;
+use App\Models\Joueur;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,7 @@ class BlessureFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+           
         ];
     }
 }

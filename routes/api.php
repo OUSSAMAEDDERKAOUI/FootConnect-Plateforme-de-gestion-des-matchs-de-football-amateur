@@ -5,13 +5,14 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\GameController;
 use App\Http\Controllers\API\ButeurController;
+use App\Http\Controllers\API\RapportController;
+use App\Http\Controllers\API\BlessureController;
 use App\Http\Controllers\API\SanctionController;
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\CompositionController;
 use App\Http\Controllers\API\Auth\AdminLigueController;
 use App\Http\Controllers\API\Auth\AdminEquipeController;
 use App\Http\Controllers\API\GameController as APIGameController;
-use App\Http\Controllers\API\RapportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,14 @@ Route::prefix('rapports')->group(function () {
     Route::put('/{id}', [RapportController::class, 'update']);
     Route::delete('/{id}', [RapportController::class, 'destroy']);
 });
+
+
+
+Route::get('blessures', [BlessureController::class, 'index']);
+Route::post('blessures', [BlessureController::class, 'store']);
+Route::get('blessures/{id}', [BlessureController::class, 'show']);
+Route::put('blessures/{id}', [BlessureController::class, 'update']);
+Route::delete('blessures/{id}', [BlessureController::class, 'destroy']);
 
 
 
