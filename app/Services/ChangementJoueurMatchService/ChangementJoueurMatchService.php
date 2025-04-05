@@ -5,22 +5,37 @@ namespace App\Services\ChangementJoueurMatchService;
 use App\Repositories\ChangementRepository\ChangementRepositoryInterface;
 
 
-class ChangementJoueurMatchService{
+class ChangementJoueurMatchService
+{
+    protected $repository;
 
-protected $Changement;
+    public function __construct(ChangementRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
+    }
 
- public function __construct(ChangementRepositoryInterface $Changement)
- {
-    $this->Changement=$Changement;
- }
-    
- public function all(){
-    return $this->Changement->all();
- }
+    public function getAll()
+    {
+        return $this->repository->all();
+    }
 
- public function create($data){
-    return $this->Changement->create($data);
- }
+    public function getById($id)
+    {
+        return $this->repository->find($id);
+    }
 
+    public function create(array $data)
+    {
+        return $this->repository->create($data);
+    }
 
+    public function update($id, array $data)
+    {
+        return $this->repository->update($id, $data);
+    }
+
+    public function delete($id)
+    {
+        return $this->repository->delete($id);
+    }
 }
