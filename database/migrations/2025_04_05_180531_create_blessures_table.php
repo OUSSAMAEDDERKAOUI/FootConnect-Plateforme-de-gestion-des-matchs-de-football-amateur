@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('blessures', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('joueur_id');
-            $table->unsignedBigInteger('game_id');
+            $table->unsignedBigInteger('game_id')->nullable();
 
             $table->date('date_blessure');
             $table->string('type'); 
