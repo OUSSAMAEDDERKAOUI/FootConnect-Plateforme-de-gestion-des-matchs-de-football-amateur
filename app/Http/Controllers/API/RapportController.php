@@ -27,5 +27,17 @@ class RapportController extends Controller
         return response()->json($this->rapportService->store($data), 201);
     }
 
-   
+    public function show($id)
+    {
+        return response()->json($this->rapportService->getById($id));
+    }
+
+    public function update(StoreRapportRequest $request, $id)
+    {
+        $data = $request->validated();
+
+        return response()->json($this->rapportService->update($id, $data));
+    }
+
+ 
 }
