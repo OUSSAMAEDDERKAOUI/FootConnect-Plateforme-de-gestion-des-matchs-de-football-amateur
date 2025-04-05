@@ -13,7 +13,6 @@ class RapportSeeder extends Seeder
      */
     public function run(): void
     {
-        Rapport::factory(3)->create();
-
+//
     }
 }
