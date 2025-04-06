@@ -71,7 +71,7 @@
                         <span class="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">En traitement</span>
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <button onclick="" class="text-blue-600 hover:text-blue-800">
+                        <button onclick="showInjuryDetails(1)" class="text-blue-600 hover:text-blue-800">
                             Voir détails
                         </button>
                     </td>
@@ -88,7 +88,7 @@
                         <span class="px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">En rééducation</span>
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <button onclick="" class="text-blue-600 hover:text-blue-800">
+                        <button onclick="showInjuryDetails(2)" class="text-blue-600 hover:text-blue-800">
                             Voir détails
                         </button>
                     </td>
@@ -105,7 +105,7 @@
                         <span class="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">Rétabli</span>
                     </td>
                     <td class="px-6 py-4 text-right">
-                        <button onclick="" class="text-blue-600 hover:text-blue-800">
+                        <button onclick="showInjuryDetails(3)" class="text-blue-600 hover:text-blue-800">
                             Voir détails
                         </button>
                     </td>
@@ -117,7 +117,56 @@
 </div>
 </main>
 </div>
-
+<div id="injuryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50  overflow-y-auto h-full w-full">
+    <div class="relative top-20 mx-auto p-5 border w-full max-w-4xl shadow-lg rounded-md bg-white">
+    <div class="flex justify-between items-center pb-4 border-b">
+        <h3 class="text-xl font-semibold">Détails de la Blessure</h3>
+        <button class="modal-close text-gray-400 hover:text-gray-500">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </div>
+    <div class="mt-4" id="injuryModalContent">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-4">
+                <div>
+                    <h4 class="font-semibold text-gray-700">Informations du Joueur</h4>
+                    <p><strong>Nom:</strong> John Doe</p>
+                    <p><strong>Équipe:</strong> FC Lyon</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-700">Détails de la Blessure</h4>
+                    <p><strong>Type:</strong> Entorse</p>
+                    <p><strong>Description:</strong> Entorse de la cheville droite lors d'un entraînement.</p>
+                    <p><strong>Date:</strong> 10/04/2025</p>
+                    <p><strong>Durée estimée:</strong> 2 semaines</p>
+                    <p><strong>Médecin:</strong> Dr. Pierre Martin</p>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">Suivi des Traitements</h4>
+                <div class="space-y-2">
+                    <div class="p-2 bg-gray-50 rounded">
+                        <p class="text-sm font-medium">12/04/2025</p>
+                        <p class="text-sm text-gray-600">Repos et application de glace.</p>
+                    </div>
+                    <div class="p-2 bg-gray-50 rounded">
+                        <p class="text-sm font-medium">15/04/2025</p>
+                        <p class="text-sm text-gray-600">Première séance de kinésithérapie.</p>
+                    </div>
+                    <div class="p-2 bg-gray-50 rounded">
+                        <p class="text-sm font-medium">20/04/2025</p>
+                        <p class="text-sm text-gray-600">Réévaluation et nouvelle séance de rééducation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="mt-4 flex justify-end space-x-2">
+        <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 modal-close">Fermer</button>
+    </div>
 
 </div>
 </div>
