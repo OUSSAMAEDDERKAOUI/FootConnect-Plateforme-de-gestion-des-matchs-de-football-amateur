@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/listes/joueurs', function () {
+    return view('adminLigue/listeJoueur');
+});
