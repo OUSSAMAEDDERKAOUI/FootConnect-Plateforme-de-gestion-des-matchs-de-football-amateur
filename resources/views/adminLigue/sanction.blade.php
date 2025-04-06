@@ -184,7 +184,7 @@
         </div>
         <div class="px-6 py-4 border-t border-gray-200">
             <div class="flex items-center justify-between">
-                <div class="text-sm text-gray-500">
+                <div class="text-sm text-gray-500 hidden sm:block">
                     Affichage de 1 à 10 sur 15 sanctions
                 </div>
                 <div class="flex space-x-2">

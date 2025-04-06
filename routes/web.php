@@ -24,3 +24,6 @@ Route::get('/listes/joueurs', function () {
 Route::get('/sanctions', function () {
     return view('adminLigue/sanction');
 });
+Route::get('/blessures', function () {
+    return view('adminLigue/blessure');
+});
