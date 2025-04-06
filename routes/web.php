@@ -21,3 +21,6 @@ Route::get('/', function () {
 Route::get('/listes/joueurs', function () {
     return view('adminLigue/listeJoueur');
 });
+Route::get('/sanctions', function () {
+    return view('adminLigue/sanction');
+});

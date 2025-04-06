@@ -2,6 +2,23 @@
 @section("title","listes des joueurs")
 @section('content')
 
+<header class="bg-white shadow">
+    <div class="px-6 py-4">
+        <div class="flex justify-between items-center">
+            <h2 class="text-xl font-semibold text-gray-800" id="mainTitle">Administration Fédération</h2>
+            <div class="space-x-2 hidden sm:block " id="btnExportAction">
+                <button id="btnExport"
+                    class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                    Exporter
+                </button>
+                <button id="btnAction"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                    Nouvelle Action
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
 
 <div class="p-4 md:p-6">
     <!-- Player Lists Section -->
