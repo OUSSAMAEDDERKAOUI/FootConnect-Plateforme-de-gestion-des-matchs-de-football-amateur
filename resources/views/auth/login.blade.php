@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         .football-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.7)), url('./image/unnamed.jpg');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.7)), url({{asset('images/login/unnamed.jpg')}});
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -21,7 +21,7 @@
         <div class="bg-gradient-to-r from-blue-700 to-blue-500 p-2 text-center">
             <div class="flex justify-center ">
                 <div class="bg-white p-3  rounded-full shadow-md">
-                    <img src="./image/logo-Lcdf.png" class="h-12">
+                    <img src="{{asset('/images/login/logo-Lcdf.png')}}" class="h-16">
                 </div>
             </div>
             <h1 class="text-2xl font-bold text-white">FootConnect</h1>
