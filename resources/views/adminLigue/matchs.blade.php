@@ -242,5 +242,32 @@
     </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const btnMatchNonProgrammé = document.getElementById('btnMatchNonProgrammé');
+    const btnMatchProgrammé = document.getElementById('btnMatchProgrammé');
+    const tableMatchProgrammé = document.getElementById('tableMatchProgrammé');
+    const tableMatchNonProgrammé = document.getElementById('tableMatchNonProgrammé');
 
+    btnMatchNonProgrammé.addEventListener('click', function() {
+        tableMatchProgrammé.classList.add('hidden');
+        tableMatchNonProgrammé.classList.remove('hidden');
+        
+        btnMatchProgrammé.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+        btnMatchProgrammé.classList.add('bg-gray-600', 'hover:bg-gray-700');
+        btnMatchNonProgrammé.classList.remove('bg-gray-600', 'hover:bg-gray-700');
+        btnMatchNonProgrammé.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+    });
+
+    btnMatchProgrammé.addEventListener('click', function() {
+        tableMatchProgrammé.classList.remove('hidden');
+        tableMatchNonProgrammé.classList.add('hidden');
+        
+        btnMatchNonProgrammé.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+        btnMatchNonProgrammé.classList.add('bg-gray-600', 'hover:bg-gray-700');
+        btnMatchProgrammé.classList.remove('bg-gray-600', 'hover:bg-gray-700');
+        btnMatchProgrammé.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+    });
+});
+</script>
 @endsection
