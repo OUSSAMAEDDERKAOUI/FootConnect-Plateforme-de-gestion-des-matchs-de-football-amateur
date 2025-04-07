@@ -27,3 +27,6 @@ Route::get('/sanctions', function () {
 Route::get('/blessures', function () {
     return view('adminLigue/blessure');
 });
+Route::get('/matchs', function () {
+    return view('adminLigue/matchs');
+});
