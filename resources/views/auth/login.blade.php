@@ -8,7 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         .football-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.7)), url({{asset('images/login/unnamed.jpg')}});
+            background-image: linear-gradient(rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.7)), url("{{asset('images/login/unnamed.jpg')}}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -31,7 +31,7 @@
         <div class="p-8">
             <h2 class="text-2xl font-semibold text-gray-800 mb-6">Connexion</h2>
             
-            <form>
+            <form id="loginForm" >
 
                 <div class="mb-6">
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
@@ -75,6 +75,11 @@
         
     </div>
 
+
+
+    <script src={{asset("js/auth/adminLigue.js")}}>
+    
+    </script>
 
 </body>
 </html>

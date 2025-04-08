@@ -33,9 +33,7 @@
     </button>
 </div>
 
-<!-- Content -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Filtres -->
     <div class="bg-white rounded-xl shadow-md mb-8 border border-gray-100">
         <div class="p-5">
             <h3 class="text-lg font-medium text-gray-800 mb-4">Filtres</h3>
@@ -96,71 +94,16 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200" id="matchesTableBody">
+                <tbody class="bg-white divide-y divide-gray-200" id="matchsNonProgrammeTable">
 
-                    <tr class="hover:bg-gray-50 transition-colors duration-150">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-gray-900">12/04/2025 - 15:00</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center space-x-3">
-                                <span class="font-medium">FC Barcelone</span>
-                                <span class="text-gray-500">vs</span>
-                                <span class="font-medium">Real Madrid</span>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">Camp Nou, Barcelone</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                Programmé
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">-</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right">
-                            <div class="flex justify-end space-x-2">
-                                <button class="text-indigo-600 hover:text-indigo-900">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                    </svg>
-                                </button>
-                                <button class="text-red-600 hover:text-red-900">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                    
                 </tbody>
             </table>
+            {{-- <div id="pagination" class="flex justify-center mt-4 space-x-2"></div> --}}
+
         </div>
        
-        <div class="px-6 py-4 border-t border-gray-200">
-            <div class="flex flex-col sm:flex-row items-center justify-between">
-                <div class="text-sm text-gray-500 mb-4 sm:mb-0">
-                    Affichage de 1 à 10 sur 25 matchs
-                </div>
-                <div class="flex space-x-1">
-                    <button class="px-3 py-1 border rounded-md hover:bg-gray-50 transition-colors duration-150">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                    <button class="px-3 py-1 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors duration-150">1</button>
-                    <button class="px-3 py-1 border rounded-md hover:bg-gray-50 transition-colors duration-150">2</button>
-                    <button class="px-3 py-1 border rounded-md hover:bg-gray-50 transition-colors duration-150">3</button>
-                    <button class="px-3 py-1 border rounded-md hover:bg-gray-50 transition-colors duration-150">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+        
     </div>
 
     <!-- Table des matchs non programmés -->
@@ -183,7 +126,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200">
+                <tbody class="bg-white divide-y divide-gray-200" id="matchsProgrammeTable">
 
                     <tr class="hover:bg-gray-50 transition-colors duration-150">
                         <td class="px-6 py-4 whitespace-nowrap">
@@ -216,6 +159,7 @@
                     </tr>
                 </tbody>
             </table>
+           
         </div>
         <div class="px-6 py-4 border-t border-gray-200">
             <div class="flex flex-col sm:flex-row items-center justify-between">
@@ -244,7 +188,6 @@
 <!-- Modal pour ajouter un match -->
 <div id="modalAddMatch" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center hidden">
     <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 overflow-hidden">
-        <!-- En-tête du modal -->
         <div class="bg-indigo-600 px-6 py-4 flex justify-between items-center">
             <h3 class="text-xl font-semibold text-white">Ajouter un nouveau match</h3>
             <button id="closeAddMatchModal" class="text-white hover:text-indigo-200 transition-colors duration-200">
@@ -257,7 +200,6 @@
         <!-- Corps du formulaire -->
         <div class="p-6">
             <form id="addMatchForm">
-                <!-- Journée -->
                 <div class="mb-4">
                     <label for="journee" class="block text-sm font-medium text-gray-700 mb-1">Journée</label>
                     <select id="journee" name="journee" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200">
@@ -270,7 +212,6 @@
                     </select>
                 </div>
                 
-                <!-- Équipes -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
                         <label for="equipeLocale" class="block text-sm font-medium text-gray-700 mb-1">Équipe locale</label>
@@ -296,7 +237,6 @@
                     </div>
                 </div>
                 
-                <!-- Boutons d'action -->
                 <div class="flex justify-end mt-6 gap-3">
                     <button type="button" id="cancelAddMatch" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 font-medium">
                         Annuler
@@ -316,7 +256,6 @@
 <!-- Modal pour programmer un match -->
 <div id="modalProgrammerMatch" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center hidden">
     <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 overflow-hidden">
-        <!-- En-tête du modal -->
         <div class="bg-emerald-600 px-6 py-4 flex justify-between items-center">
             <h3 class="text-xl font-semibold text-white">Programmer un match</h3>
             <button id="closeProgrammerMatchModal" class="text-white hover:text-emerald-200 transition-colors duration-200">
@@ -326,7 +265,6 @@
             </button>
         </div>
         
-        <!-- Corps du formulaire -->
         <div class="p-6">
             <div class="mb-6 bg-indigo-50 p-4 rounded-lg">
                 <h4 class="text-lg font-medium text-indigo-800 mb-2">Information du match</h4>
@@ -343,7 +281,6 @@
             </div>
             
             <form id="programmerMatchForm">
-                <!-- Date et heure -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
                         <label for="dateMatch" class="block text-sm font-medium text-gray-700 mb-1">Date du match</label>
@@ -355,13 +292,11 @@
                     </div>
                 </div>
                 
-                <!-- Lieu -->
                 <div class="mb-4">
                     <label for="lieuMatch" class="block text-sm font-medium text-gray-700 mb-1">Lieu</label>
                     <input type="text" id="lieuMatch" name="lieuMatch" placeholder="Exemple: Camp Nou, Barcelone" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
                 </div>
                 
-                <!-- Statut -->
                 <div class="mb-4">
                     <label for="statutMatch" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
                     <select id="statutMatch" name="statutMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
@@ -370,13 +305,11 @@
                     </select>
                 </div>
                 
-                <!-- Informations supplémentaires -->
                 <div class="mb-4">
                     <label for="infoSupp" class="block text-sm font-medium text-gray-700 mb-1">Informations supplémentaires</label>
                     <textarea id="infoSupp" name="infoSupp" rows="3" placeholder="Ajoutez des informations complémentaires..." class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200"></textarea>
                 </div>
                 
-                <!-- Boutons d'action -->
                 <div class="flex justify-end mt-6 gap-3">
                     <button type="button" id="cancelProgrammerMatch" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 font-medium">
                         Annuler
@@ -394,6 +327,6 @@
 </div>
 
 
-
-
+<script src="{{asset('js/adminLigue/matchs.js')}}"></script>
+<script></script>
 @endsection

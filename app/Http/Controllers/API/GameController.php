@@ -26,8 +26,12 @@ public function __construct(GameService $GameService)
      */
     public function index()
     {
-        
-    }
+        $matchs = $this->GameService->all();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'all Matches',
+            'matchs' => $matchs,
+        ]);    }
 
     /**
      * Store a newly created resource in storage.

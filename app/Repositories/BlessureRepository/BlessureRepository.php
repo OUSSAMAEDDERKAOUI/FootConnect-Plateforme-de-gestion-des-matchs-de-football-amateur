@@ -16,7 +16,7 @@ class BlessureRepository implements BlessureRepositoryInterface
 
     public function all()
     {
-        return $this->model->all();
+        return $this->model->all() ;
     }
 
     public function find($id)

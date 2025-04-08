@@ -7,6 +7,7 @@
     <title>FootConnect -Administration Fédération @yield('title') </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         @media (max-width: 768px) {
             .sidebar-mobile {
@@ -79,6 +80,8 @@
                         id="statisticsTab">
                         Statistiques
                     </a>
+                    <button onclick="logout()"  class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 ">Déconnexion    </button>
+
                 </nav>
             </div>
         </aside>
@@ -92,6 +95,20 @@
                 </main>
                 
               
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script src="{{ asset('js/pagination.js') }}"></script>
+
+
+<script>
+    function logout() {
+        Cookies.remove('Access-Token');
+        window.location.href = '/auth/login';
+    }
+
+</script>
  </body>
 </html>
 

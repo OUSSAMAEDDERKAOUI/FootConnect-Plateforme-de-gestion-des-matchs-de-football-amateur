@@ -21,6 +21,21 @@ class GameRepository
         $this->GameModel = $GameModel;
     }
 
+    public function all()
+    {
+        return Game::with(['equipeDomicile', 'equipeExterieur', 'arbitreCentral', 'assistant1', 'assistant2', 'delegue'])->where("lieu","!=","null")->paginate(5);;
+    }
+
+
+    public function matchNonProgramé()
+    {
+        return Game::with(['equipeDomicile', 'equipeExterieur', 'arbitreCentral', 'assistant1', 'assistant2', 'delegue'])->where("lieu","=","null")->get();
+    }
+
+
+
+
+
 
 public function AjouterGame(array $gameData){
 

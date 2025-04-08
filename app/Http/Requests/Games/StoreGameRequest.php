@@ -25,7 +25,7 @@ class StoreGameRequest extends FormRequest
             'nombre_journée' => 'required|integer|max:30',
                 'equipe_domicile_id' => 'required|exists:equipes,id',
                 'equipe_exterieur_id' => 'required|exists:equipes,id',
-                'ligue_id' => 'required|exists:ligues,id',  
+                'ligue_id' => 'nullable|exists:ligues,id',  
         ];
     }
 }

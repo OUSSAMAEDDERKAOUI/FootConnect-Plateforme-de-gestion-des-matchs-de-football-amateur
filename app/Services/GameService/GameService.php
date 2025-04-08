@@ -15,7 +15,10 @@ class GameService
     {
         $this->GameRepository = $GameRepository;
     }
-
+public function all(){
+    $games=$this->GameRepository->all();
+    return $games ;
+}
 
 
     public function AjouterGame(array $gameData){

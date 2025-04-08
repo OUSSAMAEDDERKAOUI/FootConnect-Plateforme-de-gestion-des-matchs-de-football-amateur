@@ -63,6 +63,8 @@ public function loginAdminEquipe(LoginUserRequest $request)
         ], 401);
     }
     
+    $cookie = Cookie('Access-Token', $result['token'], 60, null, null, null, false);
+
     return response()->json([
         'status' => 'success',
         'user' => $result["user"],
@@ -70,7 +72,7 @@ public function loginAdminEquipe(LoginUserRequest $request)
             'token' => $result["token"],
             'type' => 'bearer',
         ]
-    ]);
+    ])->withCookie($cookie);
     }
 
 
