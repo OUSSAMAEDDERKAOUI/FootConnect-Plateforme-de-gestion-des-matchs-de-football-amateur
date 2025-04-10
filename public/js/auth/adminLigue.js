@@ -16,18 +16,18 @@ document.getElementById('togglePassword').addEventListener('click', function () 
 
 
 if (document.cookie.split('; ').filter((item) => item.startsWith('Access-Token=')).length > 0) {
-alert(2)
+// alert(0)
 window.location.href = "/matchs"; 
 }
 
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
 e.preventDefault();
-alert(1);
+// alert(1);
 const email = document.getElementById('email').value;
 const password = document.getElementById('password').value;
 
 try {
-    alert(2);
+    // alert(2);
 
     const response = await fetch('http://127.0.0.1:8000/api/login/AdminLigue', {
         method: 'POST',
@@ -37,18 +37,18 @@ try {
         },
         body: JSON.stringify({ email, password })
     });
-    alert(3);
+    // alert(3);
 
     const data = await response.json();
-alert(data);
+// alert(data);
     if (response.ok) {
-alert(4);
-      localStorage.setItem('token', data.authorisation.token);
+// alert(4);
+    //   localStorage.setItem('token', data.authorisation.token);
 
         alert('Connexion réussie !');
         window.location.href = "/matchs"; 
     } else {
-        alert(5);
+        // alert(5);
 
         alert(data.message || "Échec de connexion");
     }

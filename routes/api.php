@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Equipe;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\GameController;
 use App\Http\Controllers\API\ButeurController;
+use App\Http\Controllers\API\EquipeController;
 use App\Http\Controllers\API\RapportController;
 use App\Http\Controllers\API\BlessureController;
 use App\Http\Controllers\API\SanctionController;
@@ -80,5 +82,6 @@ Route::delete('blessures/{id}', [BlessureController::class, 'destroy']);
 
 
 Route::apiResource('compositions', CompositionController::class);
+Route::apiResource('equipes', EquipeController::class);
 
 Route::apiResource('changements', ChangementJoueurMatchController::class);

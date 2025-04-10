@@ -60,30 +60,115 @@ const btnAddMatch = document.getElementById('btnAddMatch');
             document.body.style.overflow = ''; 
         });
     });
+
     
-    addMatchForm.addEventListener('submit', function(e) {
+    
+
+
+
+
+
+       
+    // });
+    
+
+
+// Récupérer les équipes à afficher dans le formulaire d'ajout de match
+
+        const equipeLocaleSelect = document.getElementById('equipeLocale');
+        const equipeVisiteuseSelect = document.getElementById('equipeVisiteuse');
+    
+        try {
+            const response = await fetch('/api/equipes', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            const equipes = await response.json();
+    console.log(equipes);
+    
+            const populateSelect = (select, equipes) => {
+                select.innerHTML = '<option value="">Sélectionner une équipe</option>';
+                equipes.forEach(equipe => {
+                    const option = document.createElement('option');
+                    option.value = equipe.id;
+                    option.textContent = equipe.nom;
+                    select.appendChild(option);
+                });
+            };
+    
+            populateSelect(equipeLocaleSelect, equipes);
+            populateSelect(equipeVisiteuseSelect, equipes);
+    
+            equipeLocaleSelect.addEventListener('change', () => {
+                const localeId = equipeLocaleSelect.value;
+                Array.from(equipeVisiteuseSelect.options).forEach(option => {
+                    option.disabled = option.value === localeId && option.value !== "";
+                });
+            });
+    
+            equipeVisiteuseSelect.addEventListener('change', () => {
+                const visiteuseId = equipeVisiteuseSelect.value;
+                Array.from(equipeLocaleSelect.options).forEach(option => {
+                    option.disabled = option.value === visiteuseId && option.value !== "";
+                });
+            });
+    
+        } catch (error) {
+            console.error('Erreur lors du chargement des équipes :', error);
+        }
+    });
+    
+
+
+
+
+
+
+addMatchForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         
-        const journee = document.getElementById('journee').value;
-        const equipeLocale = document.getElementById('equipeLocale').value;
-        const equipeVisiteuse = document.getElementById('equipeVisiteuse').value;
+        const nombre_journée = document.getElementById('journee').value;
+        const equipe_domicile_id = document.getElementById('equipeLocale').value;
+        const equipe_exterieur_id = document.getElementById('equipeVisiteuse').value;
+        // alert(equipe_exterieur_id);
+    
+        try {
         
-        if (!journee || !equipeLocale || !equipeVisiteuse) {
-            alert('Veuillez remplir tous les champs obligatoires.');
-            return;
+            const response = await fetch('/api/match', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({   nombre_journée, equipe_domicile_id , equipe_exterieur_id })
+            });
+        
+            const data = await response.json();
+        // alert(data);
+            if (response.ok) {
+                alert('Match ajouté avec succès!');
+                modalAddMatch.classList.add('hidden');
+                document.body.style.overflow = '';
+                addMatchForm.reset();
+        
+                // alert("L'ajout réussie !");
+            } else {
+                // alert(5);
+        
+                alert(data.message || "Échec de connexion");
+            }
+        } catch (error) {
+            console.error('Erreur:', error);
+            alert("Une erreur s'est produite");
         }
+        });
         
-        if (equipeLocale === equipeVisiteuse) {
-            alert('Les équipes locale et visiteuse ne peuvent pas être identiques.');
-            return;
-        }
-        
-        alert('Match ajouté avec succès!');
-        modalAddMatch.classList.add('hidden');
-        document.body.style.overflow = '';
-        addMatchForm.reset();
-    });
+
+
+
+
     
     
     function ouvrirModalProgrammerMatch(idMatch, journee, equipeLocale, equipeVisiteuse) {
@@ -131,10 +216,6 @@ const btnAddMatch = document.getElementById('btnAddMatch');
 
 
     
-});
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -208,64 +289,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
     
-    // function renderSimplePagination(paginationData){
-    //     const table = document.querySelector('table');
-    //         let paginationContainer = document.getElementById('simple-pagination');
-            
-    //         if (!paginationContainer) {
-    //             paginationContainer = document.createElement('div');
-    //             paginationContainer.id = 'simple-pagination';
-    //             paginationContainer.className = 'flex justify-center items-center space-x-2 my-4';
-    //             table.parentNode.appendChild(paginationContainer);
-    //         } else {
-    //             paginationContainer.innerHTML = '';
-    //         }
-            
-    //         const currentPage = paginationData.current_page;
-    //         const totalPages = paginationData.last_page;
-            
-    //         // Previous button
-    //         const prevButton = document.createElement('button');
-    //         prevButton.className = `px-3 py-1 rounded border ${currentPage === 1 ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-indigo-600 hover:bg-indigo-50'}`;
-    //         prevButton.innerHTML = 'Prev';
-    //         prevButton.disabled = currentPage === 1;
-    //         if (currentPage !== 1) {
-    //             prevButton.addEventListener('click', () => loadMatches(currentPage - 1));
-    //         }
-    //         paginationContainer.appendChild(prevButton);
-            
-    //         // Page numbers (show up to 5 pages)
-    //         const maxVisiblePages = 5;
-    //         let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    //         let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-            
-    //         if (endPage - startPage + 1 < maxVisiblePages) {
-    //             startPage = Math.max(1, endPage - maxVisiblePages + 1);
-    //         }
-            
-    //         for (let i = startPage; i <= endPage; i++) {
-    //             const pageButton = document.createElement('button');
-    //             pageButton.className = `px-3 py-1 rounded border ${i === currentPage ? 'bg-indigo-600 text-white' : 'bg-white text-indigo-600 hover:bg-indigo-50'}`;
-    //             pageButton.innerHTML = i;
-    //             pageButton.addEventListener('click', () => loadMatches(i));
-    //             paginationContainer.appendChild(pageButton);
-    //         }
-            
-    //         // Next button
-    //         const nextButton = document.createElement('button');
-    //         nextButton.className = `px-3 py-1 rounded border ${currentPage === totalPages ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-white text-indigo-600 hover:bg-indigo-50'}`;
-    //         nextButton.innerHTML = 'Next';
-    //         nextButton.disabled = currentPage === totalPages;
-    //         if (currentPage !== totalPages) {
-    //             nextButton.addEventListener('click', () => loadMatches(currentPage + 1));
-    //         }
-    //         paginationContainer.appendChild(nextButton);
-            
-    //         // Add pagination info
-    //         const infoText = document.createElement('div');
-    //         infoText.className = 'text-sm text-gray-500 ml-4';
-    //         infoText.innerHTML = `Page ${currentPage} of ${totalPages}`;
-    //         paginationContainer.appendChild(infoText);
-    //     }
+    
 });
 

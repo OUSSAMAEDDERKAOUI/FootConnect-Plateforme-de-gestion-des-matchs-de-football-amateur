@@ -204,11 +204,10 @@
                     <label for="journee" class="block text-sm font-medium text-gray-700 mb-1">Journée</label>
                     <select id="journee" name="journee" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200">
                         <option value="">Sélectionner une journée</option>
-                        <option value="1">Journée 1</option>
-                        <option value="2">Journée 2</option>
-                        <option value="3">Journée 3</option>
-                        <option value="4">Journée 4</option>
-                        <option value="5">Journée 5</option>
+                        @for ( $i=1 ; $i<=30;$i++)
+
+                        <option value="{{ $i }}">Journée  {{ $i }}</option> 
+                        @endfor
                     </select>
                 </div>
                 
@@ -217,22 +216,14 @@
                         <label for="equipeLocale" class="block text-sm font-medium text-gray-700 mb-1">Équipe locale</label>
                         <select id="equipeLocale" name="equipeLocale" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200">
                             <option value="">Sélectionner l'équipe locale</option>
-                            <option value="1">FC Barcelone</option>
-                            <option value="2">Real Madrid</option>
-                            <option value="3">Atletico Madrid</option>
-                            <option value="4">FC Séville</option>
-                            <option value="5">Valence CF</option>
+                          
                         </select>
                     </div>
                     <div>
                         <label for="equipeVisiteuse" class="block text-sm font-medium text-gray-700 mb-1">Équipe visiteuse</label>
                         <select id="equipeVisiteuse" name="equipeVisiteuse" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200">
                             <option value="">Sélectionner l'équipe visiteuse</option>
-                            <option value="1">FC Barcelone</option>
-                            <option value="2">Real Madrid</option>
-                            <option value="3">Atletico Madrid</option>
-                            <option value="4">FC Séville</option>
-                            <option value="5">Valence CF</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -328,5 +319,9 @@
 
 
 <script src="{{asset('js/adminLigue/matchs.js')}}"></script>
-<script></script>
+
+    <script>
+
+</script>
+
 @endsection

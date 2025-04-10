@@ -38,6 +38,7 @@ class GameRepository
 
 
 public function AjouterGame(array $gameData){
+    $gameData['ligue_id'] = 1;
 
     $game = Game::create($gameData);
 
