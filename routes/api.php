@@ -50,6 +50,7 @@ Route::apiResource('sanction',SanctionController::class);
 
 
 Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);
+Route::get('games', [GameController::class, 'showAllUnscheduledMatches']);
 
 
 

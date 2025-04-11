@@ -69,7 +69,6 @@ const btnAddMatch = document.getElementById('btnAddMatch');
 
 
        
-    // });
     
 
 
@@ -123,6 +122,7 @@ const btnAddMatch = document.getElementById('btnAddMatch');
 
 
 
+//L'ajout deds matchs non programmé
 
 
 addMatchForm.addEventListener('submit', async function(e) {
@@ -171,51 +171,8 @@ addMatchForm.addEventListener('submit', async function(e) {
 
     
     
-    function ouvrirModalProgrammerMatch(idMatch, journee, equipeLocale, equipeVisiteuse) {
-
-        document.getElementById('infoJournee').textContent = 'Journée ' + journee;
-        document.getElementById('infoEquipes').textContent = equipeLocale + ' vs ' + equipeVisiteuse;
-        
-
-        modalProgrammerMatch.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-    
    
-    document.addEventListener('click', function(e) {
-        if (e.target.closest('#tableMatchNonProgrammé button')) {
-            ouvrirModalProgrammerMatch('1', '5', 'FC Barcelone', 'Real Madrid');
-        }
-    });
-    
-    [closeProgrammerMatchModal, cancelProgrammerMatch].forEach(el => {
-        el.addEventListener('click', function() {
-            modalProgrammerMatch.classList.add('hidden');
-            document.body.style.overflow = '';
-        });
-    });
-    
-    programmerMatchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        
-        const dateMatch = document.getElementById('dateMatch').value;
-        const heureMatch = document.getElementById('heureMatch').value;
-        const lieuMatch = document.getElementById('lieuMatch').value;
-        
-        if (!dateMatch || !heureMatch || !lieuMatch) {
-            alert('Veuillez remplir tous les champs obligatoires.');
-            return;
-        }
-        
-        alert('Match programmé avec succès!');
-        modalProgrammerMatch.classList.add('hidden');
-        document.body.style.overflow = '';
-        programmerMatchForm.reset();
-    });
-
-
-    
+    // L'affichage des match non programmé
 
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -234,7 +191,9 @@ document.addEventListener('DOMContentLoaded', async function() {
             
             renderMatches(data.matchs.data);
             
-            window.renderSimplePagination(data.matchs,loadMatches);
+            // window.renderSimplePagination(data.matchs,loadMatches);
+            window.renderSimplePagination(data.matchs, loadMatches, 'table', 'pagination-matches');
+
             
         } catch (error) {
             console.error('Erreur lors de la récupération des matchs:', error);
@@ -246,6 +205,29 @@ document.addEventListener('DOMContentLoaded', async function() {
         tbody.innerHTML = ''; 
 
         matches.forEach(match => {
+              let statusClass = '';
+              let statusBgColor = '';
+              let statusTextColor = '';
+              
+              switch(match.statut) {
+                  case 'à venir':
+                      statusClass = 'bg-blue-100 text-blue-800';
+                      break;
+                  case 'programmé':
+                      statusClass = 'bg-purple-100 text-purple-800';
+                      break;
+                  case 'en cours':
+                      statusClass = 'bg-yellow-100 text-yellow-800';
+                      break;
+                  case 'terminé':
+                      statusClass = 'bg-green-100 text-green-800';
+                      break;
+                  case 'annulé':
+                      statusClass = 'bg-red-100 text-red-800';
+                      break;
+                  default:
+                      statusClass = 'bg-gray-100 text-gray-800';
+              }
             const row = `
                 <tr class="hover:bg-gray-50 transition-colors duration-150">
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -261,9 +243,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">${match.lieu}</div>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        ${match.statut}
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">
+                            ${match.statut || 'Non défini'}
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -290,5 +272,130 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     
     
+
+
+
+
+    await loadGames(10);
+    
+    async function loadGames(page) {
+        try {
+            const response = await fetch(`/api/games?page=${page}`, {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            const results = await response.json();
+            console.log(results);
+            
+            renderGames(results.games.data);
+            
+            window.renderSimplePagination(results.games, loadGames, '#MatchNonProgrammé', 'pagination-games');
+            
+        } catch (error) {
+            console.error('Erreur lors de la récupération des matchs:', error);
+        }
+    }
+    
+    function renderGames(games) {
+        const tbody = document.querySelector('#tbodyMatchNonProgrammé');
+        tbody.innerHTML = '';
+        
+        games.forEach(game => {
+          
+            
+            const row = `
+                <tr class="hover:bg-gray-50 transition-colors duration-150">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">${game.nombre_journée}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                                <img src="/storage/${game.equipe_domicile.logo}" class="h-6 w-6 object-contain" alt="${game.equipe_domicile.nom}"/>
+                            </div>
+                            <span class="font-medium">${game.equipe_domicile.nom}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                                <img src="/storage/${game.equipe_exterieur.logo}" class="h-6 w-6 object-contain" alt="${game.equipe_exterieur.nom}"/>
+                            </div>
+                            <span class="font-medium">${game.equipe_exterieur.nom}</span>
+                        </div>
+                    </td>
+                  
+                    <td class="px-6 py-4 whitespace-nowrap text-right">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                            </svg>
+                            Programmer
+                        </button>
+                    </td>
+                </tr>
+            `;
+            tbody.insertAdjacentHTML('beforeend', row);
+        });
+    }
+    
 });
+
+
+
+//L'affichage des match programmées :
+
+
+
+
+
+
+
+
+
+
+// function ouvrirModalProgrammerMatch(idMatch, journee, equipeLocale, equipeVisiteuse) {
+
+//     document.getElementById('infoJournee').textContent = 'Journée ' + journee;
+//     document.getElementById('infoEquipes').textContent = equipeLocale + ' vs ' + equipeVisiteuse;
+    
+
+//     modalProgrammerMatch.classList.remove('hidden');
+//     document.body.style.overflow = 'hidden';
+// }
+
+
+// document.addEventListener('click', function(e) {
+//     if (e.target.closest('#tableMatchNonProgrammé button')) {
+//         ouvrirModalProgrammerMatch('1', '5', 'FC Barcelone', 'Real Madrid');
+//     }
+// });
+
+// [closeProgrammerMatchModal, cancelProgrammerMatch].forEach(el => {
+//     el.addEventListener('click', function() {
+//         modalProgrammerMatch.classList.add('hidden');
+//         document.body.style.overflow = '';
+//     });
+// });
+
+// programmerMatchForm.addEventListener('submit', function(e) {
+//     e.preventDefault();
+    
+    
+//     const dateMatch = document.getElementById('dateMatch').value;
+//     const heureMatch = document.getElementById('heureMatch').value;
+//     const lieuMatch = document.getElementById('lieuMatch').value;
+    
+//     if (!dateMatch || !heureMatch || !lieuMatch) {
+//         alert('Veuillez remplir tous les champs obligatoires.');
+//         return;
+//     }
+    
+//     alert('Match programmé avec succès!');
+//     modalProgrammerMatch.classList.add('hidden');
+//     document.body.style.overflow = '';
+//     programmerMatchForm.reset();
+// });
 

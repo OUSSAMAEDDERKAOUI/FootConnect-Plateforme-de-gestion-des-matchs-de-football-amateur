@@ -94,7 +94,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200" id="matchsNonProgrammeTable">
+                <tbody class="bg-white divide-y divide-gray-200" id="matchsProgrammeTable">
 
                     
                 </tbody>
@@ -126,42 +126,17 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-gray-200" id="matchsProgrammeTable">
+                <div id="MatchNonProgrammé">
+                    <tbody class="bg-white divide-y divide-gray-200" id="tbodyMatchNonProgrammé">
 
-                    <tr class="hover:bg-gray-50 transition-colors duration-150">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm font-medium text-gray-900">Journée 5</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                                    <span class="text-xs font-medium">FCB</span>
-                                </div>
-                                <span class="font-medium">FC Barcelone</span>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                                    <span class="text-xs font-medium">RM</span>
-                                </div>
-                                <span class="font-medium">Real Madrid</span>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-                                </svg>
-                                Programmer
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
+                   
+                    </tbody>
+                </div>
+               
             </table>
            
         </div>
-        <div class="px-6 py-4 border-t border-gray-200">
+        {{-- <div class="px-6 py-4 border-t border-gray-200">
             <div class="flex flex-col sm:flex-row items-center justify-between">
                 <div class="text-sm text-gray-500 mb-4 sm:mb-0">
                     Affichage de 1 à 10 sur 25 matchs
@@ -181,7 +156,7 @@
                         </svg>
                     </button>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

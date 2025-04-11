@@ -15,8 +15,15 @@ class GameService
     {
         $this->GameRepository = $GameRepository;
     }
-public function all(){
-    $games=$this->GameRepository->all();
+
+
+    public function allScheduledMatches(){
+    $games=$this->GameRepository->allScheduledMatches();
+    return $games ;
+}
+
+public function allUnscheduledMatches(){
+    $games=$this->GameRepository->allUnscheduledMatches();
     return $games ;
 }
 

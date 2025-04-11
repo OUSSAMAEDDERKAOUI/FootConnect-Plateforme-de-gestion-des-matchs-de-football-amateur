@@ -26,7 +26,7 @@ public function __construct(GameService $GameService)
      */
     public function index()
     {
-        $matchs = $this->GameService->all();
+        $matchs = $this->GameService->allScheduledMatches();
         return response()->json([
             'status' => 'success',
             'message' => 'all Matches',
@@ -102,4 +102,19 @@ public function __construct(GameService $GameService)
             'data' => $game
         ]);
     }
+
+
+
+public function showAllUnscheduledMatches(){
+
+    $games = $this->GameService->allUnscheduledMatches();
+    return response()->json([
+        'status' => 'success',
+        'message' => ' all Unscheduled Matches  ',
+        'games' => $games,
+    ]);  
+  }
+
+
+
 }

@@ -26,6 +26,9 @@ class EquipeRepository implements EquipeRepositoryInterface
 
     public function create(array $data)
     {
+        if (isset($data['logo'])) {
+            $data['logo'] = $data['logo']->store('logo_equipes', 'public');
+        }
         return $this->model->create($data);
     }
 
