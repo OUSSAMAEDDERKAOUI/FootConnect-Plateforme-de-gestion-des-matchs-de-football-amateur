@@ -22,14 +22,9 @@ class ProgrammerGameRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'nombre_journée' => 'required|integer|max:30',
-        'equipe_domicile_id' => 'required|exists:equipes,id',
-        'equipe_exterieur_id' => 'required|exists:equipes,id',
-        'ligue_id' => 'nullable|exists:ligues,id',
+       
         'date_heure' => 'required|date',
         'lieu' => 'required|string|max:255',
-        'score_domicile' => 'nullable|integer',
-        'score_exterieur' => 'nullable|integer',
         'arbitre_central_id' => 'required|exists:arbitres,id',
         'assistant_1_id' => 'required|exists:arbitres,id',
         'assistant_2_id' => 'required|exists:arbitres,id',

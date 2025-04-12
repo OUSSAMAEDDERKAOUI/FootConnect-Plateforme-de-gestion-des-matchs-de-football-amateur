@@ -354,16 +354,16 @@ function ouvrirModalProgrammerMatch(idMatch, journee, equipeLocale, equipeVisite
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <p class="text-sm text-gray-600">Journée</p>
-                        <p class="font-medium" id="infoJournee">${journee}</p>
+                        <p class="font-medium" id="infoJournee">${journee} </p>
                     </div>
                     <div>
                         <p class="text-sm text-gray-600">Équipes</p>
                         <p class="font-medium" id="infoEquipes">${equipeLocale} vs ${equipeVisiteuse}</p>
                     </div>
                 </div>
+                <input id="gameId" value="${idMatch}" type="hidden"></input>
             </div>
             
-           
         </div>
         `
     
@@ -396,14 +396,13 @@ document.addEventListener('click', function(e) {
 });
 
 
-// Récupérer les équipes à afficher dans le formulaire d'ajout de match
+// Récupérer les arbitres et les delegues à afficher dans le formulaire de programmation  des matchs
 
 
     const arbitreSelect = document.getElementById('arbitreCentral');
     const assistant1Select = document.getElementById('assistant1');
     const assistant2Select = document.getElementById('assistant2');
     const delegueSelect = document.getElementById('delegue');
-
     
     try {
         const response = await fetch('/api/arbitre', {
@@ -417,16 +416,30 @@ document.addEventListener('click', function(e) {
         }
         
         const arbitres = await response.json();
+
         console.log('Arbitres chargés:', arbitres);
         
-        const populateSelect = (select, arbitres) => {
+        const reponse = await fetch('/api/delegue', {
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (!reponse.ok) {
+            throw new Error(`HTTP error! status: ${reponse.status}`);
+        }
+        
+        const delegues = await reponse.json();
 
-            select.innerHTML = '<option value="">Sélectionner un arbitre</option>';
+        console.log('Délégués chargés:', delegues);
+        
+        const populateSelect = (select, personnes) => {
+            select.innerHTML = '<option value="">Sélectionner </option>';
             
-            arbitres.forEach(arbitre => {  
+            personnes.forEach(personne => {  
                 const option = document.createElement('option');
-                option.value = arbitre.id;
-                option.textContent = arbitre.user.nom;
+                option.value = personne.id;
+                option.textContent = personne.user.nom;
                 select.appendChild(option);
             });
         };
@@ -434,21 +447,18 @@ document.addEventListener('click', function(e) {
         populateSelect(arbitreSelect, arbitres);
         populateSelect(assistant1Select, arbitres);
         populateSelect(assistant2Select, arbitres);
-        populateSelect(delegueSelect, arbitres);
+        populateSelect(delegueSelect, delegues);
         
         const updateDisabledOptions = () => {
-
-            const selectedValues = [
+            const selectedArbitreValues = [
                 arbitreSelect.value,
                 assistant1Select.value,
-                assistant2Select.value,
-                delegueSelect.value
+                assistant2Select.value
             ].filter(value => value !== ""); 
             
-            const allSelects = [arbitreSelect, assistant1Select, assistant2Select, delegueSelect];
+            const arbitreSelects = [arbitreSelect, assistant1Select, assistant2Select];
             
-            allSelects.forEach(select => {
-
+            arbitreSelects.forEach(select => {
                 const currentValue = select.value;
                 
                 Array.from(select.options).forEach(option => {
@@ -456,9 +466,10 @@ document.addEventListener('click', function(e) {
                     
                     option.disabled = 
                         option.value !== currentValue && 
-                        selectedValues.includes(option.value);
+                        selectedArbitreValues.includes(option.value);
                 });
             });
+            
         };
         
         const handleSelectChange = () => {
@@ -468,39 +479,68 @@ document.addEventListener('click', function(e) {
         arbitreSelect.addEventListener('change', handleSelectChange);
         assistant1Select.addEventListener('change', handleSelectChange);
         assistant2Select.addEventListener('change', handleSelectChange);
-        delegueSelect.addEventListener('change', handleSelectChange);
         
         updateDisabledOptions();
         
     } catch (error) {
-        console.error('Erreur lors du chargement des arbitres:', error);
+        console.error('Erreur lors du chargement des données:', error);
         
         [arbitreSelect, assistant1Select, assistant2Select, delegueSelect].forEach(select => {
-            select.innerHTML = '<option value="">Erreur de chargement des arbitres</option>';
+            select.innerHTML = '<option value="">Erreur de chargement des données</option>';
             select.disabled = true;
         });
     }
 
-
 });
 
 
-programmerMatchForm.addEventListener('submit', function(e) {
+programmerMatchForm.addEventListener('submit', async function(e) {
     e.preventDefault();
-    
     
     const dateMatch = document.getElementById('dateMatch').value;
     const lieuMatch = document.getElementById('lieuMatch').value;
+    const statutMatch = document.getElementById('statutMatch').value;
+    const arbitreCentralId = document.getElementById('arbitreCentral').value;
+    const assistant1Id = document.getElementById('assistant1').value;
+    const assistant2Id = document.getElementById('assistant2').value;
+    const delegueId = document.getElementById('delegue').value;
+    const gameId = document.getElementById('gameId').value;
+
+    alert(gameId);
+
+  
     
-    if (!dateMatch || !heureMatch || !lieuMatch) {
-        alert('Veuillez remplir tous les champs obligatoires.');
-        return;
+    try {
+        const response = await fetch(`/api/matches/${gameId}/programmer`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                nombre_journée:gameId,
+                date_heure: dateMatch,
+                lieu: lieuMatch,
+                statut: statutMatch,
+                arbitre_central_id: arbitreCentralId,
+                assistant_1_id: assistant1Id,
+                assistant_2_id: assistant2Id,
+                delegue_id: delegueId
+            })
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+            alert('Match programmé avec succès!');
+            modalProgrammerMatch.classList.add('hidden');
+            document.body.style.overflow = '';
+            programmerMatchForm.reset();
+        } else {
+            alert(data.message || "Échec de la programmation du match");
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert("Une erreur s'est produite lors de la programmation du match");
     }
-    
-    alert('Match programmé avec succès!');
-    modalProgrammerMatch.classList.add('hidden');
-    document.body.style.overflow = '';
-    programmerMatchForm.reset();
 });
-
-

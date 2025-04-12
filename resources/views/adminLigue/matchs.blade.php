@@ -240,12 +240,9 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label for="dateMatch" class="block text-sm font-medium text-gray-700 mb-1">Date du match</label>
-                    <input type="date" id="dateMatch" name="dateMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                    <input type="datetime-local" id="dateMatch" name="dateMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
                 </div>
-                <div>
-                    <label for="heureMatch" class="block text-sm font-medium text-gray-700 mb-1">Heure du match</label>
-                    <input type="time" id="heureMatch" name="heureMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
-                </div>
+                
             </div>
         
             <div class="mb-4">
@@ -256,8 +253,8 @@
             <div class="mb-4">
                 <label for="statutMatch" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
                 <select id="statutMatch" name="statutMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
-                    <option value="scheduled">Programmé</option>
-                    <option value="postponed">Reporté</option>
+                    <option value="programmé">Programmé</option>
+                    <option value="annulé">Annulé</option>
                 </select>
             </div>
         

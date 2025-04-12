@@ -8,6 +8,7 @@ use App\Http\Controllers\API\GameController;
 use App\Http\Controllers\API\ButeurController;
 use App\Http\Controllers\API\EquipeController;
 use App\Http\Controllers\API\ArbitreController;
+use App\Http\Controllers\API\DelegueController;
 use App\Http\Controllers\API\RapportController;
 use App\Http\Controllers\API\BlessureController;
 use App\Http\Controllers\API\SanctionController;
@@ -47,6 +48,7 @@ Route::post('logout', [AuthController::class,'logout']);
 
 
 Route::apiResource('match',GameController::class);
+Route::patch('/match/update/{matchId}',[GameController::class,'ProgrammerGame']);
 Route::apiResource('sanction',SanctionController::class);
 
 
@@ -63,6 +65,14 @@ Route::prefix('arbitre')->group(function () {
     Route::delete('/{id}', [ArbitreController::class, 'destroy']);
 });
 
+
+Route::prefix('delegue')->group(function () {
+    Route::get('/', [DelegueController::class, 'index']);
+    Route::get('/{id}', [DelegueController::class, 'show']);
+    Route::post('/', [DelegueController::class, 'store']);
+    Route::put('/{id}', [DelegueController::class, 'update']);
+    Route::delete('/{id}', [DelegueController::class, 'destroy']);
+});
 
 
 
