@@ -220,8 +220,8 @@
 </div>
 
 <!-- Modal pour programmer un match -->
-<div id="modalProgrammerMatch" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center hidden">
-    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4 overflow-hidden">
+<div id="modalProgrammerMatch" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50  flex items-center justify-center hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4   overflow-hidden">
         <div class="bg-emerald-600 px-6 py-4 flex justify-between items-center">
             <h3 class="text-xl font-semibold text-white">Programmer un match</h3>
             <button id="closeProgrammerMatchModal" class="text-white hover:text-emerald-200 transition-colors duration-200">
@@ -231,64 +231,79 @@
             </button>
         </div>
         
-        <div class="p-6">
-            <div class="mb-6 bg-indigo-50 p-4 rounded-lg">
-                <h4 class="text-lg font-medium text-indigo-800 mb-2">Information du match</h4>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <p class="text-sm text-gray-600">Journée</p>
-                        <p class="font-medium" id="infoJournee">Journée 5</p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-gray-600">Équipes</p>
-                        <p class="font-medium" id="infoEquipes">FC Barcelone vs Real Madrid</p>
-                    </div>
+        <div class="p-6  "  >
+          <div id="modalInfo">
+            {{-- injectée depuis js --}}
+          </div>
+            
+          <form id="programmerMatchForm" class="overflow-y-auto max-h-[60vh]">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="dateMatch" class="block text-sm font-medium text-gray-700 mb-1">Date du match</label>
+                    <input type="date" id="dateMatch" name="dateMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                </div>
+                <div>
+                    <label for="heureMatch" class="block text-sm font-medium text-gray-700 mb-1">Heure du match</label>
+                    <input type="time" id="heureMatch" name="heureMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
                 </div>
             </div>
-            
-            <form id="programmerMatchForm">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label for="dateMatch" class="block text-sm font-medium text-gray-700 mb-1">Date du match</label>
-                        <input type="date" id="dateMatch" name="dateMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
-                    </div>
-                    <div>
-                        <label for="heureMatch" class="block text-sm font-medium text-gray-700 mb-1">Heure du match</label>
-                        <input type="time" id="heureMatch" name="heureMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
-                    </div>
-                </div>
-                
-                <div class="mb-4">
-                    <label for="lieuMatch" class="block text-sm font-medium text-gray-700 mb-1">Lieu</label>
-                    <input type="text" id="lieuMatch" name="lieuMatch" placeholder="Exemple: Camp Nou, Barcelone" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
-                </div>
-                
-                <div class="mb-4">
-                    <label for="statutMatch" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
-                    <select id="statutMatch" name="statutMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
-                        <option value="scheduled">Programmé</option>
-                        <option value="postponed">Reporté</option>
+        
+            <div class="mb-4">
+                <label for="lieuMatch" class="block text-sm font-medium text-gray-700 mb-1">Lieu</label>
+                <input type="text" id="lieuMatch" name="lieuMatch" placeholder="Exemple: Camp Nou, Barcelone" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+            </div>
+        
+            <div class="mb-4">
+                <label for="statutMatch" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
+                <select id="statutMatch" name="statutMatch" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                    <option value="scheduled">Programmé</option>
+                    <option value="postponed">Reporté</option>
+                </select>
+            </div>
+        
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label for="arbitreCentral" class="block text-sm font-medium text-gray-700 mb-1">Arbitre central</label>
+                    <select id="arbitreCentral" name="arbitre_central_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                        <!-- Options  à générer  dynamiquement -->
                     </select>
                 </div>
-                
-                <div class="mb-4">
-                    <label for="infoSupp" class="block text-sm font-medium text-gray-700 mb-1">Informations supplémentaires</label>
-                    <textarea id="infoSupp" name="infoSupp" rows="3" placeholder="Ajoutez des informations complémentaires..." class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200"></textarea>
+                <div>
+                    <label for="assistant1" class="block text-sm font-medium text-gray-700 mb-1">Assistant 1</label>
+                    <select id="assistant1" name="assistant_1_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                        <!-- Options à générer dynamiquement -->
+                    </select>
                 </div>
-                
-                <div class="flex justify-end mt-6 gap-3">
-                    <button type="button" id="cancelProgrammerMatch" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 font-medium">
-                        Annuler
-                    </button>
-                    <button type="submit" class="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors duration-200 font-medium flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-                        </svg>
-                        Programmer le match
-                    </button>
+                <div>
+                    <label for="assistant2" class="block text-sm font-medium text-gray-700 mb-1">Assistant 2</label>
+                    <select id="assistant2" name="assistant_2_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                        <!-- Options à générer dynamiquement -->
+                    </select>
                 </div>
-            </form>
-        </div>
+                <div>
+                    <label for="delegue" class="block text-sm font-medium text-gray-700 mb-1">Délégué</label>
+                    <select id="delegue" name="delegue_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                        <!-- Options à générer dynamiquement -->
+                    </select>
+                </div>
+            </div>
+        
+        
+            <div class="flex justify-end mt-6 gap-3">
+                <button type="button" id="cancelProgrammerMatch" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 font-medium">
+                    Annuler
+                </button>
+                <button type="submit" class="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors duration-200 font-medium flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                    </svg>
+                    Programmer le match
+                </button>
+            </div>
+        </form>
+        
+        </div> 
+        
     </div>
 </div>
 

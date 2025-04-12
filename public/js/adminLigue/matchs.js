@@ -272,130 +272,150 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     
     
-
-
-
-
-    await loadGames(10);
-    
-    async function loadGames(page) {
-        try {
-            const response = await fetch(`/api/games?page=${page}`, {
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-
-            const results = await response.json();
-            console.log(results);
-            
-            renderGames(results.games.data);
-            
-            window.renderSimplePagination(results.games, loadGames, '#MatchNonProgrammé', 'pagination-games');
-            
-        } catch (error) {
-            console.error('Erreur lors de la récupération des matchs:', error);
-        }
-    }
-    
-    function renderGames(games) {
-        const tbody = document.querySelector('#tbodyMatchNonProgrammé');
-        tbody.innerHTML = '';
-        
-        games.forEach(game => {
-          
-            
-            const row = `
-                <tr class="hover:bg-gray-50 transition-colors duration-150">
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">${game.nombre_journée}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                                <img src="/storage/${game.equipe_domicile.logo}" class="h-6 w-6 object-contain" alt="${game.equipe_domicile.nom}"/>
-                            </div>
-                            <span class="font-medium">${game.equipe_domicile.nom}</span>
-                        </div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                                <img src="/storage/${game.equipe_exterieur.logo}" class="h-6 w-6 object-contain" alt="${game.equipe_exterieur.nom}"/>
-                            </div>
-                            <span class="font-medium">${game.equipe_exterieur.nom}</span>
-                        </div>
-                    </td>
-                  
-                    <td class="px-6 py-4 whitespace-nowrap text-right">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
-                            </svg>
-                            Programmer
-                        </button>
-                    </td>
-                </tr>
-            `;
-            tbody.insertAdjacentHTML('beforeend', row);
-        });
-    }
-    
-});
-
-
-
 //L'affichage des match programmées :
 
 
 
 
+await loadGames(10);
+    
+async function loadGames(page) {
+    try {
+        const response = await fetch(`/api/games?page=${page}`, {
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        const results = await response.json();
+        console.log(results);
+        
+        renderGames(results.games.data);
+        
+        window.renderSimplePagination(results.games, loadGames, '#MatchNonProgrammé', 'pagination-games');
+        
+    } catch (error) {
+        console.error('Erreur lors de la récupération des matchs:', error);
+    }
+}
+
+function renderGames(games) {
+    const tbody = document.querySelector('#tbodyMatchNonProgrammé');
+    tbody.innerHTML = '';
+    
+    games.forEach(game => {
+      
+        
+        const row = `
+            <tr class="hover:bg-gray-50 transition-colors duration-150">
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm font-medium text-gray-900">${game.nombre_journée}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                            <img src="/storage/${game.equipe_domicile.logo}" class="h-6 w-6 object-contain" alt="${game.equipe_domicile.nom}"/>
+                        </div>
+                        <span class="font-medium">${game.equipe_domicile.nom}</span>
+                    </div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                        <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                            <img src="/storage/${game.equipe_exterieur.logo}" class="h-6 w-6 object-contain" alt="${game.equipe_exterieur.nom}"/>
+                        </div>
+                        <span class="font-medium">${game.equipe_exterieur.nom}</span>
+                    </div>
+                </td>
+              
+                <td class="px-6 py-4 whitespace-nowrap text-right">
+                    <button data-id='${game.id}' data-journée='${game.nombre_journée}' data-equipe_domicile='${game.equipe_domicile.nom}' data-equipe_exterieur='${game.equipe_exterieur.nom}'
+                     class="btn-game inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                        </svg>
+                        Programmer
+                    </button>
+                </td>
+            </tr>
+        `;
+        tbody.insertAdjacentHTML('beforeend', row);
+    });
+}
 
 
 
+function ouvrirModalProgrammerMatch(idMatch, journee, equipeLocale, equipeVisiteuse) {
 
-
-
-// function ouvrirModalProgrammerMatch(idMatch, journee, equipeLocale, equipeVisiteuse) {
-
-//     document.getElementById('infoJournee').textContent = 'Journée ' + journee;
-//     document.getElementById('infoEquipes').textContent = equipeLocale + ' vs ' + equipeVisiteuse;
+  
+        document.getElementById('modalInfo').innerHTML = `
+          <div class="mb-6 bg-indigo-50 p-4 rounded-lg">
+                <h4 class="text-lg font-medium text-indigo-800 mb-2">Information du match</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-600">Journée</p>
+                        <p class="font-medium" id="infoJournee">${journee}</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600">Équipes</p>
+                        <p class="font-medium" id="infoEquipes">${equipeLocale} vs ${equipeVisiteuse}</p>
+                    </div>
+                </div>
+            </div>
+            
+           
+        </div>
+        `
     
 
-//     modalProgrammerMatch.classList.remove('hidden');
-//     document.body.style.overflow = 'hidden';
-// }
+    modalProgrammerMatch.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
 
 
-// document.addEventListener('click', function(e) {
-//     if (e.target.closest('#tableMatchNonProgrammé button')) {
-//         ouvrirModalProgrammerMatch('1', '5', 'FC Barcelone', 'Real Madrid');
-//     }
-// });
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.btn-game')) {
 
-// [closeProgrammerMatchModal, cancelProgrammerMatch].forEach(el => {
-//     el.addEventListener('click', function() {
-//         modalProgrammerMatch.classList.add('hidden');
-//         document.body.style.overflow = '';
-//     });
-// });
+        const id = e.target.dataset.id;
+        const equipe_domicile = e.target.dataset.equipe_domicile;
+        const equipe_exterieur = e.target.dataset.equipe_exterieur;
+        const journee = e.target.dataset.journée;
 
-// programmerMatchForm.addEventListener('submit', function(e) {
-//     e.preventDefault();
+        ouvrirModalProgrammerMatch(id,journee,equipe_domicile , equipe_exterieur);
+
+        modalProgrammerMatch.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    }
+});
+
+[closeProgrammerMatchModal, cancelProgrammerMatch].forEach(el => {
+    el.addEventListener('click', function() {
+        modalProgrammerMatch.classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+});
+
+
+});
+
+
+
+programmerMatchForm.addEventListener('submit', function(e) {
+    e.preventDefault();
     
     
-//     const dateMatch = document.getElementById('dateMatch').value;
-//     const heureMatch = document.getElementById('heureMatch').value;
-//     const lieuMatch = document.getElementById('lieuMatch').value;
+    const dateMatch = document.getElementById('dateMatch').value;
+    const lieuMatch = document.getElementById('lieuMatch').value;
     
-//     if (!dateMatch || !heureMatch || !lieuMatch) {
-//         alert('Veuillez remplir tous les champs obligatoires.');
-//         return;
-//     }
+    if (!dateMatch || !heureMatch || !lieuMatch) {
+        alert('Veuillez remplir tous les champs obligatoires.');
+        return;
+    }
     
-//     alert('Match programmé avec succès!');
-//     modalProgrammerMatch.classList.add('hidden');
-//     document.body.style.overflow = '';
-//     programmerMatchForm.reset();
-// });
+    alert('Match programmé avec succès!');
+    modalProgrammerMatch.classList.add('hidden');
+    document.body.style.overflow = '';
+    programmerMatchForm.reset();
+});
+
 

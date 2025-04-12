@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\GameController;
 use App\Http\Controllers\API\ButeurController;
 use App\Http\Controllers\API\EquipeController;
+use App\Http\Controllers\API\ArbitreController;
 use App\Http\Controllers\API\RapportController;
 use App\Http\Controllers\API\BlessureController;
 use App\Http\Controllers\API\SanctionController;
@@ -52,6 +53,15 @@ Route::apiResource('sanction',SanctionController::class);
 Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);
 Route::get('games', [GameController::class, 'showAllUnscheduledMatches']);
 
+
+
+Route::prefix('arbitre')->group(function () {
+    Route::get('/', [ArbitreController::class, 'index']);
+    Route::get('/{id}', [ArbitreController::class, 'show']);
+    Route::post('/', [ArbitreController::class, 'store']);
+    Route::put('/{id}', [ArbitreController::class, 'update']);
+    Route::delete('/{id}', [ArbitreController::class, 'destroy']);
+});
 
 
 
