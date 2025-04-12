@@ -396,8 +396,93 @@ document.addEventListener('click', function(e) {
 });
 
 
-});
+// Récupérer les équipes à afficher dans le formulaire d'ajout de match
 
+
+    const arbitreSelect = document.getElementById('arbitreCentral');
+    const assistant1Select = document.getElementById('assistant1');
+    const assistant2Select = document.getElementById('assistant2');
+    const delegueSelect = document.getElementById('delegue');
+
+    
+    try {
+        const response = await fetch('/api/arbitre', {
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const arbitres = await response.json();
+        console.log('Arbitres chargés:', arbitres);
+        
+        const populateSelect = (select, arbitres) => {
+
+            select.innerHTML = '<option value="">Sélectionner un arbitre</option>';
+            
+            arbitres.forEach(arbitre => {  
+                const option = document.createElement('option');
+                option.value = arbitre.id;
+                option.textContent = arbitre.user.nom;
+                select.appendChild(option);
+            });
+        };
+        
+        populateSelect(arbitreSelect, arbitres);
+        populateSelect(assistant1Select, arbitres);
+        populateSelect(assistant2Select, arbitres);
+        populateSelect(delegueSelect, arbitres);
+        
+        const updateDisabledOptions = () => {
+
+            const selectedValues = [
+                arbitreSelect.value,
+                assistant1Select.value,
+                assistant2Select.value,
+                delegueSelect.value
+            ].filter(value => value !== ""); 
+            
+            const allSelects = [arbitreSelect, assistant1Select, assistant2Select, delegueSelect];
+            
+            allSelects.forEach(select => {
+
+                const currentValue = select.value;
+                
+                Array.from(select.options).forEach(option => {
+                    if (option.value === "") return; 
+                    
+                    option.disabled = 
+                        option.value !== currentValue && 
+                        selectedValues.includes(option.value);
+                });
+            });
+        };
+        
+        const handleSelectChange = () => {
+            updateDisabledOptions();
+        };
+        
+        arbitreSelect.addEventListener('change', handleSelectChange);
+        assistant1Select.addEventListener('change', handleSelectChange);
+        assistant2Select.addEventListener('change', handleSelectChange);
+        delegueSelect.addEventListener('change', handleSelectChange);
+        
+        updateDisabledOptions();
+        
+    } catch (error) {
+        console.error('Erreur lors du chargement des arbitres:', error);
+        
+        [arbitreSelect, assistant1Select, assistant2Select, delegueSelect].forEach(select => {
+            select.innerHTML = '<option value="">Erreur de chargement des arbitres</option>';
+            select.disabled = true;
+        });
+    }
+
+
+});
 
 
 programmerMatchForm.addEventListener('submit', function(e) {
