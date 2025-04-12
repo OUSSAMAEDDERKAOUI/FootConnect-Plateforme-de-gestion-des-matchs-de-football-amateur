@@ -23,12 +23,14 @@ class GameRepository
 
     public function allScheduledMatches()
     {
-        return Game::with(['equipeDomicile', 'equipeExterieur', 'arbitreCentral', 'assistant1', 'assistant2', 'delegue'])->whereNotNull("lieu")->paginate(5);
-    }
+        return Game::with(['equipeDomicile', 'equipeExterieur', 'arbitreCentral', 'assistant1', 'assistant2', 'delegue'])
+        ->where("statut", "!=", "à venir")
+        ->paginate(5);
+        }
 
     public function allUnscheduledMatches()
     {
-        return Game::with(['equipeDomicile', 'equipeExterieur'])->whereNull('lieu')->orWhere('statut', 'non_programmé')->paginate(5);
+        return Game::with(['equipeDomicile', 'equipeExterieur'])->Where('statut', 'à venir')->paginate(5);
     }
 
 

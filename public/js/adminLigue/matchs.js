@@ -1,11 +1,15 @@
-// gestion d'affichage des listes des matchs programmés ou non 
-
 document.addEventListener('DOMContentLoaded', async () => {
     const token = Cookies.get('Access-Token');
 
-    if (token.length == 0) {
-        alert()
-        window.location.href = '/auth/login'; 
+    if (!token || token.length === 0) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Session expirée',
+            text: 'Vous allez être redirigé vers la page de connexion.',
+            confirmButtonText: 'OK',
+        }).then(() => {
+            window.location.href = '/auth/login';
+        });
         return;
     }
 
@@ -172,7 +176,7 @@ addMatchForm.addEventListener('submit', async function(e) {
     
     
    
-    // L'affichage des match non programmé
+    // L'affichage des match  programmé
 
 
 document.addEventListener('DOMContentLoaded', async function() {
@@ -203,33 +207,34 @@ document.addEventListener('DOMContentLoaded', async function() {
     function renderMatches(matches) {
         const tbody = document.querySelector('tbody');
         tbody.innerHTML = ''; 
-
+    
         matches.forEach(match => {
-              let statusClass = '';
-              let statusBgColor = '';
-              let statusTextColor = '';
-              
-              switch(match.statut) {
-                  case 'à venir':
-                      statusClass = 'bg-blue-100 text-blue-800';
-                      break;
-                  case 'programmé':
-                      statusClass = 'bg-purple-100 text-purple-800';
-                      break;
-                  case 'en cours':
-                      statusClass = 'bg-yellow-100 text-yellow-800';
-                      break;
-                  case 'terminé':
-                      statusClass = 'bg-green-100 text-green-800';
-                      break;
-                  case 'annulé':
-                      statusClass = 'bg-red-100 text-red-800';
-                      break;
-                  default:
-                      statusClass = 'bg-gray-100 text-gray-800';
-              }
+            let statusClass = '';
+            let statusBgColor = '';
+            let statusTextColor = '';
+            
+            switch(match.statut) {
+                case 'à venir':
+                    statusClass = 'bg-blue-100 text-blue-800';
+                    break;
+                case 'programmé':
+                    statusClass = 'bg-purple-100 text-purple-800';
+                    break;
+                case 'en cours':
+                    statusClass = 'bg-yellow-100 text-yellow-800';
+                    break;
+                case 'terminé':
+                    statusClass = 'bg-green-100 text-green-800';
+                    break;
+                case 'annulé':
+                    statusClass = 'bg-red-100 text-red-800';
+                    break;
+                default:
+                    statusClass = 'bg-gray-100 text-gray-800';
+            }
+    
             const row = `
-                <tr class="hover:bg-gray-50 transition-colors duration-150">
+                <tr class="hover:bg-gray-50 transition-colors duration-150" data-id="${match.id}">
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm font-medium text-gray-900">${match.date_heure}</div>
                     </td>
@@ -243,13 +248,13 @@ document.addEventListener('DOMContentLoaded', async function() {
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="text-sm text-gray-900">${match.lieu}</div>
                     </td>
-                      <td class="px-6 py-4 whitespace-nowrap">
+                    <td class="px-6 py-4 whitespace-nowrap">
                         <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${statusClass}">
                             ${match.statut || 'Non défini'}
                         </span>
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-500">${match.score_domicile} - ${match.score_exterieur}</div>
+                    <td class="px-10 py-4 whitespace-nowrap">
+                        ${match.score_domicile ?? ''} - ${match.score_exterieur ?? ''}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right">
                         <div class="flex justify-end space-x-2">
@@ -258,7 +263,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                                     <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                 </svg>
                             </button>
-                            <button class="text-red-600 hover:text-red-900">
+                            <button class="text-red-600 hover:text-red-900 delete-button">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                                 </svg>
@@ -267,12 +272,52 @@ document.addEventListener('DOMContentLoaded', async function() {
                     </td>
                 </tr>
             `;
+    
             tbody.insertAdjacentHTML('beforeend', row);
+        });
+    
+        // Ajouter un gestionnaire d'événements pour chaque bouton de suppression
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.addEventListener('click', async (event) => {
+                const matchRow = event.target.closest('tr');
+                const matchId = matchRow.getAttribute('data-id');
+    
+                try {
+                    const response = await fetch(`/api/match/${matchId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                        },
+                    });
+    
+                    if (!response.ok) {
+                        throw new Error('Erreur lors de la suppression du match');
+                    }
+    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Match Supprimé',
+                        text: 'Le match a été supprimé avec succès.',
+                        confirmButtonText: 'OK',
+                    }).then(() => {
+                        matchRow.remove(); 
+                    });
+
+                    } catch (error) {
+                    console.error('Erreur:', error);
+                    alert('Erreur lors de la suppression du match');
+                }
+            });
         });
     }
     
     
-//L'affichage des match programmées :
+    
+
+
+
+//L'affichage des match non programmées :
 
 
 

@@ -83,7 +83,12 @@ public function __construct(GameService $GameService)
      */
     public function destroy(string $id)
     {
-        //
+        $match=Game::findOrFail($id);
+        $match->delete();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Match deleted successfully'
+        ]);
     }
 
 
