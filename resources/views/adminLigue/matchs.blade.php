@@ -304,6 +304,82 @@
     </div>
 </div>
 
+<!-- Modal pour update un match -->
+<div id="modalupdateMatch" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50  flex items-center justify-center hidden">
+    <div class="bg-white rounded-xl shadow-xl max-w-2xl w-full mx-4   overflow-hidden">
+        <div class="bg-emerald-600 px-6 py-4 flex justify-between items-center">
+            <h3 class="text-xl font-semibold text-white">Programmer un match</h3>
+            <button id="closemodalupdateMatch" class="text-white hover:text-emerald-200 transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        
+        <div class="p-6  "  >
+            <form id="updateMatchForm" class="overflow-y-auto max-h-[60vh]">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label for="dateMatch" class="block text-sm font-medium text-gray-700 mb-1">Date du match</label>
+                    <input type="datetime-local" id="dateGame" name="dateGame" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                  </div>
+              
+                  <div>
+                    <label for="lieuMatch" class="block text-sm font-medium text-gray-700 mb-1">Lieu</label>
+                    <input type="text" id="lieuGame" name="lieuGame" placeholder="Exemple: Stade Mohammed V" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                  </div>
+                </div>
+              
+                <div class="mb-4">
+                  <label for="statutMatch" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
+                  <select id="statutGame" name="statutGame" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                    <option value="programmé">Programmé</option>
+                    <option value="en cours">En cours</option>
+                    <option value="terminé">Terminé</option>
+                    <option value="annulé">Annulé</option>
+                  </select>
+                </div>
+              
+                <!-- Scores -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <label for="scoreDomicile" class="block text-sm font-medium text-gray-700 mb-1">Score Équipe Domicile</label>
+                    <input type="number" min="0" id="scoreDomicile" name="score_domicile" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                  </div>
+                  <div>
+                    <label for="scoreExterieur" class="block text-sm font-medium text-gray-700 mb-1">Score Équipe Extérieure</label>
+                    <input type="number" min="0" id="scoreExterieur" name="score_exterieur" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
+                  </div>
+                </div>
+              
+              
+                <!-- Boutons -->
+                <div class="flex justify-end mt-6 gap-3">
+                  <button type="button" id="cancelUpdateMatch" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 font-medium">
+                    Annuler
+                  </button>
+                  <button type="submit" class="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors duration-200 font-medium flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
+                    </svg>
+                    Mettre à jour le match
+                  </button>
+                </div>
+              </form>
+              
+            
+         
+        
+        </div> 
+        
+    </div>
+</div>
+
+
+
+
+
+
 
 <script src="{{asset('js/adminLigue/matchs.js')}}"></script>
 

@@ -122,4 +122,27 @@ public function showAllUnscheduledMatches(){
 
 
 
+public function updateDataAfterMatche(Request $request , $id ){
+
+
+    $validatedData=$request->validate([
+        'lieu'=>'required|string|max:100',
+        'date_heure' => 'required|date_format:Y-m-d\TH:i',
+        'score_exterieur'=>'required|integer|min:0',
+        'score_domicile'=>'required|integer|min:0',
+        'statut'=>'required|in:terminé,annulé,en cours,programmé ',
+    ]);
+    $match=Game::findOrFail($id);
+    $match->update($validatedData);
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Match updated successfully',
+        'match' => $match,
+    ]);
+
+}
+
+
+
+
 }

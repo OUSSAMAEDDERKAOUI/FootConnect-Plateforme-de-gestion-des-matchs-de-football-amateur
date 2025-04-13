@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btnMatchProgrammé = document.getElementById('btnMatchProgrammé');
     const tableMatchProgrammé = document.getElementById('tableMatchProgrammé');
     const tableMatchNonProgrammé = document.getElementById('tableMatchNonProgrammé');
+const closemodalupdateMatch=document.getElementById('closemodalupdateMatch');
+const cancelUpdateMatch = document.getElementById('cancelUpdateMatch');
 
     btnMatchNonProgrammé.addEventListener('click', function() {
         tableMatchProgrammé.classList.add('hidden');
@@ -195,7 +197,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             
             renderMatches(data.matchs.data);
             
-            // window.renderSimplePagination(data.matchs,loadMatches);
             window.renderSimplePagination(data.matchs, loadMatches, 'table', 'pagination-matches');
 
             
@@ -258,11 +259,11 @@ document.addEventListener('DOMContentLoaded', async function() {
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right">
                         <div class="flex justify-end space-x-2">
-                            <button class="text-indigo-600 hover:text-indigo-900">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                </svg>
-                            </button>
+                           <button class="text-indigo-600 hover:text-indigo-900 edit-button" data-id="${match.id}">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                      <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                  </svg>
+                           </button>
                             <button class="text-red-600 hover:text-red-900 delete-button">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -276,7 +277,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             tbody.insertAdjacentHTML('beforeend', row);
         });
     
-        // Ajouter un gestionnaire d'événements pour chaque bouton de suppression
         document.querySelectorAll('.delete-button').forEach(button => {
             button.addEventListener('click', async (event) => {
                 const matchRow = event.target.closest('tr');
@@ -314,6 +314,98 @@ document.addEventListener('DOMContentLoaded', async function() {
     
     
     
+///////////////////////////////////////////////////
+
+
+let selectedMatchId = null;
+
+document.addEventListener('click', async (e) => {
+    const editBtn = e.target.closest('.edit-button');
+    if (editBtn) {
+        const matchRow = editBtn.closest('tr');
+        selectedMatchId = matchRow.getAttribute('data-id');
+
+        // Extraire les valeurs du tableau
+        const date = matchRow.querySelector('td:nth-child(1)').innerText;
+        const lieu = matchRow.querySelector('td:nth-child(3)').innerText.trim();
+        const statut = matchRow.querySelector('td:nth-child(4) span').innerText.trim();
+        const score = matchRow.querySelector('td:nth-child(5)').innerText.trim().split(' - ');
+        const scoreDomicile = score[0] || '';
+        const scoreExterieur = score[1] || '';
+        
+
+        // Remplir le formulaire
+        document.getElementById('dateGame').value = new Date(date).toISOString().slice(0,16);
+        document.getElementById('lieuGame').value = lieu;
+        document.getElementById('statutGame').value = statut;
+        document.getElementById('scoreDomicile').value = scoreDomicile;
+        document.getElementById('scoreExterieur').value = scoreExterieur;
+
+        // Afficher la modale
+        document.getElementById('modalupdateMatch').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+});
+
+
+document.getElementById('updateMatchForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    const data = {
+        date_heure: form.dateGame.value,
+        lieu: form.lieuGame.value,
+        statut: form.statutGame.value,
+        score_domicile: form.scoreDomicile.value || null,
+        score_exterieur: form.scoreExterieur.value || null,
+    };
+    
+    console.log(localStorage.getItem('token'));
+    console.log(data);
+    try {
+        const res = await fetch(`http://127.0.0.1:8000/api/match/${selectedMatchId}/update/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!res.ok) throw new Error("Échec de la mise à jour");
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Match mis à jour',
+            confirmButtonText: 'OK'
+        });
+
+        // Recharger les données à jour
+        const updatedMatch = await res.json();
+         await loadMatches(1); 
+        
+        // Fermer la modale
+        document.getElementById('modalupdateMatch').classList.add('hidden');
+        document.body.style.overflow = '';
+    } catch (err) {
+        console.error(err);
+        Swal.fire({
+            icon: 'error',
+            title: 'Erreur',
+            text: err.message
+        });
+    }
+});
+
+
+
+[closemodalupdateMatch, cancelUpdateMatch].forEach(el => {
+    el.addEventListener('click', () => {
+        document.getElementById('modalupdateMatch').classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+});
 
 
 
@@ -589,3 +681,7 @@ programmerMatchForm.addEventListener('submit', async function(e) {
         alert("Une erreur s'est produite lors de la programmation du match");
     }
 });
+
+
+
+

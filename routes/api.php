@@ -49,10 +49,12 @@ Route::post('logout', [AuthController::class,'logout']);
 
 Route::apiResource('match',GameController::class);
 Route::patch('/match/update/{matchId}',[GameController::class,'ProgrammerGame']);
+Route::patch('/match/{matchId}/update',[GameController::class,'updateDataAfterMatche']);
+
 Route::apiResource('sanction',SanctionController::class);
 
 
-Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);
+// Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);
 Route::get('games', [GameController::class, 'showAllUnscheduledMatches']);
 
 
