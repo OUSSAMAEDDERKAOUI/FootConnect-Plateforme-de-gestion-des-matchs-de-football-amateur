@@ -233,11 +233,19 @@ document.addEventListener('DOMContentLoaded', async function() {
                 default:
                     statusClass = 'bg-gray-100 text-gray-800';
             }
-    
+            const date = new Date(match.date_heure);
+            const formattedDate = date.toLocaleString('fr-FR', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit'
+            });
+            
             const row = `
                 <tr class="hover:bg-gray-50 transition-colors duration-150" data-id="${match.id}">
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">${match.date_heure}</div>
+                        <div class="text-sm font-medium text-gray-900">${formattedDate}</div>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center space-x-3">
@@ -414,7 +422,7 @@ document.getElementById('updateMatchForm').addEventListener('submit', async (e) 
 
 
 
-await loadGames(10);
+await loadGames(1);
     
 async function loadGames(page) {
     try {

@@ -1,12 +1,14 @@
 <?php
 
 use App\Models\Equipe;
-use Illuminate\Http\Request;
+use App\Models\Joueur;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\GameController;
 use App\Http\Controllers\API\ButeurController;
 use App\Http\Controllers\API\EquipeController;
+use App\Http\Controllers\API\JoueurController;
 use App\Http\Controllers\API\ArbitreController;
 use App\Http\Controllers\API\DelegueController;
 use App\Http\Controllers\API\RapportController;
@@ -48,13 +50,14 @@ Route::post('logout', [AuthController::class,'logout']);
 
 
 Route::apiResource('match',GameController::class);
-Route::patch('/match/update/{matchId}',[GameController::class,'ProgrammerGame']);
+// Route::patch('/match/update/{matchId}',[GameController::class,'ProgrammerGame']);
 Route::patch('/match/{matchId}/update',[GameController::class,'updateDataAfterMatche']);
 
 Route::apiResource('sanction',SanctionController::class);
+Route::get('ligue/sanction',[SanctionController::class,"getAllSanctions"]);
 
 
-// Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);
+Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);
 Route::get('games', [GameController::class, 'showAllUnscheduledMatches']);
 
 
@@ -102,9 +105,15 @@ Route::get('blessures/{id}', [BlessureController::class, 'show']);
 Route::put('blessures/{id}', [BlessureController::class, 'update']);
 Route::delete('blessures/{id}', [BlessureController::class, 'destroy']);
 
+Route::put('joueur/{id}/validate', [JoueurController::class, 'validatePlayer']);
+Route::put('joueur/{id}/reject', [JoueurController::class, 'rejectPlayer']);
+
 
 
 Route::apiResource('compositions', CompositionController::class);
 Route::apiResource('equipes', EquipeController::class);
+Route::get('equipe/liste',[ EquipeController::class,'getList']);
+Route::get('equipe/liste/{teamId}',[ EquipeController::class,'getPlayersList']);
+Route::put('equipe/{equipeId}/liste',[ EquipeController::class,'makeListTraité']);
 
 Route::apiResource('changements', ChangementJoueurMatchController::class);

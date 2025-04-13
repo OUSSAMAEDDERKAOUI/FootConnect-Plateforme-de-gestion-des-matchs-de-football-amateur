@@ -1,9 +1,14 @@
 <?php
 namespace App\Http\Controllers\API;
-use App\Http\Controllers\Controller;
+use App\Models\Equipe;
 
-use App\Http\Requests\EquipeRequest\StoreEquipeRequest;
+use App\Models\AdminEquipe;
+use App\Mail\TeamStatusUpdated;
+use App\Http\Controllers\Controller;
+use App\Jobs\SendStatutEquipeBymail;
+use Illuminate\Support\Facades\Mail;
 use App\Services\EquipeService\EquipeService;
+use App\Http\Requests\EquipeRequest\StoreEquipeRequest;
 
 class EquipeController extends Controller
 {
@@ -47,6 +52,46 @@ class EquipeController extends Controller
     {
         $this->equipeService->deleteEquipe($id);
         return response()->json(['message' => 'Equipe deleted successfully']);
+    }
+
+
+    public function makeListTraité($id){
+
+
+        $equipe = Equipe::findOrFail($id);
+
+        // Traité
+        $equipe->statut= "Traité"; 
+        $equipe->save();
+
+    
+        
+        // dump($admin->email);
+        SendStatutEquipeBymail::dispatch($equipe);
+
+    
+        
+        return response()->json([
+            'message' => 'La liste des joueur a été Traité avec succès.',
+            'equipe' => $equipe
+        ], 200);
+
+    }
+
+
+    public function getList(){
+        $list=Equipe::with(["joueurs.user"])->paginate(8);
+        $equipes=Equipe::withCount('joueurs')->orderBy('equipes.nom')->paginate(8);
+        return response()->json([
+            "equipes"=>$equipes,
+            'list'=>$list,
+       ] );
+    }
+    public function getPlayersList($id){
+        $list=Equipe::with(["joueurs.user"])->where("id",$id)->paginate(8);
+        return response()->json([
+            'list'=>$list,
+       ] );
     }
 }
 

@@ -30,4 +30,7 @@ class AdminLigue extends Authenticatable implements JWTSubject
         'name'=>$this->name
       ];
     }
+    public function equipe(){
+      return $this->hasOne(User::class);
+  }
 }

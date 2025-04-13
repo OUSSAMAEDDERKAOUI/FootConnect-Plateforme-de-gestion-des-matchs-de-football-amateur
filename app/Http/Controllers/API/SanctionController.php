@@ -19,6 +19,11 @@ public function __construct(SanctionService $SanctionService){
 }
 
 
+
+
+
+
+
 public function store(StoreSanctionRequest $request){
 
     $validatedData=$request->validated();
@@ -58,6 +63,13 @@ public function destroy($SanctionId){
         "sanction"=>$sanction,
     ]);
 }
+
+
+
+
+
+
+
 
 
 }

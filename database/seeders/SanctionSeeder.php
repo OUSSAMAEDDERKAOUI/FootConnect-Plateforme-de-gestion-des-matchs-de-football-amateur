@@ -12,6 +12,6 @@ class SanctionSeeder extends Seeder
      */
     public function run(): void
     {
-        Sanction::factory(2)->create();
+        Sanction::factory(10)->create();
     }
 }

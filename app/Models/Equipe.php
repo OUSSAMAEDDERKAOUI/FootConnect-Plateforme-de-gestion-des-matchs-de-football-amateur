@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Joueur;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Equipe extends Model
 {
@@ -13,5 +14,18 @@ class Equipe extends Model
         'telephone',
         'logo',
         'categorie',
+        'statut',
     ];
+
+
+
+    public function joueurs(){
+        return $this->hasMany(Joueur::class);
+    }
+    public function users(){
+        return $this->hasMany(User::class);
+    }
+    public function adminEquipe(){
+        return $this->belongsTo(adminEquipe::class);
+    }
 }
