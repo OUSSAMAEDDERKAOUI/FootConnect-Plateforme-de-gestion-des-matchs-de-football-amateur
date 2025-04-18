@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\API;
-use App\Http\Controllers\Controller;
+use App\Models\Game;
 
-use App\Http\Requests\Sanction\StoreSanctionRequest;
-use Illuminate\Http\Request;
-use App\Models\Sanction ;
 use App\Models\User;
+use App\Models\Sanction ;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Services\SanctionService\SanctionService;
+use App\Http\Requests\Sanction\StoreSanctionRequest;
+use App\Models\Joueur;
+
 class SanctionController extends Controller
 {
 
@@ -40,7 +43,10 @@ public function store(StoreSanctionRequest $request){
 public function update(Request $request , $SanctionId){
 
     $validatedData=$request->validate([
-        'duree'=>'required|string', 
+        'nbr_matchs'=>'required|integer', 
+        'game_id'=>'required|integer', 
+        'joueur_id'=>'required|integer', 
+
     ]);
 
     $sanction =$this->SanctionService->ajouterDureeSanction($validatedData , $SanctionId);
@@ -63,6 +69,60 @@ public function destroy($SanctionId){
         "sanction"=>$sanction,
     ]);
 }
+
+
+
+
+public function getSanctionsById($sanctionId){
+
+    $sanction = Sanction::with(['Joueur.user','Joueur.equipe','game.equipeExterieur','game.equipeDomicile'])
+    ->whereRelation('Joueur', 'statut', '!=', 'blesse')
+    ->orderBy('created_at','desc')
+    ->where('id','=',$sanctionId)
+    ->get();
+
+    return response()->json([
+        "status"=>"success",
+        "message"=>' Sanction  By Id',
+        "sanctions"=>$sanction,
+    ]);
+}
+
+
+
+
+
+public function getALLSanctions(){
+
+$sanctions = Sanction::with('Joueur.user')
+    ->whereRelation('Joueur', 'statut', '!=', 'blesse')
+    ->orderBy('created_at','desc')
+    ->paginate(8);
+
+return response()->json([
+    "status"=>"success",
+    "message"=>' All Sanction ',
+    "sanctions"=>$sanctions,
+]);
+
+
+}
+
+
+
+public function statistiques()
+{
+    return response()->json([
+        'Suspension' => Sanction::where('statut', 'Suspension')->count(),
+        'Carton_Jaune' => Sanction::whereIn('type', 'Carton Jaune')->count(),
+        'Carton_Rouge' => Sanction::whereIn('type',  'Carton Rouge')->count(),
+        'avertissements' => Sanction::where('type', 'Avertissement')->count(),
+    ]);
+}
+
+
+
+
 
 
 

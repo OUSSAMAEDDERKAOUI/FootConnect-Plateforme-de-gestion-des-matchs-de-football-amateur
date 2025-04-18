@@ -56,6 +56,10 @@ Route::patch('/match/{matchId}/update',[GameController::class,'updateDataAfterMa
 Route::apiResource('sanction',SanctionController::class);
 Route::get('ligue/sanction',[SanctionController::class,"getAllSanctions"]);
 
+Route::get('sanctions/statistiques',[SanctionController::class,"statistiques"]);
+
+Route::get('ligue/sanction/{sanctionId}',[SanctionController::class,"getSanctionsById"]);
+
 
 Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);
 Route::get('games', [GameController::class, 'showAllUnscheduledMatches']);
@@ -115,5 +119,6 @@ Route::apiResource('equipes', EquipeController::class);
 Route::get('equipe/liste',[ EquipeController::class,'getList']);
 Route::get('equipe/liste/{teamId}',[ EquipeController::class,'getPlayersList']);
 Route::put('equipe/{equipeId}/liste',[ EquipeController::class,'makeListTraité']);
+
 
 Route::apiResource('changements', ChangementJoueurMatchController::class);

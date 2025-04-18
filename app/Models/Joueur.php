@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Equipe;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Joueur extends Model
 {
@@ -23,7 +24,9 @@ class Joueur extends Model
         return $this->hasMany(Buteur::class,'game_id');
     }
 
-
+    public function equipe(){
+        return $this->belongsTo(Equipe::class);
+    }
 
     public function blessures()
     {

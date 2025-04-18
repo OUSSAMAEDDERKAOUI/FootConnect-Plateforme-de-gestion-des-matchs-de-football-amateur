@@ -46,7 +46,7 @@ try {
     //   localStorage.setItem('token', data.authorisation.token);
 
         alert('Connexion réussie !');
-        window.location.href = "/matchs"; 
+        window.location.href = "ligue/matchs"; 
     } else {
         // alert(5);
 

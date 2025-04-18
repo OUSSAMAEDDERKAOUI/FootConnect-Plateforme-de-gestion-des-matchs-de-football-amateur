@@ -27,12 +27,12 @@ Route::get('/auth/login',function(){
 Route::get('/listes/joueurs', function () {
     return view('adminLigue/listeJoueur');
 });
-Route::get('/sanctions', function () {
+Route::get('/ligue/sanction', function () {
     return view('adminLigue/sanction');
 });
 Route::get('/blessures', function () {
     return view('adminLigue/blessure');
 });
-Route::get('/matchs', function () {
+Route::get('/ligue/matchs', function () {
     return view('adminLigue/matchs');
 });
