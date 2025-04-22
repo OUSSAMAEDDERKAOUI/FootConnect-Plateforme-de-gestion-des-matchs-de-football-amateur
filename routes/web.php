@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImportController;
+use App\Http\Controllers\GameImportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +38,16 @@ Route::get('/blessures', function () {
 Route::get('/ligue/matchs', function () {
     return view('adminLigue/matchs');
 });
+
+
+// Route::middleware(['auth', 'role:adminEquipe'])->group(function () {
+    Route::get('/import/players', [ImportController::class, 'showImportForm'])->name('players.import.form');
+    Route::post('/import-players', [ImportController::class, 'import'])->name('players.import');
+    Route::get('/download-players-template', [ImportController::class, 'downloadTemplate'])->name('players.template.download');
+// });
+
+// Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/import/games', [GameImportController::class, 'showImportForm'])->name('games.import.form');
+    Route::post('/import-games', [GameImportController::class, 'import'])->name('games.import');
+    Route::get('/download-games-template', [GameImportController::class, 'downloadTemplate'])->name('games.template.download');
+// });

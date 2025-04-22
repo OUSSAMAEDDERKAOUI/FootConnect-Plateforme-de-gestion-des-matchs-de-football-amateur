@@ -16,44 +16,49 @@ document.getElementById('togglePassword').addEventListener('click', function () 
 
 
 if (document.cookie.split('; ').filter((item) => item.startsWith('Access-Token=')).length > 0) {
-// alert(0)
-window.location.href = "/matchs"; 
+    
+    window.history.back();
 }
 
 document.getElementById('loginForm').addEventListener('submit', async function (e) {
-e.preventDefault();
-// alert(1);
-const email = document.getElementById('email').value;
-const password = document.getElementById('password').value;
+    e.preventDefault();
 
-try {
-    // alert(2);
+    const role = document.getElementById('role').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-    const response = await fetch('http://127.0.0.1:8000/api/login/AdminLigue', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-    });
-    // alert(3);
-
-    const data = await response.json();
-// alert(data);
-    if (response.ok) {
-// alert(4);
-    //   localStorage.setItem('token', data.authorisation.token);
-
-        alert('Connexion réussie !');
-        window.location.href = "ligue/matchs"; 
-    } else {
-        // alert(5);
-
-        alert(data.message || "Échec de connexion");
+    let url = 'http://127.0.0.1:8000/api/login';
+    if (role === 'AdminLigue') {
+        url += '/AdminLigue';
+    } else if (role === 'AdminEquipe') {
+        url += '/AdminEquipe';
     }
-} catch (error) {
-    console.error('Erreur:', error);
-    alert("Une erreur s'est produite");
-}
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            if (role === 'AdminLigue') {
+                window.location.href = "/ligue/matchs";
+            } else if (role === 'AdminEquipe') {
+                window.location.href = "/import/players";
+            } else {
+                window.location.href = "/dashboard";
+            }
+        } else {
+            alert(data.message || "Échec de connexion");
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        alert("Une erreur s'est produite");
+    }
 });

@@ -17,7 +17,10 @@ class Equipe extends Model
         'statut',
     ];
 
-
+    public function adminEquipe()
+    {
+        return $this->hasOne(AdminEquipe::class);
+    }
 
     public function joueurs(){
         return $this->hasMany(Joueur::class);
@@ -25,7 +28,7 @@ class Equipe extends Model
     public function users(){
         return $this->hasMany(User::class);
     }
-    public function adminEquipe(){
-        return $this->belongsTo(adminEquipe::class);
-    }
+    // public function adminEquipe(){
+    //     return $this->belongsTo(adminEquipe::class);
+    // }
 }

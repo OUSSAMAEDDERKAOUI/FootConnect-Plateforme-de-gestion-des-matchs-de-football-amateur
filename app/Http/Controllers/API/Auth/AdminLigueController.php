@@ -84,16 +84,15 @@ public function loginAdminLigue(LoginUserRequest $request)
 
 
 
-//     public function logout()
-//     {
-//         $this->AdminLigueService->logout();
+    // public function logout()
+    // {
+    //     $this->AdminLigueService->logout();
 
-//         // Retourner une réponse de succès après la déconnexion
-//         return response()->json([
-//             'status' => 'success',
-//             'message' => 'Successfully logged out',
-//         ]);
-//     }
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'message' => 'Successfully logged out',
+    //     ]);
+    // }
 
 
 //     // public function refresh()

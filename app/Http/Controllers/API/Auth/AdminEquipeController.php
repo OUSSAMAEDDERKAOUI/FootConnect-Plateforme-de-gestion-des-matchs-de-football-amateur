@@ -55,7 +55,7 @@ public function loginAdminEquipe(LoginUserRequest $request)
     $credentials = $request->only('email', 'password');
     
     $result = $this->AdminEquipeService->authenticate($credentials);
-    
+
     if (!$result) {
         return response()->json([
             'status' => 'error',
@@ -64,7 +64,8 @@ public function loginAdminEquipe(LoginUserRequest $request)
     }
     
     $cookie = Cookie('Access-Token', $result['token'], 60, null, null, null, false);
-
+    $userIdCookie = cookie('User-ID', $result['user']->id, 60, null, null, null, false); 
+// dump($cookie);
     return response()->json([
         'status' => 'success',
         'user' => $result["user"],
@@ -72,7 +73,9 @@ public function loginAdminEquipe(LoginUserRequest $request)
             'token' => $result["token"],
             'type' => 'bearer',
         ]
-    ])->withCookie($cookie);
+    ])->withCookie($cookie)
+    ->withCookie($userIdCookie); 
+
     }
 
 

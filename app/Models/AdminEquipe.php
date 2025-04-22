@@ -24,8 +24,11 @@ class AdminEquipe extends Authenticatable implements JWTSubject
         'isBanned',
     ];
 
-
-
+    public function equipe()
+    {
+        return $this->belongsTo(Equipe::class);
+    }
+ 
 
 
     public function getJWTIdentifier()

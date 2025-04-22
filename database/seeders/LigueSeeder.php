@@ -12,6 +12,6 @@ class LigueSeeder extends Seeder
      */
     public function run(): void
     {
-        Ligue::factory(1)->create();
+        Ligue::factory(3)->create();
     }
 }
