@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\API;
 use App\Models\Equipe;
 
+use App\Models\Joueur;
 use App\Models\AdminEquipe;
 use App\Mail\TeamStatusUpdated;
 use App\Http\Controllers\Controller;
@@ -93,5 +94,19 @@ class EquipeController extends Controller
             'list'=>$list,
        ] );
     }
+    public function getPlayersTeam($id)
+{
+    $equipe = Equipe::findOrFail($id);
+    
+    $joueurs = Joueur::with('user')
+        ->where('equipe_id', $equipe->id)
+        ->paginate(6); 
+
+    return response()->json([
+        'equipe' => $equipe,
+        'list' => $joueurs,
+    ]);
+}
+
 }
 

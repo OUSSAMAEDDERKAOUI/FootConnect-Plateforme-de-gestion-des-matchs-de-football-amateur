@@ -40,6 +40,10 @@ Route::get('/ligue/matchs', function () {
 });
 
 
+Route::get('/equipe/liste/joueurs', function () {
+    return view('adminEquipe/listesJoueur');
+});
+
 // Route::middleware(['auth', 'role:adminEquipe'])->group(function () {
     Route::get('/import/players', [ImportController::class, 'showImportForm'])->name('players.import.form');
     Route::post('/import-players', [ImportController::class, 'import'])->name('players.import');

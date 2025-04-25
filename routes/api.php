@@ -111,6 +111,7 @@ Route::delete('blessures/{id}', [BlessureController::class, 'destroy']);
 
 Route::put('joueur/{id}/validate', [JoueurController::class, 'validatePlayer']);
 Route::put('joueur/{id}/reject', [JoueurController::class, 'rejectPlayer']);
+Route::get('joueur/{id}', [JoueurController::class, 'getPlayerDetails']);
 
 
 
@@ -118,6 +119,8 @@ Route::apiResource('compositions', CompositionController::class);
 Route::apiResource('equipes', EquipeController::class);
 Route::get('equipe/liste',[ EquipeController::class,'getList']);
 Route::get('equipe/liste/{teamId}',[ EquipeController::class,'getPlayersList']);
+Route::get('equipe/{teamId}/liste',[ EquipeController::class,'getPlayersTeam']);
+
 Route::put('equipe/{equipeId}/liste',[ EquipeController::class,'makeListTraité']);
 
 

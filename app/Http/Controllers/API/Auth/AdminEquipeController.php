@@ -65,6 +65,8 @@ public function loginAdminEquipe(LoginUserRequest $request)
     
     $cookie = Cookie('Access-Token', $result['token'], 60, null, null, null, false);
     $userIdCookie = cookie('User-ID', $result['user']->id, 60, null, null, null, false); 
+    $equipeIdCookie = cookie('equipe_id', $result['user']->equipe_id, 60, null, null, null, false); 
+
 // dump($cookie);
     return response()->json([
         'status' => 'success',
@@ -74,7 +76,8 @@ public function loginAdminEquipe(LoginUserRequest $request)
             'type' => 'bearer',
         ]
     ])->withCookie($cookie)
-    ->withCookie($userIdCookie); 
+    ->withCookie($userIdCookie)
+    ->withCookie($equipeIdCookie);
 
     }
 
