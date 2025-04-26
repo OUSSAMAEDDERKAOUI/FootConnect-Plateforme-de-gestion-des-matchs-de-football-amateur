@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     fetchSanctions(1); 
+    chargerStatistiquesSanctions();
 
 
 })

@@ -59,17 +59,17 @@
                     <a href="index.html" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700">
                         Tableau de bord
                     </a>
-                    <a href="/listes/joueurs"
+                    <a href="/equipe/liste/joueurs"
                         class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 active bg-blue-700"
                         id="playerListsTab">
                         Listes des Joueurs
                     </a>
                  
-                    <a href="/ligue/sanction" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700"
+                    <a href="/equipe/sanctions" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700"
                         id="sanctionsTab">
                         Sanctions
                     </a>
-                    <a href="/ligue/matchs" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700"
+                    <a href="/equipe/matchs" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700"
                         id="matchesTab">
                         Matchs
                     </a>

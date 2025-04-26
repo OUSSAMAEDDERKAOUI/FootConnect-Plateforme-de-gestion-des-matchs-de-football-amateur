@@ -57,8 +57,12 @@ Route::apiResource('sanction',SanctionController::class);
 Route::get('ligue/sanction',[SanctionController::class,"getAllSanctions"]);
 
 Route::get('sanctions/statistiques',[SanctionController::class,"statistiques"]);
+Route::get('sanctions/equipe/{id}/statistiques',[SanctionController::class,"statistiquesByEquipe"]);
 
 Route::get('ligue/sanction/{sanctionId}',[SanctionController::class,"getSanctionsById"]);
+Route::get('equipe/sanction/{sanctionId}',[SanctionController::class,"getSanctionsById"]);
+
+Route::get('equipe/{equipeId}/sanctions',[SanctionController::class,"getSanctionsByEquipeId"]);
 
 
 Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);

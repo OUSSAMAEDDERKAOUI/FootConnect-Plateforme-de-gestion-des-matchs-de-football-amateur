@@ -39,6 +39,9 @@ Route::get('/ligue/matchs', function () {
     return view('adminLigue/matchs');
 });
 
+Route::get('/equipe/sanctions', function () {
+    return view('adminEquipe/sanction');
+});
 
 Route::get('/equipe/liste/joueurs', function () {
     return view('adminEquipe/listesJoueur');
