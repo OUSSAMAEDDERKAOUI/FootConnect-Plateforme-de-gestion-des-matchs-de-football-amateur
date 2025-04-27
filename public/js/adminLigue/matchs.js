@@ -333,7 +333,6 @@ document.addEventListener('click', async (e) => {
         const matchRow = editBtn.closest('tr');
         selectedMatchId = matchRow.getAttribute('data-id');
 
-        // Extraire les valeurs du tableau
         const date = matchRow.querySelector('td:nth-child(1)').innerText;
         const lieu = matchRow.querySelector('td:nth-child(3)').innerText.trim();
         const statut = matchRow.querySelector('td:nth-child(4) span').innerText.trim();
@@ -342,14 +341,12 @@ document.addEventListener('click', async (e) => {
         const scoreExterieur = score[1] || '';
         
 
-        // Remplir le formulaire
         document.getElementById('dateGame').value = new Date(date).toISOString().slice(0,16);
         document.getElementById('lieuGame').value = lieu;
         document.getElementById('statutGame').value = statut;
         document.getElementById('scoreDomicile').value = scoreDomicile;
         document.getElementById('scoreExterieur').value = scoreExterieur;
 
-        // Afficher la modale
         document.getElementById('modalupdateMatch').classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
@@ -389,11 +386,9 @@ document.getElementById('updateMatchForm').addEventListener('submit', async (e) 
             confirmButtonText: 'OK'
         });
 
-        // Recharger les données à jour
         const updatedMatch = await res.json();
          await loadMatches(1); 
         
-        // Fermer la modale
         document.getElementById('modalupdateMatch').classList.add('hidden');
         document.body.style.overflow = '';
     } catch (err) {

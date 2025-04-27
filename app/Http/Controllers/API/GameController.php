@@ -142,7 +142,35 @@ public function updateDataAfterMatche(Request $request , $id ){
 
 }
 
+// public function allScheduledMatchesByTeamId($id){
+//     $matchs=Game::with(['equipeDomicile', 'equipeExterieur', 'arbitreCentral', 'assistant1', 'assistant2', 'delegue'])
+//         ->where("statut", "!=", "à venir")
+//         ->whereRelation('equipeExterieur',$id)
+//         ->orWhereRelation('equipeDomicile',$id)
+//         ->paginate(5);
 
 
+//         return response()->json([
+//             'status' => 'success',
+//             'message' => 'Match updated successfully',
+//             'match' => $matchs,
+//         ]);
+// }
+public function allScheduledMatchesByTeamId($id)
+{
+    $matchs = Game::with(['equipeDomicile', 'equipeExterieur', 'arbitreCentral', 'assistant1', 'assistant2', 'delegue'])
+        ->where('statut', '!=', 'à venir')
+        ->where(function ($query) use ($id) {
+            $query->whereRelation('equipeExterieur', 'id', $id)
+                  ->orWhereRelation('equipeDomicile', 'id', $id);
+        })
+        ->paginate(5);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Matchs récupérés avec succès',
+        'matchs' => $matchs,
+    ]);
+}
 
 }

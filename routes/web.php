@@ -47,6 +47,11 @@ Route::get('/equipe/liste/joueurs', function () {
     return view('adminEquipe/listesJoueur');
 });
 
+
+Route::get('/equipe/matchs', function () {
+    return view('adminEquipe/matchs');
+});
+
 // Route::middleware(['auth', 'role:adminEquipe'])->group(function () {
     Route::get('/import/players', [ImportController::class, 'showImportForm'])->name('players.import.form');
     Route::post('/import-players', [ImportController::class, 'import'])->name('players.import');

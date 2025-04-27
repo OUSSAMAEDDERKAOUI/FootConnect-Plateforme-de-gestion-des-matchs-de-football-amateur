@@ -50,6 +50,8 @@ Route::post('logout', [AuthController::class,'logout']);
 
 
 Route::apiResource('match',GameController::class);
+Route::get('equipe/matchs/{equipeId}',[GameController::class,'allScheduledMatchesByTeamId']);
+
 // Route::patch('/match/update/{matchId}',[GameController::class,'ProgrammerGame']);
 Route::patch('/match/{matchId}/update',[GameController::class,'updateDataAfterMatche']);
 

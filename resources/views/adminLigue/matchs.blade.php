@@ -262,25 +262,24 @@
                 <div>
                     <label for="arbitreCentral" class="block text-sm font-medium text-gray-700 mb-1">Arbitre central</label>
                     <select id="arbitreCentral" name="arbitre_central_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
-                        <!-- Options  à générer  dynamiquement -->
                     </select>
                 </div>
                 <div>
                     <label for="assistant1" class="block text-sm font-medium text-gray-700 mb-1">Assistant 1</label>
                     <select id="assistant1" name="assistant_1_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
-                        <!-- Options à générer dynamiquement -->
+                    
                     </select>
                 </div>
                 <div>
                     <label for="assistant2" class="block text-sm font-medium text-gray-700 mb-1">Assistant 2</label>
                     <select id="assistant2" name="assistant_2_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
-                        <!-- Options à générer dynamiquement -->
+
                     </select>
                 </div>
                 <div>
                     <label for="delegue" class="block text-sm font-medium text-gray-700 mb-1">Délégué</label>
                     <select id="delegue" name="delegue_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200">
-                        <!-- Options à générer dynamiquement -->
+                  
                     </select>
                 </div>
             </div>
@@ -340,7 +339,6 @@
                   </select>
                 </div>
               
-                <!-- Scores -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <div>
                     <label for="scoreDomicile" class="block text-sm font-medium text-gray-700 mb-1">Score Équipe Domicile</label>
@@ -353,7 +351,7 @@
                 </div>
               
               
-                <!-- Boutons -->
+
                 <div class="flex justify-end mt-6 gap-3">
                   <button type="button" id="cancelUpdateMatch" class="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors duration-200 font-medium">
                     Annuler

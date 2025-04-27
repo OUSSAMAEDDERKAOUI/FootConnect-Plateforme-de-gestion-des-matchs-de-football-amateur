@@ -28,6 +28,8 @@ class GameRepository
         ->paginate(5);
         }
 
+   
+
     public function allUnscheduledMatches()
     {
         return Game::with(['equipeDomicile', 'equipeExterieur'])->Where('statut', 'à venir')->paginate(5);
