@@ -32,8 +32,8 @@ Route::get('/listes/joueurs', function () {
 Route::get('/ligue/sanction', function () {
     return view('adminLigue/sanction');
 });
-Route::get('/blessures', function () {
-    return view('adminLigue/blessure');
+Route::get('/medecin/blessures', function () {
+    return view('medecin/blessures');
 });
 Route::get('/ligue/matchs', function () {
     return view('adminLigue/matchs');

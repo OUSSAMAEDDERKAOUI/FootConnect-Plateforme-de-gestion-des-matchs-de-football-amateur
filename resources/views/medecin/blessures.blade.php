@@ -1,4 +1,4 @@
-@extends('layouts/adminEquipe')
+@extends('layouts/adminLigue')
 @section("title","listes des joueurs")
 @section('content')
 <header class="bg-white shadow">
@@ -52,72 +52,42 @@
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joueur</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Équipe</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Match</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de blessure</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de retour estimée</th>
                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200" id="injuriesTableBody">
-                <tr class="hover:bg-gray-50">
-                    <td class="px-6 py-4">
-                        <div class="font-medium">John Doe</div>
-                    </td>
-                    <td class="px-6 py-4">FC Lyon</td>
-                    <td class="px-6 py-4">Entorse</td>
-                    <td class="px-6 py-4">10/04/2025</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">En traitement</span>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <button onclick="showInjuryDetails(1)" class="text-blue-600 hover:text-blue-800">
-                            Voir détails
-                        </button>
-                    </td>
-                </tr>
+              
                 
                 <tr class="hover:bg-gray-50">
                     <td class="px-6 py-4">
                         <div class="font-medium">Alice Dupont</div>
                     </td>
                     <td class="px-6 py-4">Paris SG</td>
-                    <td class="px-6 py-4">Fracture</td>
+                    <td class="px-6 py-4">Entorse</td>
                     <td class="px-6 py-4">05/04/2025</td>
                     <td class="px-6 py-4">
-                        <span class="px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">En rééducation</span>
+                        <span class="px-2 py-1  text-xs font-semibold  text-black-800">Entorse du genou</span>
                     </td>
+                    <td class="px-6 py-4">15/04/2025</td>
+
                     <td class="px-6 py-4 text-right">
                         <button onclick="showInjuryDetails(2)" class="text-blue-600 hover:text-blue-800">
                             Voir détails
                         </button>
                     </td>
-                </tr>
-                
-                <tr class="hover:bg-gray-50">
-                    <td class="px-6 py-4">
-                        <div class="font-medium">Marc Lefevre</div>
-                    </td>
-                    <td class="px-6 py-4">AS Monaco</td>
-                    <td class="px-6 py-4">Entorse</td>
-                    <td class="px-6 py-4">02/04/2025</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800">Rétabli</span>
-                    </td>
-                    <td class="px-6 py-4 text-right">
-                        <button onclick="showInjuryDetails(3)" class="text-blue-600 hover:text-blue-800">
-                            Voir détails
-                        </button>
-                    </td>
-                </tr>
-                
+                </tr>      
             </tbody>
         </table>
     </div>
 </div>
 </main>
 </div>
-<div id="injuryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50  overflow-y-auto h-full w-full ">
+<div id="injuryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50  overflow-y-auto h-full w-full hidden">
     <div class="relative top-20 mx-auto p-5 border w-full max-w-4xl shadow-lg rounded-md bg-white">
     <div class="flex justify-between items-center pb-4 border-b">
         <h3 class="text-xl font-semibold">Détails de la Blessure</h3>

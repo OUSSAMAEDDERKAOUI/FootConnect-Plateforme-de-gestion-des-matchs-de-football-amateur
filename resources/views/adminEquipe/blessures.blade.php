@@ -1,4 +1,4 @@
-@extends('layouts/adminEquipe')
+@extends('layouts/adminLigue')
 @section("title","listes des joueurs")
 @section('content')
 <header class="bg-white shadow">
@@ -117,7 +117,7 @@
 </div>
 </main>
 </div>
-<div id="injuryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50  overflow-y-auto h-full w-full ">
+<div id="injuryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50  overflow-y-auto h-full w-full hidden">
     <div class="relative top-20 mx-auto p-5 border w-full max-w-4xl shadow-lg rounded-md bg-white">
     <div class="flex justify-between items-center pb-4 border-b">
         <h3 class="text-xl font-semibold">Détails de la Blessure</h3>
