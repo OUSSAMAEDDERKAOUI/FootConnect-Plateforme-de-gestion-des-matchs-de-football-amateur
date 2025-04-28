@@ -61,86 +61,123 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200" id="injuriesTableBody">
-              
-                
-                <tr class="hover:bg-gray-50">
-                    <td class="px-6 py-4">
-                        <div class="font-medium">Alice Dupont</div>
-                    </td>
-                    <td class="px-6 py-4">Paris SG</td>
-                    <td class="px-6 py-4">Entorse</td>
-                    <td class="px-6 py-4">05/04/2025</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 py-1  text-xs font-semibold  text-black-800">Entorse du genou</span>
-                    </td>
-                    <td class="px-6 py-4">15/04/2025</td>
-
-                    <td class="px-6 py-4 text-right">
-                        <button onclick="showInjuryDetails(2)" class="text-blue-600 hover:text-blue-800">
-                            Voir détails
-                        </button>
-                    </td>
-                </tr>      
             </tbody>
         </table>
     </div>
 </div>
-</main>
-</div>
-<div id="injuryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50  overflow-y-auto h-full w-full hidden">
-    <div class="relative top-20 mx-auto p-5 border w-full max-w-4xl shadow-lg rounded-md bg-white">
-    <div class="flex justify-between items-center pb-4 border-b">
-        <h3 class="text-xl font-semibold">Détails de la Blessure</h3>
-        <button class="modal-close text-gray-400 hover:text-gray-500">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
+
+<div id="injuryModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+    <div class="relative top-20 mx-auto p-5 border w-full max-w-4xl shadow-lg rounded-md bg-white overflow-y-auto">
+        <div class="flex justify-between items-center pb-4 border-b">
+            <h3 class="text-xl font-semibold">Détails de la Blessure</h3>
+            <button id="closebtn" class="modal-close text-gray-400 hover:text-gray-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="mt-4" id="injuryModalContent">
+        </div>
+        <div class="mt-4 flex justify-end space-x-2">
+            <button id="clsButton" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 modal-close">Fermer</button>
+        </div>
     </div>
-    <div class="mt-4" id="injuryModalContent">
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    fetchInjury();
+})
+
+async function fetchInjury() {
+    const response = await fetch(`http://127.0.0.1:8000/api/blessures`);
+    const data = await response.json();
+    renderListes(data);
+}
+
+function renderListes(data) {
+    const tableBody = document.getElementById('injuriesTableBody');
+    tableBody.innerHTML = ''; 
+
+    data.forEach(injury => {
+        const row = document.createElement('tr');
+        row.classList.add('hover:bg-gray-50');
+        
+        const playerName = injury.joueur.user.prenom + ' ' + injury.joueur.user.nom;
+        const gameName = injury.game.equipe_exterieur_id === injury.joueur.equipe_id ? "Équipe extérieure" : "Équipe domicile"; 
+        const injuryDate = new Date(injury.date_blessure).toLocaleDateString();
+        const injuryType = injury.type.charAt(0).toUpperCase() + injury.type.slice(1); 
+        const description = injury.description;
+        const estimatedReturnDate = new Date(injury.retour_estime).toLocaleDateString();
+
+        row.innerHTML = `
+            <td class="px-6 py-4">${playerName}</td>
+            <td class="px-6 py-4">${gameName}</td>
+            <td class="px-6 py-4">${injuryDate}</td>
+            <td class="px-6 py-4">${injuryType}</td>
+            <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-semibold text-black-800">${description}</span></td>
+            <td class="px-6 py-4">${estimatedReturnDate}</td>
+            <td class="px-6 py-4 text-right">
+            <button onclick="showInjuryDetails(${injury.id})" class="text-blue-600 hover:text-blue-800">
+                 <i class="fas fa-eye"></i>
+            </button>
+            </td>
+        `;
+        
+        tableBody.appendChild(row);
+    });
+}
+
+async function showInjuryDetails(injuryId) {
+    const modal = document.getElementById('injuryModal');
+    const modalContent = document.getElementById('injuryModalContent');
+    
+    const response = await fetch(`http://127.0.0.1:8000/api/blessures/${injuryId}`);
+    const data = await response.json();
+    
+    const player = data.joueur.user;
+    const teamLogo = data.joueur.equipe.logo;
+    const playerImage = player.photo; 
+
+    modalContent.innerHTML = `
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="space-y-4">
-                <div>
-                    <h4 class="font-semibold text-gray-700">Informations du Joueur</h4>
-                    <p><strong>Nom:</strong> John Doe</p>
-                    <p><strong>Équipe:</strong> FC Lyon</p>
+                <div class="flex items-center space-x-4">
+                    <img class="w-16 h-16 rounded-full object-cover" src="${playerImage}" alt="Player Image">
+                    <div>
+                        <h4 class="font-semibold text-gray-700">${player.prenom} ${player.nom}</h4>
+                        <p class="text-sm text-gray-500">Équipe: ${data.joueur.equipe.nom}</p>
+                    </div>
                 </div>
+
                 <div>
-                    <h4 class="font-semibold text-gray-700">Détails de la Blessure</h4>
-                    <p><strong>Type:</strong> Entorse</p>
-                    <p><strong>Description:</strong> Entorse de la cheville droite lors d'un entraînement.</p>
-                    <p><strong>Date:</strong> 10/04/2025</p>
-                    <p><strong>Durée estimée:</strong> 2 semaines</p>
-                    <p><strong>Médecin:</strong> Dr. Pierre Martin</p>
+                    <h4 class="font-semibold text-gray-700 mt-4">Détails de la Blessure</h4>
+                    <p><strong>Type:</strong> ${data.type ? data.type : 'Non spécifié'}</p>
+                    <p><strong>Description:</strong> ${data.description || 'Aucune description disponible.'}</p>
+                    <p><strong>Date de blessure:</strong> ${new Date(data.date_blessure).toLocaleDateString()}</p>
+                    <p><strong>Durée estimée de retour:</strong> ${new Date(data.retour_estime).toLocaleDateString()}</p>
                 </div>
             </div>
+            
             <div>
                 <h4 class="font-semibold text-gray-700 mb-2">Suivi des Traitements</h4>
                 <div class="space-y-2">
-                    <div class="p-2 bg-gray-50 rounded">
-                        <p class="text-sm font-medium">12/04/2025</p>
-                        <p class="text-sm text-gray-600">Repos et application de glace.</p>
-                    </div>
-                    <div class="p-2 bg-gray-50 rounded">
-                        <p class="text-sm font-medium">15/04/2025</p>
-                        <p class="text-sm text-gray-600">Première séance de kinésithérapie.</p>
-                    </div>
-                    <div class="p-2 bg-gray-50 rounded">
-                        <p class="text-sm font-medium">20/04/2025</p>
-                        <p class="text-sm text-gray-600">Réévaluation et nouvelle séance de rééducation.</p>
-                    </div>
+                    <p class="text-gray-500">Aucun traitement enregistré.</p>
                 </div>
             </div>
         </div>
-        
-    </div>
-    <div class="mt-4 flex justify-end space-x-2">
-        <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 modal-close">Fermer</button>
-    </div>
+    `;
 
-</div>
-</div>
+    modal.classList.remove('hidden');
+    document.body.style.overflow = "hidden"; 
+}
 
-
+[closebtn, clsButton].forEach(el => {
+    el.addEventListener('click', () => {
+        document.getElementById('injuryModal').classList.add("hidden");
+        document.body.style.overflow = ''; 
+    });
+});
+</script>
 
 @endsection

@@ -16,12 +16,17 @@ class BlessureRepository implements BlessureRepositoryInterface
 
     public function all()
     {
-        return $this->model->all() ;
+        $blessures=Blessure::with(['joueur.user','game'])->get();
+        return $blessures;
+
     }
 
     public function find($id)
     {
-        return $this->model->find($id);
+        $blessure=Blessure::with(['joueur.user','joueur.equipe','game'])->findOrFail($id);
+        
+        // return $this->model->find($id);
+        return $blessure;
     }
 
     public function create(array $data)
