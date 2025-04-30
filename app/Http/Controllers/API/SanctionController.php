@@ -137,9 +137,9 @@ public function getSanctionsByEquipeId($equipeId){
 public function statistiques()
 {
     return response()->json([
-        'Suspension' => Sanction::where('statut', 'Suspension')->count(),
-        'Carton_Jaune' => Sanction::whereIn('type', 'Carton Jaune')->count(),
-        'Carton_Rouge' => Sanction::whereIn('type',  'Carton Rouge')->count(),
+        'Suspension' => Sanction::where('type', 'Suspension')->count(),
+        'Carton_Jaune' => Sanction::where('type', 'Carton Jaune')->count(),
+        'Carton_Rouge' => Sanction::where('type',  'Carton Rouge')->count(),
         'avertissements' => Sanction::where('type', 'Avertissement')->count(),
     ]);
 
@@ -148,13 +148,14 @@ public function statistiques()
 
     public function statistiquesByEquipe($id)
 {
-    $joueur=Joueur::where('equipe_id',$id)->first();
-    $joueur_id=$joueur->id;
+    // $joueur=Joueur::where('equipe_id',$id)->first();
+    // $joueur_id=$joueur->id;
+
     return response()->json([
-        'Suspension' => Sanction::where('type', 'Suspension')->where('joueur_id',$joueur_id)->count(),
-        'Carton_Jaune' => Sanction::where('type', 'Carton Jaune')->where('joueur_id','=',$joueur_id)->count(),
-        'Carton_Rouge' => Sanction::where('type',  'Carton Rouge')->where('joueur_id','=',$joueur_id)->count(),
-        'avertissements' => Sanction::where('type', 'Avertissement')->where('joueur_id','=',$joueur_id)->count(),
+        'Suspension' => Sanction::where('type', 'Suspension')->with('joueur')->whereRelation('joueur','equipe_id',$id)->count(),
+        'Carton_Jaune' => Sanction::where('type', 'Carton Jaune')->with('joueur')->whereRelation('joueur','equipe_id',$id)->count(),
+        'Carton_Rouge' => Sanction::where('type',  'Carton Rouge')->with('joueur')->whereRelation('joueur','equipe_id',$id)->count(),
+        'avertissements' => Sanction::where('type', 'Avertissement')->with('joueur')->whereRelation('joueur','equipe_id',$id)->count(),
     ]);
 }
 

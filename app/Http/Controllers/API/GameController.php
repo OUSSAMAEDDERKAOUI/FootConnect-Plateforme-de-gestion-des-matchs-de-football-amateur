@@ -172,5 +172,21 @@ public function allScheduledMatchesByTeamId($id)
         'matchs' => $matchs,
     ]);
 }
+public function allFinishedMatchesByTeamId($id)
+{
+    $matchs = Game::with(['equipeDomicile', 'equipeExterieur'])
+        ->where('statut', '=', 'terminé')
+        ->where(function ($query) use ($id) {
+            $query->whereRelation('equipeExterieur', 'id', $id)
+                  ->orWhereRelation('equipeDomicile', 'id', $id);
+        })
+        ->paginate(5);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Matchs récupérés avec succès',
+        'matchs' => $matchs,
+    ]);
+}
 
 }

@@ -47,9 +47,20 @@ Route::get('/equipe/liste/joueurs', function () {
     return view('adminEquipe/listesJoueur');
 });
 
+Route::get('/medecin/sanctions', function () {
+    return view('medecin/sanctions');
+});
+
+Route::get('/medecin/liste/joueurs', function () {
+    return view('medecin/listesJoueur');
+});
+
 
 Route::get('/equipe/matchs', function () {
     return view('adminEquipe/matchs');
+});
+Route::get('/medecin/matchs', function () {
+    return view('medecin/matchs');
 });
 
 // Route::middleware(['auth', 'role:adminEquipe'])->group(function () {

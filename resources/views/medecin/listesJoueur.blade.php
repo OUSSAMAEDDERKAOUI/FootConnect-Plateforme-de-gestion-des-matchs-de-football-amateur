@@ -1,5 +1,5 @@
-@extends('layouts.adminEquipe')
-@section("title", "Import Players")
+@extends('layouts.Medecin')
+@section("title", " Affichage des Joueurs")
 
 @section('content')
 <style>
@@ -171,8 +171,8 @@
     <div class="popup-content bg-white rounded-3xl shadow-2xl w-full max-w-xl overflow-hidden">
       <div class="relative header-bg p-6">
         <div class="flex justify-between items-center relative z-10">
-          <div class="bg-white p-3 rounded-2xl shadow-lg transform -rotate-3">
-            <img id="teamLogo" src="/api/placeholder/60/60" alt="Logo de l'équipe" class="h-12 w-12 object-contain">
+          <div class="bg-white  rounded-2xl shadow-lg transform -rotate-12 h-25 w-20">
+            <img id="teamLogo" src="" alt="Logo de l'équipe" class=" w-[100%] h-[100%]  object-contain">
           </div>
           <button id="closePopup" class="close-btn text-white hover:text-gray-200 transition duration-300 bg-white bg-opacity-20 p-2 rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -293,5 +293,5 @@
 </html>
     
 </main>
-<script src="{{asset("/js/adminEquipe/listeJoueur.js")}}"></script>
+<script src="{{asset("/js/medecin/listeJoueur.js")}}"></script>
 @endsection 

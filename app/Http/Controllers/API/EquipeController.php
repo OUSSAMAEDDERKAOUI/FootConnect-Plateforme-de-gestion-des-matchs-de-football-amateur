@@ -10,6 +10,8 @@ use App\Jobs\SendStatutEquipeBymail;
 use Illuminate\Support\Facades\Mail;
 use App\Services\EquipeService\EquipeService;
 use App\Http\Requests\EquipeRequest\StoreEquipeRequest;
+use App\Models\Medecin;
+use Illuminate\Support\Facades\Auth;
 
 class EquipeController extends Controller
 {
@@ -107,6 +109,24 @@ class EquipeController extends Controller
         'list' => $joueurs,
     ]);
 }
+
+public function getequipeIdbyMedecin()
+{
+    $user = Auth()->user();
+$userId=$user->id;
+    $medecin=Medecin::where("user_id",$userId)->first();
+
+    if (!$user) {
+        return response()->json([
+            'message' => 'Aucun utilisateur .'
+        ], 404);
+    }
+
+    return response()->json([
+        'medecin' => $medecin,
+    ]);
+}
+
 
 }
 

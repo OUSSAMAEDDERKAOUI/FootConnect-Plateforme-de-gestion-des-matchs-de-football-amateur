@@ -3,7 +3,9 @@
 namespace App\Repositories\BlessureRepository;
 
 use App\Models\Blessure;
+use App\Models\Joueur;
 use App\Repositories\BlessureRepository\BlessureRepositoryInterface;
+use Spatie\LaravelIgnition\Recorders\DumpRecorder\Dump;
 
 class BlessureRepository implements BlessureRepositoryInterface
 {
@@ -16,7 +18,9 @@ class BlessureRepository implements BlessureRepositoryInterface
 
     public function all()
     {
-        $blessures=Blessure::with(['joueur.user','game'])->get();
+        $blessures=Blessure::with(['joueur.user','game.equipeDomicile','game.equipeExterieur'])
+        ->orderBy('date_blessure','desc')
+        ->get();
         return $blessures;
 
     }
@@ -31,7 +35,13 @@ class BlessureRepository implements BlessureRepositoryInterface
 
     public function create(array $data)
     {
-        return $this->model->create($data);
+        $blessure =$this->model->create($data);
+        $joueur_id=$blessure->joueur_id;
+        $joueur=Joueur::findOrFail($joueur_id);
+        $joueur->update([
+            'statut'=>'blesse',
+        ]);
+        return $blessure;
     }
 
     public function update($id, array $data)

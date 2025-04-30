@@ -65,6 +65,7 @@ if (!$result) {
         'message' => 'Unauthorized Token',
     ], 401);
 }
+$cookie = Cookie('Access-Token', $result['token'], 60, null, null, null, false);
 
 return response()->json([
     'status' => 'success',
@@ -73,7 +74,7 @@ return response()->json([
         'token' => $result["token"],
         'type' => 'bearer',
     ]
-]);
+])->withCookie($cookie);
 }
 
 

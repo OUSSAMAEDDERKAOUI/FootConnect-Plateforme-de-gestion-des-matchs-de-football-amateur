@@ -51,12 +51,29 @@ document.getElementById('loginForm').addEventListener('submit', async function (
                 window.location.href = "/ligue/matchs";
             } else if (role === 'AdminEquipe') {
                 window.location.href = "/import/players";
-            } else {
-                window.location.href = "/dashboard";
+            } 
+
+
+           else if (role === 'Utilisateur') {
+            alert();
+            
+                localStorage.setItem('token', data.authorisation.token);
+
+                  if(data.user.role==='medecin'){
+                    window.location.href = "/medecin/blessures"; 
+                  }
+                  else if(data.user.role==='entraineur'){
+                    window.location.href = "/entraineur/annonces"; 
+                  }
+                  else if(data.user.role==='admin'){
+                    window.location.href = "/admin/statistics"; 
+                  }
+              } else {
+                  alert(data.message || "Échec de connexion");
+              }
+           
+            
             }
-        } else {
-            alert(data.message || "Échec de connexion");
-        }
     } catch (error) {
         console.error('Erreur:', error);
         alert("Une erreur s'est produite");

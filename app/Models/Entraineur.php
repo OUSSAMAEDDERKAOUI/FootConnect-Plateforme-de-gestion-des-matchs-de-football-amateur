@@ -14,5 +14,11 @@ class Entraineur extends Model
         'licence',
         'role_entraineur',
         'statut',
+        'equipe_id',
+
     ];
+    public function equipe()
+    {
+        return $this->belongsTo(Equipe::class);
+    }
 }

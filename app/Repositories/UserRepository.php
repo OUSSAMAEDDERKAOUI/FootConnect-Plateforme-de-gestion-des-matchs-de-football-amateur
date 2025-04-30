@@ -80,6 +80,8 @@ class UserRepository
                     'role_entraineur' => $userData['role_entraineur'],
                     'statut' => $userData['statut'],
                     'user_id' => $user->id,
+                    'equipe_id' => $userData['equipe_id'],
+
                 ]);
                 break;
     
@@ -89,6 +91,8 @@ class UserRepository
                     'specialite' => $userData['specialite'],
                     'statut' => $userData['statut'],
                     'user_id' => $user->id,
+                    'equipe_id' => $userData['equipe_id'],
+
                 ]);
                 break;
 

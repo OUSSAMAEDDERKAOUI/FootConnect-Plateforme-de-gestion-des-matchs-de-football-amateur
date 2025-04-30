@@ -13,5 +13,10 @@ class Medecin extends Model
         'licence',
         'specialite',
         'statut',
+        'equipe_id',
     ];
+    public function equipe()
+    {
+        return $this->belongsTo(Equipe::class);
+    }
 }

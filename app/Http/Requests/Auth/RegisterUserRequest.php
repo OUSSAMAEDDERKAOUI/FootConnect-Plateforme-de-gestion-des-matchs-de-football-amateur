@@ -60,6 +60,8 @@ class RegisterUserRequest extends FormRequest
                     'licence' => 'required|string|max:255',
                     'role_entraineur' => 'required|string|in:principal,adjoint,préparateur physique',
                     'statut' => 'required|string|max:255',
+                    'equipe_id' => 'required|exists:equipes,id',
+
                 ];
                 break;
 
@@ -68,6 +70,8 @@ class RegisterUserRequest extends FormRequest
                     'licence' => 'required|string|max:255',
                     'specialite' => 'required|string|in:Traumatologie,Traumatologie,Médecine générale',
                     'statut' => 'required|string|max:255',
+                    'equipe_id' => 'required|exists:equipes,id',
+
                 ];
                 break;
         }

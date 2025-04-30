@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers\API;
-use App\Http\Controllers\Controller;
+use App\Models\Joueur;
 
+use App\Models\Blessure;
+use App\Http\Controllers\Controller;
 use App\Services\BlessureService\BlessureService;
 use App\Http\Requests\BlessureRequest\StoreBlessureRequest;
 
@@ -47,6 +49,15 @@ class BlessureController extends Controller
     {
         $this->blessureService->deleteBlessure($id);
         return response()->json(['message' => 'Blessure deleted successfully']);
+    }
+
+
+    public function isHealthy($id){
+        $blessure=Blessure::findOrFail($id);
+        $joueur_id=$blessure->joueur_id;
+        $joueur=Joueur::findOrFail($joueur_id);
+        $joueur->update(['statut'=>'actif']);
+        return response()->json($joueur);
     }
 }
 

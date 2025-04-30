@@ -51,6 +51,8 @@ Route::post('logout', [AuthController::class,'logout']);
 
 Route::apiResource('match',GameController::class);
 Route::get('equipe/matchs/{equipeId}',[GameController::class,'allScheduledMatchesByTeamId']);
+Route::get('equipe/{equipeId}/matchs',[GameController::class,'allFinishedMatchesByTeamId']);
+
 
 // Route::patch('/match/update/{matchId}',[GameController::class,'ProgrammerGame']);
 Route::patch('/match/{matchId}/update',[GameController::class,'updateDataAfterMatche']);
@@ -65,6 +67,8 @@ Route::get('ligue/sanction/{sanctionId}',[SanctionController::class,"getSanction
 Route::get('equipe/sanction/{sanctionId}',[SanctionController::class,"getSanctionsById"]);
 
 Route::get('equipe/{equipeId}/sanctions',[SanctionController::class,"getSanctionsByEquipeId"]);
+// Route::get('medecin/equipe',[EquipeController::class,"getequipeIdbyMedecin"]);
+Route::middleware('auth:api')->get('medecin/equipe', [EquipeController::class, 'getequipeIdbyMedecin']);
 
 
 Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);
@@ -114,11 +118,10 @@ Route::post('blessures', [BlessureController::class, 'store']);
 Route::get('blessures/{id}', [BlessureController::class, 'show']);
 Route::put('blessures/{id}', [BlessureController::class, 'update']);
 Route::delete('blessures/{id}', [BlessureController::class, 'destroy']);
-
 Route::put('joueur/{id}/validate', [JoueurController::class, 'validatePlayer']);
 Route::put('joueur/{id}/reject', [JoueurController::class, 'rejectPlayer']);
 Route::get('joueur/{id}', [JoueurController::class, 'getPlayerDetails']);
-
+Route::put('blessure/{id}/finished',[BlessureController::class,'isHealthy']);
 
 
 Route::apiResource('compositions', CompositionController::class);
