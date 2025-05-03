@@ -55,7 +55,6 @@ document.getElementById('loginForm').addEventListener('submit', async function (
 
 
            else if (role === 'Utilisateur') {
-            alert();
             
                 localStorage.setItem('token', data.authorisation.token);
 
@@ -67,6 +66,10 @@ document.getElementById('loginForm').addEventListener('submit', async function (
                   }
                   else if(data.user.role==='admin'){
                     window.location.href = "/admin/statistics"; 
+                  }
+                  else if(data.user.role==='arbitre'){
+                    alert('arbitre');
+                    window.location.href = "/arbitre/rapport"; 
                   }
               } else {
                   alert(data.message || "Échec de connexion");

@@ -52,10 +52,12 @@ Route::post('logout', [AuthController::class,'logout']);
 Route::apiResource('match',GameController::class);
 Route::get('equipe/matchs/{equipeId}',[GameController::class,'allScheduledMatchesByTeamId']);
 Route::get('equipe/{equipeId}/matchs',[GameController::class,'allFinishedMatchesByTeamId']);
-
+// Route::get('match/mostir', [GameController::class,'showToDayMatches']);
+Route::middleware('auth:api')->get('game/arbitre',[GameController::class,'showToDayMatches']);
 
 // Route::patch('/match/update/{matchId}',[GameController::class,'ProgrammerGame']);
 Route::patch('/match/{matchId}/update',[GameController::class,'updateDataAfterMatche']);
+Route::patch('/game/{matchId}/score',[GameController::class,'addScoreToGame']);
 
 Route::apiResource('sanction',SanctionController::class);
 Route::get('ligue/sanction',[SanctionController::class,"getAllSanctions"]);
@@ -70,6 +72,7 @@ Route::get('equipe/{equipeId}/sanctions',[SanctionController::class,"getSanction
 // Route::get('medecin/equipe',[EquipeController::class,"getequipeIdbyMedecin"]);
 Route::middleware('auth:api')->get('medecin/equipe', [EquipeController::class, 'getequipeIdbyMedecin']);
 
+// Route::middleware('auth:api')->get('arbitre/ligue', [ArbitreController::class, 'getArbitreId']);
 
 Route::patch('matches/{game}/programmer', [GameController::class, 'ProgrammerGame']);
 Route::get('games', [GameController::class, 'showAllUnscheduledMatches']);
@@ -79,7 +82,7 @@ Route::get('games', [GameController::class, 'showAllUnscheduledMatches']);
 Route::prefix('arbitre')->group(function () {
     Route::get('/', [ArbitreController::class, 'index']);
     Route::get('/{id}', [ArbitreController::class, 'show']);
-    Route::post('/', [ArbitreController::class, 'store']);
+    Route::post('/register', [ArbitreController::class, 'store']);
     Route::put('/{id}', [ArbitreController::class, 'update']);
     Route::delete('/{id}', [ArbitreController::class, 'destroy']);
 });
@@ -134,3 +137,6 @@ Route::put('equipe/{equipeId}/liste',[ EquipeController::class,'makeListTraité'
 
 
 Route::apiResource('changements', ChangementJoueurMatchController::class);
+
+
+Route::get('/rapports/{game}/pdf', [RapportController::class, 'generatePDF']);

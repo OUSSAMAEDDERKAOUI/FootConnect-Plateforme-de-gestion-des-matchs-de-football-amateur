@@ -88,17 +88,6 @@
    
 </div>
 
-        
-       
-
-
-
-
-
-
-
-
-
 
 <script src="{{asset('js/medecin/matchs.js')}}"></script>
 

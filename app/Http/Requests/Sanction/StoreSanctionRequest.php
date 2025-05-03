@@ -27,8 +27,9 @@ class StoreSanctionRequest extends FormRequest
                 'joueur_id'=>'required|exists:joueurs,id',
                 'type'=>'required|in:Carton Jaune,Carton Rouge,Avertissement,Suspension',
                 'date_time'=>'required|date', 
+                'minute'=>'required|string',
                 'duree'=>'nullable|string', 
-                'note'=>'required|string',
+                'note'=>'nullable|string',
             
         ];
     }

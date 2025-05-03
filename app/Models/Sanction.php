@@ -16,6 +16,7 @@ class Sanction extends Model
         'date_time', 
         'duree', 
         'note',
+        'minute',
     ];
 
     public function game()

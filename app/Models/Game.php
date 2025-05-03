@@ -1,7 +1,5 @@
 <?php
 
-// app/Models/Match.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,7 +25,6 @@ class Game extends Model
         'statut'
     ];
 
-    // Relations avec d'autres modèles
 
     public function equipeDomicile()
     {
@@ -56,7 +53,7 @@ class Game extends Model
 
     public function delegue()
     {
-        return $this->belongsTo(User::class, 'delegue_id');
+        return $this->belongsTo(Delegue::class, 'delegue_id');
     }
 
 
@@ -75,6 +72,10 @@ class Game extends Model
     public function blessures()
     {
         return $this->hasMany(Blessure::class);
+    }
+    public function changements()
+    {
+        return $this->hasMany(ChangementJoueurMatch::class,'game_id');
     }
     
 }

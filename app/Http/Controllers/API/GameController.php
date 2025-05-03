@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\API;
 
+use Carbon\Carbon;
 use App\Models\Game;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Validated;
 use App\Services\GameService\GameService;
 use App\Http\Requests\Games\StoreGameRequest;
 use App\Http\Requests\Games\UpdateGameRequest;
 use App\Http\Requests\Games\ProgrammerGameRequest;
+use App\Models\Arbitre;
 
 class GameController extends Controller
 {
@@ -128,6 +131,26 @@ public function updateDataAfterMatche(Request $request , $id ){
     $validatedData=$request->validate([
         'lieu'=>'required|string|max:100',
         'date_heure' => 'required|date_format:Y-m-d\TH:i',
+        'score_exterieur'=>'nullable|integer|min:0',
+        'score_domicile'=>'nullable|integer|min:0',
+        'statut'=>'required|in:terminé,annulé,en cours,programmé ',
+    ]);
+    $match=Game::findOrFail($id);
+    $match->update($validatedData);
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Match updated successfully',
+        'match' => $match,
+    ]);
+
+}
+
+public function addScoreToGame(Request $request , $id ){
+
+
+    $validatedData=$request->validate([
+       
+        
         'score_exterieur'=>'required|integer|min:0',
         'score_domicile'=>'required|integer|min:0',
         'statut'=>'required|in:terminé,annulé,en cours,programmé ',
@@ -141,6 +164,7 @@ public function updateDataAfterMatche(Request $request , $id ){
     ]);
 
 }
+
 
 // public function allScheduledMatchesByTeamId($id){
 //     $matchs=Game::with(['equipeDomicile', 'equipeExterieur', 'arbitreCentral', 'assistant1', 'assistant2', 'delegue'])
@@ -188,5 +212,43 @@ public function allFinishedMatchesByTeamId($id)
         'matchs' => $matchs,
     ]);
 }
+
+
+// public function showToDayMatches(){
+//     $arbitreId=Auth()->id();
+//     print_r($arbitreId);
+//     $games = Game::with(['equipeDomicile', 'equipeExterieur'])->where('arbitre_central_id',$arbitreId)
+//     ->where('date_heure', '>=', Carbon::now()->subHours(48))
+//     ->orderBy('date_heure', 'desc')
+//     ->get();
+//     return response()->json([
+//         'status' => 'success',
+//         'message' => 'Matchs récupérés avec succès',
+//         'matchs' => $games,
+//     ]);
+// }
+public function showToDayMatches(){
+    $user = Auth()->user();
+    $userId=$user->id;
+        $arbitre=Arbitre::where("user_id",$userId)->first();
+        $arbitreId=$arbitre->id;
+
+    $games = Game::with(['equipeDomicile', 'equipeExterieur'])
+        ->where('arbitre_central_id', $arbitreId)
+        ->where('date_heure', '>=', Carbon::now()->subHours(48)) 
+        ->orderBy('date_heure', 'desc')
+        ->get();
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Matchs récupérés avec succès',
+        'matchs' => $games,
+    ]);
+
+
+}
+
+
+
 
 }

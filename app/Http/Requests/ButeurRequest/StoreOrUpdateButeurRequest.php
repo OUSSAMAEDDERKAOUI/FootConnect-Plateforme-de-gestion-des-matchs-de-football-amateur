@@ -15,7 +15,7 @@ class StoreOrUpdateButeurRequest extends FormRequest
         return [
             'game_id' => 'required|exists:games,id',
             'joueur_id' => 'required|exists:joueurs,id',
-            'minute' => 'required|date_format:H:i:s',
+            'minute' => 'required|string',
         ];
     }
 }

@@ -12,7 +12,6 @@ class DropOldTypeCheckConstraint extends Migration
 
     public function down(): void
     {
-        // Si tu veux la remettre (optionnel)
         DB::statement("ALTER TABLE sanctions ADD CONSTRAINT sanctions_type_check CHECK (type IN ('Carton Jaune', 'Carton Rouge', 'Avertissement'))");
     }
 }

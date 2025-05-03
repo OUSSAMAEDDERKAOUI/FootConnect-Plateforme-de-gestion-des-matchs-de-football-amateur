@@ -38,6 +38,9 @@ public function joueur(){
 public function arbitre(){
     return $this->hasOne(Arbitre::class,'user_id');
 }
+public function delegue(){
+    return $this->hasOne(Delegue::class,'user_id');
+}
 
     /**
      * The attributes that should be hidden for serialization.
