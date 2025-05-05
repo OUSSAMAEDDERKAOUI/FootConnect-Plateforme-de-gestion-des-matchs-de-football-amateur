@@ -6,5 +6,10 @@ use Illuminate\Http\Request;
 
 class AdminEquipeController extends Controller
 {
-    //
+
+
+
+    public function testrole(){
+
+    }
 }

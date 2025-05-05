@@ -1,5 +1,6 @@
+const token = Cookies.get('Access-Token');
+
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = Cookies.get('Access-Token');
      
 
 
@@ -24,12 +25,15 @@ async function fetchPlayerLists(page) {
     const teamFilter = document.getElementById('teamFilter').value;
     const statusFilter = document.getElementById('statusFilter').value;
     try {
-        let url = `http://127.0.0.1:8000/api/equipe/liste?page=${page}`;
-        if (teamFilter !== 'all' || statusFilter !== 'all') {
-            url += `?team=${teamFilter}&status=${statusFilter}`;
-        }
+        
 
-        const response = await fetch(url);
+        const response = await fetch(`/api/equipe/liste?page=${page}`,{
+            method:'GET',
+            headers:{
+                'Accept': 'application/json',  
+                'Authorization':`Bearer ${token}`
+            }
+        });
         const data = await response.json();
         renderListes(data)
         window.renderSimplePagination(data.equipes, fetchPlayerLists, '#playerListsTable', 'pagination-games');
@@ -87,7 +91,13 @@ async function fetchPlayerLists(page) {
  }
  async function viewPlayers(teamId) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/equipe/liste/${teamId}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/equipe/liste/${teamId}`,{
+            method:'GET',
+            headers:{
+                'Accept': 'application/json',  
+                'Authorization':`Bearer ${token}`
+            }
+        });
         const teamData = await response.json();
         console.log('ID Équipe :', teamId);
         console.log('Réponse :', teamData);
@@ -217,8 +227,10 @@ async function validatePlayer(playerId) {
        
        const response = await fetch(`http://127.0.0.1:8000/api/joueur/${playerId}/validate`, {
            method: 'PUT',
-           headers: {
+           headers:{
+               'Accept': 'application/json',  
                'Content-Type': 'application/json',
+               'Authorization':`Bearer ${token}`
            }
        });
        
@@ -263,10 +275,12 @@ async function validatePlayer(playerId) {
      
        
        const response = await fetch(`http://127.0.0.1:8000/api/joueur/${playerId}/reject`, {
-           method: 'PUT',
-           headers: {
-               'Content-Type': 'application/json',
-           }
+        method: 'PUT',
+        headers:{
+            'Accept': 'application/json',  
+            'Content-Type': 'application/json',
+            'Authorization':`Bearer ${token}`
+        }
        });
        
        if (!response.ok) {
@@ -311,9 +325,11 @@ async function makeListTraité(equipeId) {
         
         const response = await fetch(`http://127.0.0.1:8000/api/equipe/${equipeId}/liste`, {
             method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            }
+           headers:{
+               'Accept': 'application/json',  
+               'Content-Type': 'application/json',
+               'Authorization':`Bearer ${token}`
+           }
         });
         
         if (!response.ok) {

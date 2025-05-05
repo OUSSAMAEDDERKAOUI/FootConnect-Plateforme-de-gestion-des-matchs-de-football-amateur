@@ -1,46 +1,77 @@
 <?php
 
+// namespace App\Http\Middleware;
+
+// use Closure;
+// use Illuminate\Http\Request;
+// use Symfony\Component\HttpFoundation\Response;
+
+// class CheckRole
+// {
+//     /**
+//      * Handle an incoming request.
+//      *
+//      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+//      */
+//     public function handle(Request $request, Closure $next, ...$roles)
+// {
+//     $user = $request->user();
+//     $adminEquipe=$request->adminEquipe();
+
+//     if (!$user) {
+//         return response()->json([
+//             'error' => 'User is not authenticated',
+//             'message' => 'You need to be logged in to access this resource.'
+//         ], Response::HTTP_UNAUTHORIZED);
+//     }
+
+//     if (!$this->hasValidRole($user, $roles)) {
+//         return response()->json([
+//             'error' => 'Forbidden',
+//             'message' => 'You do not have the required permissions to access this resource.'
+//         ], Response::HTTP_FORBIDDEN);
+//     }
+
+//     return $next($request);
+// }
+
+
+// private function hasValidRole($user, $roles)
+// {
+//     return in_array($user->role, $roles);
+// }
+
+// }
+
+
 namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next, ...$roles)
-{
-    $user = $request->user();
+    {
+        $guards = [
+            'api' => \App\Models\User::class,
+            'api_admin_equipe' => \App\Models\AdminEquipe::class,
+            'api_admin_ligue' => \App\Models\AdminLigue::class,
+        ];
 
-    if (!$user) {
-        return response()->json([
-            'error' => 'User is not authenticated',
-            'message' => 'You need to be logged in to access this resource.'
-        ], Response::HTTP_UNAUTHORIZED);
+        foreach ($guards as $guard => $model) {
+            if (Auth::guard($guard)->check()) {
+                $user = Auth::guard($guard)->user();
+
+                if (in_array($user->role, $roles)) {
+                    return $next($request);
+                }
+
+                return response()->json(['message' => 'Unauthorized role'], 403);
+            }
+        }
+
+        return response()->json(['message' => 'Unauthorized'], 401);
     }
-
-    if (!$this->hasValidRole($user, $roles)) {
-        return response()->json([
-            'error' => 'Forbidden',
-            'message' => 'You do not have the required permissions to access this resource.'
-        ], Response::HTTP_FORBIDDEN);
-    }
-
-    return $next($request);
 }
-
-
-private function hasValidRole($user, $roles)
-{
-    // Vérifier le rôle de l'utilisateur 
-    return in_array($user->role, $roles);
-}
-
-}
-
-

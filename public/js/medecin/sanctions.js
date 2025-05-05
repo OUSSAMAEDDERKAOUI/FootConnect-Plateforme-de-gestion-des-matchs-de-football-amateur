@@ -1,5 +1,6 @@
+const token = Cookies.get('Access-Token');
+
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = Cookies.get('Access-Token');
      
     if (!token || token.length === 0) {
         Swal.fire({
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function fetchSanctions(page) {
         try {
-            const token = localStorage.getItem('token');
+            // const token = localStorage.getItem('token');
             
             if (!token) {
                 console.error('Token d\'authentification manquant');
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const equipeRes = await fetch('http://127.0.0.1:8000/api/medecin/equipe', {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`,  
+                    'Authorization': `Bearer${token}`,  
                     'Accept': 'application/json',  
                 }
             });
@@ -43,7 +44,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log(`id de l'equipe : ${equipeId}`); 
 
 
-            const response = await fetch(`/api/equipe/${equipeId}/sanctions?page=${page}`); 
+            const response = await fetch(`/api/equipe/${equipeId}/sanctions?page=${page}`,{
+              method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Authorization':`Bearer${token}`
+          }
+            }); 
             const data = await response.json();
             console.log(data);
             if (data.status === "success" && data.sanctions) {
@@ -107,7 +114,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function viewSanction(sanctionId) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/equipe/sanction/${sanctionId}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/equipe/sanction/${sanctionId}`,{
+          method:'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Authorization':`Bearer${token}`
+        }
+        });
         const SanctionData = await response.json();
         console.log('ID SANCTION :', sanctionId);
         console.log('Réponse :', SanctionData);
@@ -263,9 +276,9 @@ console.log(newDuration);
         fetch(`http://127.0.0.1:8000/api/sanction/${sanctionId}`, {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
+              'Accept': 'application/json',
+              'Authorization':`Bearer${token}`
+          },
             body: JSON.stringify(data)
         })
         .then(response => response.json())
@@ -315,8 +328,9 @@ async function chargerStatistiquesSanctions() {
       const response = await fetch(`http://127.0.0.1:8000/api/sanctions/equipe/${equipeId}/statistiques`, {
             method: 'GET',
             headers: {
-                'Accept': 'application/json'
-            }
+              'Accept': 'application/json',
+              'Authorization':`Bearer${token}`
+          }
         });
 
         const stats = await response.json();

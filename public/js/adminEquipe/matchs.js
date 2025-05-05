@@ -20,8 +20,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             let equipeId = Cookies.get('equipe_id');
             const response = await fetch(`/api/equipe/matchs/${equipeId}?page=${page}`, {
+                method: 'GET',
                 headers: {
-                    'Accept': 'application/json'
+                    'Authorization': `Bearer ${token}`,  
+                    'Accept': 'application/json',  
                 }
             });
 

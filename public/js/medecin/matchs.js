@@ -1,5 +1,6 @@
+const token = Cookies.get('Access-Token');
+
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = Cookies.get('Access-Token');
 
     if (!token || token.length === 0) {
         Swal.fire({
@@ -42,7 +43,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const response = await fetch(`/api/equipe/matchs/${equipeId}?page=${page}`, {
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization':`Bearer${token}`
                 }
             });
 

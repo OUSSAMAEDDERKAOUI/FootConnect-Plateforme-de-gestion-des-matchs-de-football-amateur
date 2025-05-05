@@ -1,5 +1,6 @@
+
+const token = Cookies.get('Access-Token');
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = Cookies.get('Access-Token');
 
     if (!token || token.length === 0) {
         Swal.fire({
@@ -85,8 +86,10 @@ const btnAddMatch = document.getElementById('btnAddMatch');
     
         try {
             const response = await fetch('/api/equipes', {
-                headers: {
-                    'Accept': 'application/json'
+                method:'GET',
+                headers:{
+                    'Accept': 'application/json',  
+                    'Authorization':`Bearer ${token}`
                 }
             });
             const equipes = await response.json();
@@ -146,7 +149,8 @@ addMatchForm.addEventListener('submit', async function(e) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization':`Bearer ${token}`
                 },
                 body: JSON.stringify({   nombre_journée, equipe_domicile_id , equipe_exterieur_id })
             });
@@ -187,8 +191,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     async function loadMatches(page) {
         try {
             const response = await fetch(`/api/match?page=${page}`, {
-                headers: {
-                    'Accept': 'application/json'
+                method:'GET',
+                headers:{
+                    'Accept': 'application/json',  
+                    'Authorization':`Bearer ${token}`
                 }
             });
 
@@ -295,7 +301,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                            'Authorization': `Bearer ${token}`,
                         },
                     });
     
@@ -373,7 +379,7 @@ document.getElementById('updateMatchForm').addEventListener('submit', async (e) 
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(data),
         });
@@ -422,8 +428,10 @@ await loadGames(1);
 async function loadGames(page) {
     try {
         const response = await fetch(`/api/games?page=${page}`, {
-            headers: {
-                'Accept': 'application/json'
+            method:'GET',
+            headers:{
+                'Accept': 'application/json',  
+                'Authorization':`Bearer ${token}`
             }
         });
 
@@ -546,8 +554,10 @@ document.addEventListener('click', function(e) {
     
     try {
         const response = await fetch('/api/arbitre', {
-            headers: {
-                'Accept': 'application/json'
+            method:'GET',
+            headers:{
+                'Accept': 'application/json',  
+                'Authorization':`Bearer ${token}`
             }
         });
         
@@ -560,8 +570,10 @@ document.addEventListener('click', function(e) {
         console.log('Arbitres chargés:', arbitres);
         
         const reponse = await fetch('/api/delegue', {
-            headers: {
-                'Accept': 'application/json'
+            method:'GET',
+            headers:{
+                'Accept': 'application/json',  
+                'Authorization':`Bearer ${token}`
             }
         });
         
@@ -655,7 +667,9 @@ programmerMatchForm.addEventListener('submit', async function(e) {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Authorization':`Bearer ${token}`
+
             },
             body: JSON.stringify({
                 nombre_journée:gameId,

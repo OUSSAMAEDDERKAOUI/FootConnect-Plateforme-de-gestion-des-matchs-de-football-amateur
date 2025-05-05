@@ -95,7 +95,7 @@
                 </div>
                 <div class="ml-4">
                     <h3 class="text-gray-500 text-sm">Suspensions</h3>
-                    <p id="suspensions" class="text-2xl font-semibold">4</p>
+                    <p id="Suspensions" class="text-2xl font-semibold">4</p>
                 </div>
             </div>
         </div>

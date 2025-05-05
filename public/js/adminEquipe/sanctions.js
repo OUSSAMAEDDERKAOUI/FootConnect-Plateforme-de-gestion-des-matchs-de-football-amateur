@@ -1,5 +1,6 @@
+const token = Cookies.get('Access-Token');
+
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = Cookies.get('Access-Token');
      
 
 
@@ -26,7 +27,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             let equipeId = Cookies.get('equipe_id');
             console.log(equipeId);
-            const response = await fetch(`http://127.0.0.1:8000/api/equipe/${equipeId}/sanctions?page=${page}`); 
+            const response = await fetch(`http://127.0.0.1:8000/api/equipe/${equipeId}/sanctions?page=${page}`,{
+              method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,  
+                    'Accept': 'application/json',  
+                }
+            }); 
             const data = await response.json();
 
             if (data.status === "success" && data.sanctions) {
@@ -90,7 +97,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function viewSanction(sanctionId) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/equipe/sanction/${sanctionId}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/equipe/sanction/${sanctionId}`,{
+          method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,  
+                    'Accept': 'application/json',  
+                }
+        });
         const SanctionData = await response.json();
         console.log('ID SANCTION :', sanctionId);
         console.log('Réponse :', SanctionData);
@@ -198,27 +211,6 @@ document.addEventListener('DOMContentLoaded', async () => {
               </span>
             </div>
           </div>
-          
-          ${sanction.type === 'Carton Rouge' ? `
-          <div class="mt-4 p-3 bg-white bg-opacity-80 rounded-lg shadow">
-
-
-                <label for="suspensionLength" class="font-semibold text-blue-800 block mb-2">Modifier la sanction</label>
-            <input 
-              type="number" 
-              id="suspensionLength" 
-              min="1" 
-              value="" 
-              placeholder="Modifier le nombre de matchs de suspension" 
-              class="px-3 py-2 border border-gray-300 rounded-md w-full"
-            />
-          </div>
-          ` : ''}
-          
-          <div class="mt-6 flex justify-end">
-            <button id="actionUpdate" onClick="actionUpdate(${sanction.id},${game.id},${joueur.id})"  class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow mr-2 ${cacheUpdateButton}">
-              Modifier
-            </button>
           </div>
         </div>
       </div>
@@ -232,37 +224,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 }
 
-function actionUpdate(sanctionId, game_id, joueur_id) {
-    const suspensionInput = document.getElementById('suspensionLength');
 
-        const newDuration = suspensionInput.value;
-console.log(newDuration);
-        const data = {
-            game_id: game_id,
-            joueur_id: joueur_id,
-            nbr_matchs: newDuration 
-        };
-
-        fetch(`http://127.0.0.1:8000/api/sanction/${sanctionId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Sanction mise à jour :', data);
-            document.getElementById('sanctionDuration').textContent = `${newDuration} match(s)`;
-                 fetchSanctions();
-            document.getElementById('sanctionContent').classList.add('hidden');
-        })
-        .catch(error => {
-            console.error('Erreur lors de la mise à jour de la sanction :', error);
-        });
-    
-}
 
 
 

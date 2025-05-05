@@ -1,5 +1,6 @@
+const token = Cookies.get('Access-Token');
+
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = Cookies.get('Access-Token');
      
 
 
@@ -25,7 +26,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function fetchSanctions(page) {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/ligue/sanction?page=${page}`); 
+            const response = await fetch(`http://127.0.0.1:8000/api/ligue/sanction?page=${page}`,{
+              method:'GET',
+              headers:{
+                  'Accept': 'application/json',  
+                  'Authorization':`Bearer ${token}`
+              }
+            }); 
             const data = await response.json();
 
             if (data.status === "success" && data.sanctions) {
@@ -89,7 +96,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function viewSanction(sanctionId) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/api/ligue/sanction/${sanctionId}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/ligue/sanction/${sanctionId}`,{
+          method:'GET',
+          headers:{
+              'Accept': 'application/json',  
+              'Authorization':`Bearer ${token}`
+          }
+        });
         const SanctionData = await response.json();
         console.log('ID SANCTION :', sanctionId);
         console.log('Réponse :', SanctionData);
@@ -249,10 +262,11 @@ console.log(newDuration);
         };
 
         fetch(`http://127.0.0.1:8000/api/sanction/${sanctionId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+          method: 'PUT',
+          headers:{
+              'Accept': 'application/json',  
+              'Authorization':`Bearer ${token}`,
+              'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
         })
@@ -276,6 +290,7 @@ async function annulerSanction(sanctionId) {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
+                  'Authorization':`Bearer ${token}`
             },
         });
 
@@ -300,14 +315,16 @@ async function chargerStatistiquesSanctions() {
         const response = await fetch('http://127.0.0.1:8000/api/sanctions/statistiques', {
             method: 'GET',
             headers: {
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                   'Authorization':`Bearer ${token}`
+
             }
         });
 
         const stats = await response.json();
-
+console.log(stats);
         document.getElementById('carte_jaune').textContent = stats.Carton_Jaune ?? 0;
-        document.getElementById('suspensions').textContent = stats.suspensions ?? 0;
+        document.getElementById('Suspensions').textContent = stats.Suspension ?? 0;
         document.getElementById('Avertissements').textContent = stats.avertissements ?? 0;
         document.getElementById('carte_rouge').textContent = stats.Carton_Rouge ?? 0;
 

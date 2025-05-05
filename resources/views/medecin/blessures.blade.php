@@ -170,8 +170,18 @@
     </div>
 </div>
 
+
+
+
 <script>
     document.addEventListener('DOMContentLoaded', async () => {
+        const token = localStorage.getItem('token');
+            
+        if (!token) {
+            console.error('Token d\'authentification manquant');
+            return;
+        }
+
         fetchInjury();
 
         const joueurSelect = document.getElementById('joueurSelect');
@@ -192,7 +202,6 @@
         const deleteInjuryId = document.getElementById('deleteInjuryId');
 
         btnAddInjury.addEventListener('click', () => {
-
             form.reset();
             injuryIdInput.value = '';
             modalTitle.textContent = 'Ajouter une Blessure';
@@ -223,7 +232,8 @@
             const response = await fetch(`http://127.0.0.1:8000/api/blessures/${injuryId}`, {
                 method: 'DELETE',
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 }
             });
             
@@ -247,13 +257,6 @@
             }
         });
 
-        const token = localStorage.getItem('token');
-            
-        if (!token) {
-            console.error('Token d\'authentification manquant');
-            return;
-        }
-
         const equipeRes = await fetch('http://127.0.0.1:8000/api/medecin/equipe', {
             method: 'GET',
             headers: {
@@ -268,10 +271,15 @@
         const equipeId = medecinData.medecin.equipe_id;
         console.log(equipeId); 
 
-        const joueursRes = await fetch(`http://127.0.0.1:8000/api/equipe/liste/${equipeId}`);
+        const joueursRes = await fetch(`http://127.0.0.1:8000/api/equipe/liste/${equipeId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        });
         const joueursData = await joueursRes.json();
-        data=joueursData.list.data[0]
-        joueurs=data.joueurs
+        data = joueursData.list.data[0];
+        joueurs = data.joueurs;
         console.log(joueurs);
         joueurSelect.innerHTML = '<option value="">-- Sélectionner un joueur --</option>';
         joueurs.forEach(joueur => {
@@ -281,9 +289,14 @@
             joueurSelect.appendChild(option);
         });
 
-        const matchsRes = await fetch(`http://127.0.0.1:8000/api/equipe/${equipeId}/matchs`);
+        const matchsRes = await fetch(`http://127.0.0.1:8000/api/equipe/${equipeId}/matchs`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        });
         const matchData = await matchsRes.json();
-        const matchs=matchData.matchs.data 
+        const matchs = matchData.matchs.data;
         console.log(matchData);
 
         matchSelect.innerHTML = '<option value="">-- Sélectionner un match --</option>';
@@ -319,7 +332,8 @@
                 method: method,
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(payload)
             });
@@ -342,7 +356,18 @@
     });
 
     async function fetchInjury() {
-        const response = await fetch(`http://127.0.0.1:8000/api/blessures`);
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error('Token d\'authentification manquant');
+            return;
+        }
+        
+        const response = await fetch(`http://127.0.0.1:8000/api/blessures`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        });
         const data = await response.json();
         renderListes(data);
     }
@@ -397,10 +422,21 @@
     }
 
     async function showInjuryDetails(injuryId) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error('Token d\'authentification manquant');
+            return;
+        }
+        
         const modal = document.getElementById('injuryModal');
         const modalContent = document.getElementById('injuryModalContent');
         
-        const response = await fetch(`http://127.0.0.1:8000/api/blessures/${injuryId}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/blessures/${injuryId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json'
+            }
+        });
         const data = await response.json();
         
         const player = data.joueur.user;
@@ -440,36 +476,52 @@
         document.body.style.overflow = "hidden"; 
     }
     
+    async function isHealthy(id) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error('Token d\'authentification manquant');
+            return null;
+        }
+        
+        try {
+            const response = await fetch(`/api/blessure/${id}/finished`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
 
+            if (!response.ok) {
+                throw new Error(`Erreur : ${response.status}`);
+            }
 
+            const data = await response.json();
+            console.log(data);
+            fetchInjury();
 
- async function isHealthy(id) {
-    try {
-        const response = await fetch(`/api/blessure/${id}/finished`, {
-            method: 'PUT',
+            return data;
+
+        } catch (error) {
+            console.error("Erreur lors de la vérification de l'état de santé :", error);
+            return null;
+        }
+    }
+
+    async function editInjury(injuryId) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.error('Token d\'authentification manquant');
+            return;
+        }
+
+        const response = await fetch(`http://127.0.0.1:8000/api/blessures/${injuryId}`, {
             headers: {
-                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json'
             }
         });
-
-        if (!response.ok) {
-            throw new Error(`Erreur : ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log(data);
-        return data;
-
-    } catch (error) {
-        console.error("Erreur lors de la vérification de l'état de santé :", error);
-        return null;
-    }
-}
-
-    async function editInjury(injuryId) {
-
-        const response = await fetch(`http://127.0.0.1:8000/api/blessures/${injuryId}`);
         const data = await response.json();
         
         document.getElementById('modalTitle').textContent = 'Modifier la Blessure';

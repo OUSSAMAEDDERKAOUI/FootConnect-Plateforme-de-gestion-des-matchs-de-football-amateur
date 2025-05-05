@@ -15,6 +15,7 @@ class JoueurController extends Controller
 
 
         $player = Joueur::with(['user','equipe'])->findOrFail($id);
+        
 $sanction=Sanction::where('joueur_id',$player->id)->count();
 $buts=Buteur::where('joueur_id',$player->id)->count();
       

@@ -180,6 +180,7 @@ public function addScoreToGame(Request $request , $id ){
 //             'match' => $matchs,
 //         ]);
 // }
+
 public function allScheduledMatchesByTeamId($id)
 {
     $matchs = Game::with(['equipeDomicile', 'equipeExterieur', 'arbitreCentral', 'assistant1', 'assistant2', 'delegue'])
@@ -229,10 +230,11 @@ public function allFinishedMatchesByTeamId($id)
 // }
 public function showToDayMatches(){
     $user = Auth()->user();
+    // dump($user);
+
     $userId=$user->id;
         $arbitre=Arbitre::where("user_id",$userId)->first();
         $arbitreId=$arbitre->id;
-
     $games = Game::with(['equipeDomicile', 'equipeExterieur'])
         ->where('arbitre_central_id', $arbitreId)
         ->where('date_heure', '>=', Carbon::now()->subHours(48)) 

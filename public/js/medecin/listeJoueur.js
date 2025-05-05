@@ -1,6 +1,8 @@
+const token = Cookies.get('Access-Token');
+
+
 document.addEventListener('DOMContentLoaded', async () => {
-    const token = Cookies.get('Access-Token');
-     
+
 
 
     if (!token || token.length === 0) {
@@ -23,8 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function fetchPlayerLists(page) {
     
     try {
-        const token = localStorage.getItem('token');
-            
+
         if (!token) {
             console.error('Token d\'authentification manquant');
             return;
@@ -43,7 +44,14 @@ async function fetchPlayerLists(page) {
         const equipeId = medecinData.medecin.equipe_id;
         console.log(equipeId); 
 
-        const response = await fetch(`http://127.0.0.1:8000/api/equipe/${equipeId}/liste?page=${page}`);
+        const response = await fetch(`http://127.0.0.1:8000/api/equipe/${equipeId}/liste?page=${page}`,{
+            method:'GET',
+            headers:{
+                'Accept': 'application/json',  
+                'Authorization':`Bearer${token}`
+
+            }
+        });
 
         const data = await response.json();
         console.log('ID Équipe :', equipeId);
@@ -109,7 +117,14 @@ console.log(joueurs);
 
 async function viewPlayers(id) {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/joueur/${id}`);
+      const response = await fetch(`http://127.0.0.1:8000/api/joueur/${id}`,{
+        method:'GET',
+        headers:{
+            'Accept': 'application/json',  
+            'Authorization':`Bearer${token}`
+        }
+    });
+    
       const data = await response.json();
   
 
