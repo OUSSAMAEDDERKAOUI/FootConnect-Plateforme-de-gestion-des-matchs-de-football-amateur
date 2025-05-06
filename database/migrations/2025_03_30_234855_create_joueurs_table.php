@@ -17,7 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('equipe_id');
             $table->integer('numeroMaillot');
             $table->enum('position', ['gardien', 'defenseur', 'milieu', 'attaquant']);
-            $table->enum('statut', ['actif', 'suspendu', 'blesse']);          
+            $table->enum('statut', ['actif', 'suspendu', 'blesse']);         
+            $table->enum('validation_status', ['en attente', 'validé', 'rejeté'])->default("en attente"); 
             $table->timestamps();
             $table->foreign('equipe_id')->references('id')->on('equipes')->onDelete('cascade');
         });

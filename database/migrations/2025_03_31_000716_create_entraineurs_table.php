@@ -19,6 +19,8 @@ return new class extends Migration
             $table->enum('role_entraineur', ['principal', 'adjoint', 'préparateur physique']);
             $table->enum('statut', ['actif', 'suspendu']);          
             $table->timestamps();
+            $table->foreignId('equipe_id')->constrained('equipes')->onDelete('cascade');
+
         });
     }
 

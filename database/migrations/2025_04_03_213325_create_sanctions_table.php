@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('game_id');
             $table->unsignedBigInteger('joueur_id');
             
-            $table->enum('type', ['Carton Jaune', 'Carton Rouge', 'Avertissement']);
+            $table->enum('type', ['Carton Jaune', 'Carton Rouge', 'Avertissement','Suspension']);
             
             $table->dateTime('date_time'); 
 
@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('note')->nullable(); 
 
             $table->timestamps();
-        
+            $table->string('minute')->nullable();
+
             
             $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
             $table->foreign('joueur_id')->references('id')->on('joueurs')->onDelete('cascade');

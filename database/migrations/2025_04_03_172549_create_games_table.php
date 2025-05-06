@@ -35,7 +35,7 @@ return new class extends Migration
             $table->foreign('arbitre_central_id')->references('id')->on('arbitres')->onDelete('cascade');
             $table->foreign('assistant_1_id')->references('id')->on('arbitres')->onDelete('cascade');
             $table->foreign('assistant_2_id')->references('id')->on('arbitres')->onDelete('cascade');
-            $table->foreign('delegue_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('delegue_id')->references('id')->on('delegues')->onDelete('cascade');
         });
         
     }

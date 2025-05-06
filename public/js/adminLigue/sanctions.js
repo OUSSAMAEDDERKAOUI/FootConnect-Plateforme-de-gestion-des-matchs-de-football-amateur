@@ -46,8 +46,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <td class="px-6 py-4 whitespace-nowrap">
                                      <div class="flex items-center">
  
-              <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                            <img src="/storage/${sanction.joueur.user.photo}" class="h-6 w-6 object-contain" alt="${sanction.joueur.user}"/>
+              <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                            <img src="${sanction.joueur.user.photo}" class="w-full h-full object-cover rounded-full" alt="${sanction.joueur.user}"/>
             </div>
                                     <span class="font-medium">${sanction.joueur.user.nom} ${sanction.joueur.user.prenom}</span>
 
@@ -153,15 +153,15 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="flex items-center mb-6">
             <!-- Photo du joueur -->
             <div class="w-20 h-20 rounded-full overflow-hidden border-4 border-gray-200 mr-4 shadow-lg">
-              <img id="playerPhoto" src="/storage/${sanction.joueur.user.photo}"alt="Photo du joueur" class="w-full h-full object-cover" />
+              <img id="playerPhoto" src="${sanction.joueur.user.photo}"alt="Photo du joueur" class="w-full h-full object-cover" />
             </div>
             
             <div>
               <h3 id="playerName" class="font-bold text-xl text-gray-800">${user.prenom} ${user.nom}</h3>
               <div class="flex items-center mt-1">
                 <!-- Logo de l'équipe -->
-                <div class="team-badge mr-2">
-                  <img id="teamLogo" src="/storage/${equipe.logo} alt="Logo équipe" class="w-full h-full object-contain" />
+                <div class="team-badge w-[20px] h-[20px]  rounded-full overflow-hidden border-4 border-gray-200 mr-2 shadow-lg">
+                  <img id="teamLogo" src="/storage/${equipe.logo}" alt="Logo équipe" class="w-full h-full object-cover" />
                 </div>
                 <p id="teamName" class="text-gray-600">${equipe.nom}</p>
               </div>
@@ -183,7 +183,6 @@ document.addEventListener('DOMContentLoaded', async () => {
               <div class="flex items-center">
                 <!-- Logo équipe domicile -->
                 <div class="team-badge mr-1">
-                  <img id="homeTeamLogo" src="/storage/${homeTeam.logo} alt="Logo équipe domicile" class="w-6 h-6 object-contain" />
                 </div>
                 <span id="matchTeams" class="font-medium mx-1">${homeTeam.nom} vs ${awayTeam.nom}</span>
               </div>

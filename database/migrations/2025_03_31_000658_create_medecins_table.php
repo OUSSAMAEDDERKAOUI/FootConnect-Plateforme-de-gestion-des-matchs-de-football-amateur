@@ -18,6 +18,8 @@ return new class extends Migration
         $table->enum('specialite', ['Traumatologie', 'Physiothérapie', 'Médecine générale']);
         $table->enum('statut', ['actif', 'suspendu']);          
         $table->timestamps();
+        $table->foreignId('equipe_id')->constrained('equipes')->onDelete('cascade');
+
     });
 
     }

@@ -150,7 +150,7 @@ async function viewPlayers(id) {
   
       document.querySelector('.player-photo').style.backgroundImage = `url('${user.photo}')`;
   
-      document.getElementById('teamLogo').src=`${equipe.logo}`;
+      document.getElementById('teamLogo').src=`/storage/${equipe.logo}`;
   
       document.getElementById('playerPopup').classList.add('active');
   

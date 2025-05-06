@@ -74,6 +74,10 @@
                         id="matchesTab">
                         Matchs
                     </a>
+                    <a href="/import/players" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700"
+                    id="matchesTab">
+                    Importation Des Joueurs
+                </a>
 
                     <button onclick="logout()"  class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 ">Déconnexion    </button>
 
@@ -108,6 +112,15 @@
         window.location.href = '/auth/login';
     }
 
+    const currentPath = window.location.pathname;
+
+document.querySelectorAll('nav a').forEach(link => {
+  if (link.getAttribute('href') === currentPath) {
+    link.classList.add('bg-blue-700', 'text-white');
+  } else {
+    link.classList.remove('bg-blue-700', 'text-white');
+  }
+});
 </script>
  </body>
 </html>

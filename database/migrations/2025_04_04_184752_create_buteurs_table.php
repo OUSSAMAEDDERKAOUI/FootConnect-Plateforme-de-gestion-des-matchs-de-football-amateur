@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('game_id');
             $table->unsignedBigInteger('joueur_id');
-            $table->time('minute');
+            $table->string('minute');
             $table->timestamps();
 
             $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nationalite')->default('marocaine');
             $table->date('date_naissance');
             $table->string('telephone');
-            $table->string('photo');
+            $table->string('photo')->nullable();  
             $table->boolean('isBanned')->default(false);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

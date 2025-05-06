@@ -78,7 +78,7 @@
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <span class="text-sm font-medium">FC Barcelone Amateur - Buts</span>
+                    <span class="text-sm font-medium">Domicile  - Buts</span>
                 </div>
                 <div class="flex gap-2">
                     <select id="teamHomeGoal" class="custom-select border rounded p-2 text-sm flex-grow">
@@ -96,7 +96,7 @@
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <span class="text-sm font-medium">Real Madrid Youth - Buts</span>
+                    <span class="text-sm font-medium">Extérieur - Buts</span>
                 </div>
                 <div class="flex gap-2">
                     <select id="teamAwayGoal" class="custom-select border rounded p-2 text-sm flex-grow">
@@ -114,7 +114,7 @@
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <span class="text-sm font-medium">FC Barcelone Amateur - Cartes</span>
+                    <span class="text-sm font-medium">Domicile  - Cartes</span>
                 </div>
                 <div class="flex gap-2">
                     <select id="teamHomeSanction" class="custom-select border rounded p-2 text-sm flex-grow">
@@ -136,7 +136,7 @@
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <span class="text-sm font-medium">Real Madrid Youth - Buts</span>
+                    <span class="text-sm font-medium">extérieur - Buts</span>
                 </div>
                 <div class="flex gap-2">
                     <select  id="teamAwaySanction" class="custom-select border rounded p-2 text-sm flex-grow">
@@ -158,7 +158,7 @@
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <span class="text-sm font-medium">FC Barcelone Amateur - Substitution</span>
+                    <span class="text-sm font-medium">Domicile  - Substitution</span>
                 </div>
                 <div class=" teamHomeChanges flex gap-2">
                     <select id="teamHomeChangesIn" class="custom-select border rounded p-2 text-sm w-[40%]">
@@ -179,7 +179,7 @@
                             <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <span class="text-sm font-medium">Real Madrid Youth - Substitution</span>
+                    <span class="text-sm font-medium">extérieur - Substitution</span>
                 </div>
                 <div class="flex gap-2">
                     <select id="teamAwayChangesIn" class="custom-select border rounded p-2 text-sm w-[40%]">

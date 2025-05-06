@@ -63,8 +63,8 @@ async function fetchPlayerLists(page) {
          <td class="px-4 md:px-6 py-4 whitespace-nowrap">
             <div class="flex items-center">
  
-              <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                            <img src="/storage/${item.logo}" class="h-6 w-6 object-contain" alt="${item.logo}"/>
+              <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                            <img src="/storage/${item.logo}" class="w-full h-full object-cover rounded-full" alt="${item.logo}"/>
             </div>
                                     <span class="font-medium">${item.nom}</span>
 

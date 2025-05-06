@@ -162,7 +162,6 @@ addMatchForm.addEventListener('submit', async function(e) {
                 modalAddMatch.classList.add('hidden');
                 document.body.style.overflow = '';
                 addMatchForm.reset();
-        
                 // alert("L'ajout réussie !");
             } else {
                 // alert(5);
@@ -379,6 +378,7 @@ document.getElementById('updateMatchForm').addEventListener('submit', async (e) 
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',  
                 'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(data),
@@ -461,16 +461,16 @@ function renderGames(games) {
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex items-center">
-                        <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                            <img src="/storage/${game.equipe_domicile.logo}" class="h-6 w-6 object-contain" alt="${game.equipe_domicile.nom}"/>
+                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                            <img src="/storage/${game.equipe_domicile.logo}" class="h-12 w-12 object-cover rounded-full" alt="${game.equipe_domicile.nom}"/>
                         </div>
                         <span class="font-medium">${game.equipe_domicile.nom}</span>
                     </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex items-center">
-                        <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-                            <img src="/storage/${game.equipe_exterieur.logo}" class="h-6 w-6 object-contain" alt="${game.equipe_exterieur.nom}"/>
+                        <div class="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+                            <img src="/storage/${game.equipe_exterieur.logo}" class="h-full w-full object-cover rounded-full" alt="${game.equipe_exterieur.nom}"/>
                         </div>
                         <span class="font-medium">${game.equipe_exterieur.nom}</span>
                     </div>
@@ -572,7 +572,8 @@ document.addEventListener('click', function(e) {
         const reponse = await fetch('/api/delegue', {
             method:'GET',
             headers:{
-                'Accept': 'application/json',  
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',  
                 'Authorization':`Bearer ${token}`
             }
         });
@@ -658,7 +659,7 @@ programmerMatchForm.addEventListener('submit', async function(e) {
     const delegueId = document.getElementById('delegue').value;
     const gameId = document.getElementById('gameId').value;
 
-    alert(gameId);
+    // alert(gameId);
 
   
     
@@ -686,7 +687,7 @@ programmerMatchForm.addEventListener('submit', async function(e) {
         const data = await response.json();
         
         if (response.ok) {
-            alert('Match programmé avec succès!');
+            // alert('Match programmé avec succès!');
             modalProgrammerMatch.classList.add('hidden');
             document.body.style.overflow = '';
             programmerMatchForm.reset();

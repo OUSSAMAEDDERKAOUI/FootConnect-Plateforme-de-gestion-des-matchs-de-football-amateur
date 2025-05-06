@@ -28,7 +28,7 @@ class ProgrammerGameRequest extends FormRequest
         'arbitre_central_id' => 'required|exists:arbitres,id',
         'assistant_1_id' => 'required|exists:arbitres,id',
         'assistant_2_id' => 'required|exists:arbitres,id',
-        'delegue_id' => 'required|exists:users,id',
+        'delegue_id' => 'required|exists:delegues,id',
         ];
     }
 }

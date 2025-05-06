@@ -61,7 +61,7 @@
                         Tableau de bord
                     </a>
                     <a href="/listes/joueurs"
-                        class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 active bg-blue-700"
+                        class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700  bg-blue-700"
                         id="playerListsTab">
                         Listes des Joueurs
                     </a>
@@ -74,9 +74,9 @@
                         id="matchesTab">
                         Matchs
                     </a>
-                    <a href="#" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700"
+                    <a href="/import/games" class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700"
                         id="statisticsTab">
-                        Statistiques
+                        Import Les Matchs
                     </a>
                     <button onclick="logout()"  class="block py-2.5 px-4 rounded transition duration-200 hover:bg-blue-700 ">Déconnexion    </button>
 
@@ -111,6 +111,16 @@
         window.location.href = '/auth/login';
     }
 
+
+    const currentPath = window.location.pathname;
+
+document.querySelectorAll('nav a').forEach(link => {
+  if (link.getAttribute('href') === currentPath) {
+    link.classList.add('bg-blue-700', 'text-white');
+  } else {
+    link.classList.remove('bg-blue-700', 'text-white');
+  }
+});
 </script>
  </body>
 </html>
